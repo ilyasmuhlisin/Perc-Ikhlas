@@ -23,3 +23,4 @@
    2. create textarea
    3. create submit button
    4. create dummy history chat
+10. Prepare Product List 
