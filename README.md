@@ -18,3 +18,8 @@
 6. Create carousel and Card using react-bootstrap
 7. Layouting carousel and Card
 8. Create chat icon
+9. Create Popup Chat
+   1. create header
+   2. create textarea
+   3. create submit button
+   4. create dummy history chat
