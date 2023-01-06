@@ -1,17 +1,24 @@
 import React from "react";
 import { Outlet, Navigate } from "react-router-dom";
+import UserChatComponent from "./user/UserChatComponent";
 
 function ProtectedRoutesComponent({ admin }) {
-  let auth = false;
   if (admin) {
     let adminAuth = true;
-    if (adminAuth) auth = true;
-  }else{
+    // outlet halaman yang dilindungi
+    return adminAuth ? <Outlet /> : <Navigate to="/login" />;
+  } else {
     let userAuth = true;
-    if (userAuth) auth = true;
+    // outlet halaman yang dilindungi
+    return userAuth ? (
+      <>
+        <UserChatComponent />
+        <Outlet />
+      </>
+    ) : (
+      <Navigate to="/login" />
+    );
   }
-  // outlet halaman yang dilindungi
-  return auth ? <Outlet /> : <Navigate to="/login" />;
 }
 
 export default ProtectedRoutesComponent;
