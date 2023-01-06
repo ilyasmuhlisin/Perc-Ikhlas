@@ -1,1 +1,0 @@
-# Perc-Ikhlas
