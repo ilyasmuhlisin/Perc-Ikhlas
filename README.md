@@ -16,3 +16,4 @@
 4. Create UI Header Component
 5. Create UI Footer Component
 6. Create carousel and Card using react-bootstrap
+7. Layouting carousel and Card 
