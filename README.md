@@ -5,3 +5,7 @@
    4. create product list screen
    5. create home screen
    6. create cart screen
+2. Create Admin, User Screen and protect component
+   1. create admin screen
+   2. create user screen
+   3. create protected routes component
