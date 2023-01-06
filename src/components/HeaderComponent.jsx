@@ -19,7 +19,7 @@ function HeaderComponent() {
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <LinkContainer to="/">
-          <Navbar.Brand href="/">BEST ONLINE SHOP</Navbar.Brand>
+          <Navbar.Brand href="/">Perc. Ikhlas</Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -30,7 +30,7 @@ function HeaderComponent() {
                 <Dropdown.Item>Cars</Dropdown.Item>
                 <Dropdown.Item>Books</Dropdown.Item>
               </DropdownButton>
-              <Form.Control type="text" placeholder="Search in shop ..." />
+              <Form.Control type="text" placeholder="Search" />
               <Button variant="warning">
                 <i className="bi bi-search text-dark"></i>
               </Button>

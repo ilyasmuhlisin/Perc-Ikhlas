@@ -14,3 +14,4 @@
    2. create footer screen file
    3. create user protected routes component file
 4. Create UI Header Component
+5. Create UI Footer Component
