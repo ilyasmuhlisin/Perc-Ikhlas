@@ -1,9 +1,14 @@
 import React from 'react'
+import ProductCarouselComponent from "../components/ProductCarouselComponent";
+import CategoryCardComponent from "../components/CategoryCardComponent";
 
 function HomeScreen() {
   return (
-    <div>HomeScreen</div>
-  )
+    <>
+      <ProductCarouselComponent />
+      <CategoryCardComponent />
+    </>
+  );
 }
 
 export default HomeScreen
