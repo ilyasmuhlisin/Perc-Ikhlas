@@ -23,4 +23,9 @@
    2. create textarea
    3. create submit button
    4. create dummy history chat
-10. Prepare Product List 
+10. Prepare Product List
+11. Create Template Sorting and Filtering
+   1. Create Sorting
+   2. Create Filtering by Price
+   3. Create Filtering by category
+   4. Create Filtering by attribute category

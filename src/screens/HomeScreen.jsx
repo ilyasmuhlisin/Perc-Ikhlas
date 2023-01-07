@@ -5,14 +5,10 @@ import { Row, Container } from "react-bootstrap";
 
 function HomeScreen() {
   const categories = [
-    "Tablets",
-    "Monitors",
-    "Games",
-    "Printers",
-    "Software",
-    "Cameras",
-    "Books",
-    "Videos",
+    "Undangan",
+    "MMT/Spanduk",
+    "Bungkus Makanan",
+    "Serat Ulem",
   ];
   return (
     <>

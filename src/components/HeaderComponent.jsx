@@ -26,9 +26,10 @@ function HeaderComponent() {
           <Nav className="me-auto">
             <InputGroup>
               <DropdownButton id="dropdown-basic-button" title="All">
-                <Dropdown.Item>Electronics</Dropdown.Item>
-                <Dropdown.Item>Cars</Dropdown.Item>
-                <Dropdown.Item>Books</Dropdown.Item>
+                <Dropdown.Item>Undangan</Dropdown.Item>
+                <Dropdown.Item>Serat Ulem</Dropdown.Item>
+                <Dropdown.Item>MMT/Spanduk</Dropdown.Item>
+                <Dropdown.Item>Bungkus Makanan</Dropdown.Item>
               </DropdownButton>
               <Form.Control type="text" placeholder="Search" />
               <Button variant="warning">

@@ -15,7 +15,7 @@ function CategoryCardComponent({ category, idx }) {
   ];
   return (
     <Card>
-      <Card.Img crossorigin="anonymous" variant="top" src={images[idx]} />
+      <Card.Img crossOrigin="anonymous" variant="top" src={images[idx]} />
       <Card.Body>
         <Card.Title>{category}</Card.Title>
         <Card.Text>
