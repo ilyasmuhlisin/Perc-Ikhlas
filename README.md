@@ -42,3 +42,4 @@
 15. Create UI Cart Screen
 16. Create Register Screen
 17. Create Login Screen
+18. Create User Profile Screen
