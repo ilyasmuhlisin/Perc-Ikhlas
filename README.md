@@ -34,3 +34,8 @@
     2. Customize Pagination
     3. Create auto scroll top on another page
 13. Layouting Component on Product Details screen
+14. Customize Product Details Screen
+    1. Customize alert checkout
+    2. Customize description product
+    3. Customize review section
+    4. Create zoom image hover
