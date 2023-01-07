@@ -1,17 +1,33 @@
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Row, Col } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
-const ProductForListComponent = () => {
+const ProductForListComponent = ({ images, idx }) => {
   return (
-    <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src="/images/tablets-category.png" />
-      <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
+    <Card style={{ marginTop: "30px", marginBottom: "50px" }}>
+      <Row>
+        <Col lg={5}>
+          <Card.Img
+            variant="top"
+            src={"/images/" + images[idx] + "-category.png"}
+          />
+        </Col>
+        <Col lg={7}>
+          <Card.Body>
+            <Card.Title>Product Name Lorem ipsum dolor sit amet</Card.Title>
+            <Card.Text>
+              Product Description Lorem ipsum dolor sit amet consectetur
+              adipisicing elit. Magni ipsa ducimus architecto explicabo id
+              accusantium nihil exercitationem autem porro esse.
+            </Card.Text>
+            <Card.Text className="h4">
+              Rp.500{" "}
+              <LinkContainer to="/product-details">
+                <Button variant="danger">See product</Button>
+              </LinkContainer>
+            </Card.Text>
+          </Card.Body>
+        </Col>
+      </Row>
     </Card>
   );
 };

@@ -25,7 +25,11 @@
    4. create dummy history chat
 10. Prepare Product List
 11. Create Template Sorting and Filtering
-   1. Create Sorting
-   2. Create Filtering by Price
-   3. Create Filtering by category
-   4. Create Filtering by attribute category
+    1. Create Sorting
+    2. Create Filtering by Price
+    3. Create Filtering by category
+    4. Create Filtering by attribute category
+12. Customize Product List Screen
+    1. Responsive card component
+    2. Customize Pagination
+    3. Create auto scroll top on another page

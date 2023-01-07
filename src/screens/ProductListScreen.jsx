@@ -33,7 +33,13 @@ function ProductListScreen() {
           </ListGroup>
         </Col>
         <Col md={9}>
-          <ProductForListComponent />
+          {Array.from({ length: 5 }).map((_, idx) => (
+            <ProductForListComponent
+              key={idx}
+              images={["games", "monitors", "tablets", "games", "monitors"]}
+              idx={idx}
+            />
+          ))}
           <PaginationComponent />
         </Col>
       </Row>
