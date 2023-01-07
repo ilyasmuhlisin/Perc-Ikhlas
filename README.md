@@ -33,3 +33,4 @@
     1. Responsive card component
     2. Customize Pagination
     3. Create auto scroll top on another page
+13. Layouting Component on Product Details screen
