@@ -40,3 +40,4 @@
     3. Customize review section
     4. Create zoom image hover
 15. Create UI Cart Screen
+16. Create Register Func
