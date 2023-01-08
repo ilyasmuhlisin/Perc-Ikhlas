@@ -52,4 +52,9 @@
     3. Create admin order details
 21. Create admin product screen
 22. Create admin new product screen
-
+23. Create All Screen in Admin link component
+    1. Create Admin Edit Product
+    2. Create Admin Edit User
+    3. Create Admin Users Screen
+    4. Create Admin chat
+    5. Create Admin Analytics
