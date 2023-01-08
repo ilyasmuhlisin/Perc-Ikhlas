@@ -1,7 +1,7 @@
 import React from 'react'
 import { Row, Col, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
-const UserOrdersPage = () => {
+const UserOrdersScreen = () => {
   return (
     <Row className="m-5">
       <Col md={12}>
@@ -41,5 +41,5 @@ const UserOrdersPage = () => {
   );
 };
 
-export default UserOrdersPage;
+export default UserOrdersScreen;
 

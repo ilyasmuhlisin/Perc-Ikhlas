@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useState } from "react";
 
-const UserProfilePage = () => {
+const UserProfileScreen = () => {
   const [validated, setValidated] = useState(false);
 
   const onChange = () => {
@@ -157,5 +157,5 @@ const UserProfilePage = () => {
   );
 };
 
-export default UserProfilePage;
+export default UserProfileScreen;
 

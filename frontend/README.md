@@ -43,3 +43,6 @@
 16. Create Register Screen
 17. Create Login Screen
 18. Create User Profile Screen
+19. Create Details Screen
+    1. Create User Order Details
+    2. Create User Cart Order details
