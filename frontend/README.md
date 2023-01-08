@@ -50,3 +50,5 @@
     1. Create Admin order screen
     2. Create admin link component
     3. Create admin order details
+21. Create admin product screen
+
