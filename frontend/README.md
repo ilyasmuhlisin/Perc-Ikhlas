@@ -49,3 +49,4 @@
 20. Create Admin Order screen
     1. Create Admin order screen
     2. Create admin link component
+    3. Create admin order details
