@@ -46,3 +46,6 @@
 19. Create Details Screen
     1. Create User Order Details
     2. Create User Cart Order details
+20. Create Admin Order screen
+    1. Create Admin order screen
+    2. Create admin link component
