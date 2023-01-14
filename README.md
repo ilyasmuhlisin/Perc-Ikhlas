@@ -63,3 +63,6 @@
     1. routes
     2. controller
     3. server
+26. Configuration Database
+    1. Configurasi mongoDB
+    2. instal and connect mongoose to mongoDB
