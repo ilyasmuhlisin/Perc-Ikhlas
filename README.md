@@ -66,3 +66,6 @@
 26. Configuration Database
     1. Configurasi mongoDB
     2. instal and connect mongoose to mongoDB
+27. Create Product model
+    1. review model
+    2. image model
