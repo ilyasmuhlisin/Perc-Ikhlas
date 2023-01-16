@@ -69,3 +69,7 @@
 27. Create Product model
     1. review model
     2. image model
+28. Create Another model
+    1. categorymodel
+    2. user model
+    3. order model
