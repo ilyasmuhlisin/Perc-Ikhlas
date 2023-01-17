@@ -73,3 +73,4 @@
     1. categorymodel
     2. user model
     3. order model
+29. Create Seeders,Routes,Controller file
