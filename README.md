@@ -78,3 +78,4 @@
 31. Create pagination function
 32. Create sort funct by name etc
 33. Create Filter by price
+34. Create Filter by category on produk page and navbar

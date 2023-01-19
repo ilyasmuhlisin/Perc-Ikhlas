@@ -5,15 +5,15 @@ const getProducts = async (req, res, next) => {
   try {
     // filter price
     let query = {};
-    // let queryCondition = false;
+    let queryCondition = false;
 
-    // let priceQueryCondition = {};
+    let priceQueryCondition = {};
     if (req.query.price) {
       queryCondition = true;
       // $lte perintah khusus mongodb jika harga difilter tidak ada
       // maka ditampilkan harga yang lebih rendah
-      // priceQueryCondition = { price: { $lte: Number(req.query.price) } };
-      query = { price: { $lte: Number(req.query.price) } };
+      priceQueryCondition = { price: { $lte: Number(req.query.price) } };
+      // query = { price: { $lte: Number(req.query.price) } };
     }
     // let ratingQueryCondition = {};
     // if (req.query.rating) {
@@ -23,11 +23,37 @@ const getProducts = async (req, res, next) => {
     //   };
     // }
 
-    // if (queryCondition) {
-    //   query = {
-    //     $and: [priceQueryCondition, ratingQueryCondition],
-    //   };
-    // }
+    // search dari navbar
+    let categoryQueryCondition = {};
+    const categoryName = req.params.categoryName || "";
+    if (categoryName) {
+      queryCondition = true;
+      // nama category terdapat /
+      let a = categoryName.replaceAll(",", "/");
+      // let a = categoryName.replaceAll("/");
+      // misal /^ssss/ ^awalan string
+      var regEx = new RegExp("^" + a);
+      categoryQueryCondition = { category: regEx };
+    }
+
+    // search dari produk page filter
+    if (req.query.category) {
+      queryCondition = true;
+      // memisahkan value dengan , a,b
+      let a = req.query.category.split(",").map((item) => {
+        if (item) return new RegExp("^" + item);
+      });
+      categoryQueryCondition = {
+        // perintah spesial $in mongo db value lebih dari satu a,b
+        category: { $in: a },
+      };
+    }
+
+    if (queryCondition) {
+      query = {
+        $and: [priceQueryCondition, categoryQueryCondition],
+      };
+    }
 
     // pagination
     // jika query tidak ada set ke 1
