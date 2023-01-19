@@ -76,3 +76,4 @@
 29. Create Seeders,Routes,Controller file
 30. Create Category and attribut controller
 31. Create pagination function
+32. Create sort funct by name etc
