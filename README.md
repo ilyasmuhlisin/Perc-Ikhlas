@@ -77,3 +77,4 @@
 30. Create Category and attribut controller
 31. Create pagination function
 32. Create sort funct by name etc
+33. Create Filter by price
