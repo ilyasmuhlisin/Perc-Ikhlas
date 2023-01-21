@@ -79,3 +79,4 @@
 32. Create sort funct by name etc
 33. Create Filter by price
 34. Create Filter by category on produk page and navbar
+35. create Filter by attribute

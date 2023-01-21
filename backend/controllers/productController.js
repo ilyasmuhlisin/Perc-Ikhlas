@@ -49,9 +49,40 @@ const getProducts = async (req, res, next) => {
       };
     }
 
+    // filter by atribut
+    let attrsQueryCondition = [];
+    if (req.query.attrs) {
+      // attrs=RAM-1TB-2TB-4TB,color-blue-red
+      // [ 'RAM-1TB-4TB', 'color-blue', '' ]
+      // acc nilai sebelumnya = kosong + item nilai selanjutnya
+      // reduce perulangan dalm array
+      attrsQueryCondition = req.query.attrs.split(",").reduce((acc, item) => {
+        if (item) {
+          let a = item.split("-");
+          let values = [...a];
+          values.shift(); // removes first item
+          let a1 = {
+            // $elemMath perintah mongoDb entuk mencocokan key field pertama dengan value field kedua
+            // [Tipe , foto, tanpa foto]
+            attrs: { $elemMatch: { key: a[0], value: { $in: values } } },
+          };
+          acc.push(a1);
+          // console.dir(acc, { depth: null })
+          return acc;
+        } else return acc;
+        // nilai awal array kosong
+      }, []);
+      //   console.dir(attrsQueryCondition, { depth: null });
+      queryCondition = true;
+    }
+
     if (queryCondition) {
       query = {
-        $and: [priceQueryCondition, categoryQueryCondition],
+        $and: [
+          priceQueryCondition,
+          categoryQueryCondition,
+          ...attrsQueryCondition,
+        ],
       };
     }
 
