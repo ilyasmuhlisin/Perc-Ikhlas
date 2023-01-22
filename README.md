@@ -80,3 +80,4 @@
 33. Create Filter by price
 34. Create Filter by category on produk page and navbar
 35. create Filter by attribute
+36. Create Search on SearchBox

@@ -76,16 +76,6 @@ const getProducts = async (req, res, next) => {
       queryCondition = true;
     }
 
-    if (queryCondition) {
-      query = {
-        $and: [
-          priceQueryCondition,
-          categoryQueryCondition,
-          ...attrsQueryCondition,
-        ],
-      };
-    }
-
     // pagination
     // jika query tidak ada set ke 1
     const pageNum = Number(req.query.pageNum) || 1;
@@ -102,10 +92,38 @@ const getProducts = async (req, res, next) => {
       sort = { [sortOpt[0]]: Number(sortOpt[1]) };
       console.log(sort);
     }
+
+    // search by searchbox
+    const searchQuery = req.params.searchQuery || "";
+    let searchQueryCondition = {};
+    let select = {};
+    if (searchQuery) {
+      queryCondition = true;
+      searchQueryCondition = { $text: { $search: searchQuery } };
+      // menambahkan field score akurasi pencarian
+      select = {
+        score: { $meta: "textScore" },
+      };
+      // mengurutkan berdasarkan akurasi
+      sort = { score: { $meta: "textScore" } };
+    }
+
+    if (queryCondition) {
+      query = {
+        $and: [
+          priceQueryCondition,
+          categoryQueryCondition,
+          ...attrsQueryCondition,
+          searchQueryCondition,
+        ],
+      };
+    }
+
     // mengetahui berapa data product didatabase
     const totalProducts = await Product.countDocuments(query);
     // mendapatkan produk denga urutan 1 = asc dan dilimit pagination
     const products = await Product.find(query)
+      .select(select)
       // skip yang ditampilkan misalnya pageNum bernilai 1 - 1 maka 0 sehingga dikali 0 ttp 0
       .skip(recordsPerPage * (pageNum - 1))
       .sort(sort)
