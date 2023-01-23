@@ -150,4 +150,54 @@ const getProductById = async (req, res, next) => {
     next(err);
   }
 };
-module.exports = { getProducts, getProductById };
+
+const getBestsellers = async (req, res, next) => {
+  try {
+    const products = await Product.aggregate([
+      // sortir berdasarkan category ascend dan penjualan desc
+      { $sort: { category: 1, sales: -1 } },
+      {
+        // mengelompokan berdasrkan kategori diperlukan sorting untuk menjalankan
+        $group: { _id: "$category", doc_with_max_sales: { $first: "$$ROOT" } },
+      },
+      // menghilangkan
+      { $replaceWith: "$doc_with_max_sales" },
+      { $match: { sales: { $gt: 0 } } },
+      { $project: { _id: 1, name: 1, images: 1, category: 1, description: 1 } },
+      { $limit: 3 },
+    ]);
+    res.json(products);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const adminGetProducts = async (req, res, next) => {
+  try {
+    const products = await Product.find({})
+      .sort({ category: 1 })
+      // hanya name price category yang dibutuhkan
+      .select("name price category");
+    return res.json(products);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const adminDeleteProduct = async (req, res, next) => {
+  try {
+    const product = await Product.findById(req.params.id).orFail();
+    await product.remove();
+    res.json({ message: "product removed" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = {
+  getProducts,
+  getProductById,
+  getBestsellers,
+  adminGetProducts,
+  adminDeleteProduct,
+};
