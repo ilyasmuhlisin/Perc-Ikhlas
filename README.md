@@ -84,3 +84,4 @@
 37. Detail Product Get Product By Id
 38. Product BestSell,get & del admin prod
 39. Product Create & Update by admin
+40. Create util imagesValidate
