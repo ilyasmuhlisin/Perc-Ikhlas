@@ -83,3 +83,4 @@
 36. Create Search on SearchBox
 37. Detail Product Get Product By Id
 38. Product BestSell,get & del admin prod
+39. Product Create & Update by admin

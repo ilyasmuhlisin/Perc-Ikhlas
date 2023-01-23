@@ -194,10 +194,65 @@ const adminDeleteProduct = async (req, res, next) => {
   }
 };
 
+const adminCreateProduct = async (req, res, next) => {
+  try {
+    const product = new Product();
+    const { name, description, count, price, category, attributesTable } =
+      req.body;
+    product.name = name;
+    product.description = description;
+    product.count = count;
+    product.price = price;
+    product.category = category;
+    if (attributesTable.length > 0) {
+      attributesTable.map((item) => {
+        product.attrs.push(item);
+      });
+    }
+    await product.save();
+
+    res.json({
+      message: "product created",
+      productId: product._id,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const adminUpdateProduct = async (req, res, next) => {
+  try {
+    const product = await Product.findById(req.params.id).orFail();
+    const { name, description, count, price, category, attributesTable } =
+      req.body;
+    product.name = name || product.name;
+    product.description = description || product.description;
+    product.count = count || product.count;
+    product.price = price || product.price;
+    product.category = category || product.category;
+    if (attributesTable.length > 0) {
+      product.attrs = [];
+      attributesTable.map((item) => {
+        product.attrs.push(item);
+      });
+    } else {
+      product.attrs = [];
+    }
+    await product.save();
+    res.json({
+      message: "product updated",
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getProducts,
   getProductById,
   getBestsellers,
   adminGetProducts,
   adminDeleteProduct,
+  adminCreateProduct,
+  adminUpdateProduct,
 };
