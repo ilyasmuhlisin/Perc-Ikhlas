@@ -163,6 +163,10 @@ const getUserProfile = async (req, res, next) => {
 
 const writeReview = async (req, res, next) => {
   try {
+    // karena 2 model digunakan jadi harus saling berkaitan
+    // jika tambah review keduanya harus sama
+    const session = await Review.startSession();
+
     const { comment } = req.body;
     // // validate request:
     // if (!(comment && rating)) {
@@ -173,22 +177,36 @@ const writeReview = async (req, res, next) => {
     const ObjectId = require("mongodb").ObjectId;
     let reviewId = ObjectId();
 
-    await Review.create([
-      {
-        _id: reviewId,
-        comment: comment,
-        // rating: Number(rating),
-        user: {
-          _id: req.user._id,
-          name: req.user.name + " " + req.user.lastName,
+    session.startTransaction();
+    await Review.create(
+      [
+        {
+          _id: reviewId,
+          comment: comment,
+          // rating: Number(rating),
+          user: {
+            _id: req.user._id,
+            name: req.user.name + " " + req.user.lastName,
+          },
         },
-      },
-    ]);
+      ],
+      { session: session }
+    );
 
     // populate = auto field ref on product
-    const product = await Product.findById(req.params.productId).populate(
-      "reviews"
+    const product = await Product.findById(req.params.productId)
+      .populate("reviews")
+      .session(session);
+
+    const alreadyReviewed = product.reviews.find(
+      (r) => r.user._id.toString() === req.user._id.toString()
     );
+    if (alreadyReviewed) {
+      await session.abortTransaction();
+      session.endSession();
+      return res.status(400).send("product already reviewed");
+    }
+
     // res.send(product)
     // simpan review ke product model
     let prc = [...product.reviews];
@@ -206,8 +224,11 @@ const writeReview = async (req, res, next) => {
     }
     await product.save();
 
+    await session.commitTransaction();
+    session.endSession();
     res.send("review created");
   } catch (err) {
+    await session.abortTransaction();
     next(err);
   }
 };
