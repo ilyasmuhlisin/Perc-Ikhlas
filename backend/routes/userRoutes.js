@@ -9,6 +9,7 @@ const {
   registerUser,
   loginUser,
   updateUserProfile,
+  getUserProfile,
 } = require("../controllers/userController");
 
 router.post("/register", registerUser);
@@ -17,6 +18,7 @@ router.post("/login", loginUser);
 // user logged in routes:
 router.use(verifyIsLoggedIn);
 router.put("/profile", updateUserProfile);
+router.get("/profile/:id", getUserProfile);
 
 // admin routes:
 router.use(verifyIsAdmin);
