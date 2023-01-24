@@ -86,3 +86,4 @@
 39. Product Create & Update by admin
 40. Create util imagesValidate
 41. Create Image Upload
+42. Create delete images

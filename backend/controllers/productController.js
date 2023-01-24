@@ -297,6 +297,32 @@ const adminUpload = async (req, res, next) => {
   }
 };
 
+const adminDeleteProductImage = async (req, res, next) => {
+  try {
+    // mennafsirkan kode dari encode frontend
+    const imagePath = decodeURIComponent(req.params.imagePath);
+    const path = require("path");
+    const finalPath = path.resolve("../frontend/public") + imagePath;
+
+    // filesystem
+    const fs = require("fs");
+    fs.unlink(finalPath, (err) => {
+      if (err) {
+        res.status(500).send(err);
+      }
+    });
+    await Product.findOneAndUpdate(
+      { _id: req.params.productId },
+      // spesial sintaks update mongo
+      { $pull: { images: { path: imagePath } } }
+    ).orFail();
+    // tidak ingin mengembalikan respom apapum
+    return res.end();
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getProducts,
   getProductById,
@@ -306,4 +332,5 @@ module.exports = {
   adminCreateProduct,
   adminUpdateProduct,
   adminUpload,
+  adminDeleteProductImage,
 };
