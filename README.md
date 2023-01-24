@@ -88,3 +88,7 @@
 41. Create Image Upload
 42. Create delete images
 43. Get users
+44. Create register with jwt
+    1. hashpassword
+    2. cookie
+    3. jwt
