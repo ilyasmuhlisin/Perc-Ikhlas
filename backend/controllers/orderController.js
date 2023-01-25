@@ -5,9 +5,20 @@ const getUserOrders = async (req, res, next) => {
   try {
     const orders = await Order.find({ user: ObjectId(req.user._id) });
     res.send(orders);
-  } catch (err) {
+  } catch (error) {
     next(error);
   }
 };
 
-module.exports = getUserOrders;
+const getOrder = async (req, res, next) => {
+  try {
+    const order = await Order.findById(req.params.id)
+      .populate("user", "-password -isAdmin -_id -__v -createdAt -updatedAt")
+      .orFail();
+    res.send(order);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { getUserOrders, getOrder };
