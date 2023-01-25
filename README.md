@@ -105,3 +105,4 @@
     3. delete
 53. Get User Orders
 54. Get Order data
+55. Create an order
