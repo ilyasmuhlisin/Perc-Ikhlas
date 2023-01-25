@@ -99,3 +99,7 @@
 49. Get User profile by id
 50. Create review product
 51. Create review only one user
+52. Manage user by admin
+    1. get user by id
+    2. update user
+    3. delete
