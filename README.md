@@ -107,3 +107,4 @@
 54. Get Order data
 55. Create an order
 56. Update isPaid true
+57. Update isDelivered true
