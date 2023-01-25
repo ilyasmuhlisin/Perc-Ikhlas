@@ -103,8 +103,9 @@
     1. get user by id
     2. update user
     3. delete
-53. Get User Orders
+53. Get User Orders Regular
 54. Get Order data
 55. Create an order
 56. Update isPaid true
 57. Update isDelivered true
+58. Get User Orders Admin
