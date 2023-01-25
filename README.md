@@ -108,4 +108,5 @@
 55. Create an order
 56. Update isPaid true
 57. Update isDelivered true
-58. Get User Orders Admin
+58. Get all User Orders Admin
+59. Get order for analys

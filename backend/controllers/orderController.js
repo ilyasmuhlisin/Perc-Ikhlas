@@ -92,6 +92,26 @@ const getOrders = async (req, res, next) => {
   }
 };
 
+const getOrderForAnalysis = async (req, res, next) => {
+  try {
+    const start = new Date(req.params.date);
+    // 00.00 am
+    start.setHours(0, 0, 0, 0);
+    const end = new Date(req.params.date);
+    end.setHours(23, 59, 59, 999);
+
+    const order = await Order.find({
+      createdAt: {
+        // temukan order lebih besar dari waktu awal dan lebih kecil waktu akhir
+        $gte: start,
+        $lte: end,
+      },
+    }).sort({ createdAt: "asc" });
+    res.send(order);
+  } catch (err) {
+    next(err);
+  }
+};
 
 module.exports = {
   getUserOrders,
@@ -100,4 +120,5 @@ module.exports = {
   updateOrderToPaid,
   updateOrderToDelivered,
   getOrders,
+  getOrderForAnalysis,
 };

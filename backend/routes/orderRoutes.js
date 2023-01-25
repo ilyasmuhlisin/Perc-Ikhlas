@@ -11,6 +11,7 @@ const {
   updateOrderToPaid,
   updateOrderToDelivered,
   getOrders,
+  getOrderForAnalysis,
 } = require("../controllers/orderController");
 
 // user routes
@@ -24,5 +25,6 @@ router.put("/paid/:id", updateOrderToPaid);
 router.use(verifyIsAdmin);
 router.put("/delivered/:id", updateOrderToDelivered);
 router.get("/admin", getOrders);
+router.get("/analysis/:date", getOrderForAnalysis);
 
 module.exports = router;
