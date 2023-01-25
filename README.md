@@ -106,3 +106,4 @@
 53. Get User Orders
 54. Get Order data
 55. Create an order
+56. Update isPaid true
