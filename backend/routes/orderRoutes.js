@@ -1,7 +1,16 @@
-const express = require('express')
-const router = express.Router()
-const getOrders = require("../controllers/orderController")
+const express = require("express");
+const router = express.Router();
+const {
+  verifyIsLoggedIn,
+  verifyIsAdmin,
+} = require("../middleware/verifyAuthToken");
+const getUserOrders = require("../controllers/orderController");
 
-router.get("/", getOrders)
+// user routes
+router.use(verifyIsLoggedIn);
+router.get("/", getUserOrders);
 
-module.exports = router
+// admin routes
+router.use(verifyIsAdmin);
+
+module.exports = router;
