@@ -111,3 +111,4 @@
 58. Get all User Orders Admin
 59. Get order for analys
 60. Run FE and BE only 1 sintaks
+61. Create Console Command for seed
