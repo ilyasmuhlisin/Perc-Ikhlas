@@ -7,7 +7,10 @@ import PriceFilterComponent from "../components/filterQueryResultOptions/PriceFi
 import CategoryFilterComponent from "../components/filterQueryResultOptions/CategoryFilterComponent";
 import AttributesFilterComponent from "../components/filterQueryResultOptions/AttributesFilterComponent";
 
+import axios from "axios";
+
 function ProductListScreen() {
+  axios.get("/api/products").then((res) => console.log(res));
   return (
     <Container fluid>
       <Row>
@@ -27,7 +30,7 @@ function ProductListScreen() {
               <AttributesFilterComponent />
             </ListGroup.Item>
             <ListGroup.Item>
-              <Button variant="primary">Filter</Button>
+              <Button variant="primary">Filter</Button>{" "}
               <Button variant="danger">Reset</Button>
             </ListGroup.Item>
           </ListGroup>
