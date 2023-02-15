@@ -112,4 +112,5 @@
 59. Get order for analys
 60. Run FE and BE only 1 sintaks
 61. Create Console Command for seed
-62. Fetch User Data Form Admin
+62. Fetch Users Data Form Admin
+63. Fetch & Del Products Form Admin

@@ -3,13 +3,20 @@ import { Row, Col, Table, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 
-const UsersScreenComponent = ({ fetchUsers }) => {
+const UsersScreenComponent = ({ fetchUsers, deleteUser }) => {
   const [users, setUsers] = useState([]);
+  const [userDeleted, setUserDeleted] = useState(false);
 
-  const deleteHandler = () => {
-    if (window.confirm("Are you sure?")) alert("User deleted!");
+  const deleteHandler = async (userId) => {
+    if (window.confirm("Are you sure?")) {
+      const data = await deleteUser(userId);
+      // respon dari backend
+      if (data.message === "user removed") {
+        setUserDeleted(!userDeleted);
+      }
+    }
+    // alert("User deleted!");
   };
-
   useEffect(() => {
     // abort digunakan untuk membatalkan koneksi apabila user pindah halaman
     const abctrl = new AbortController();
@@ -21,7 +28,7 @@ const UsersScreenComponent = ({ fetchUsers }) => {
         )
       );
     return () => abctrl.abort();
-  }, []);
+  }, [userDeleted]);
   return (
     <Row className="m-5">
       <Col md={2}>
@@ -65,7 +72,7 @@ const UsersScreenComponent = ({ fetchUsers }) => {
                   <Button
                     variant="danger"
                     className="btn-sm"
-                    onClick={deleteHandler}
+                    onClick={() => deleteHandler(user._id)}
                   >
                     <i className="bi bi-x-circle"></i>
                   </Button>
