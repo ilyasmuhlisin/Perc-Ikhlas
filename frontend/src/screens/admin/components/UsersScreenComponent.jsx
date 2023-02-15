@@ -1,12 +1,18 @@
+import { useState, useEffect } from "react";
 import { Row, Col, Table, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 
-const deleteHandler = () => {
-    if(window.confirm("Are you sure?")) alert("User deleted!");
-}
+const UsersScreenComponent = ({fetchUsers}) => {
+  const [users, setUsers] = useState([]);
 
-const UsersScreenComponent = () => {
+  const deleteHandler = () => {
+    if (window.confirm("Are you sure?")) alert("User deleted!");
+  };
+
+  useEffect(() => {
+    fetchUsers().then((res) => setUsers(res));
+  }, []);
   return (
     <Row className="m-5">
       <Col md={2}>
@@ -14,6 +20,7 @@ const UsersScreenComponent = () => {
       </Col>
       <Col md={10}>
         <h1>User List</h1>
+        {console.log(users)}
         <Table striped bordered hover responsive>
           <thead>
             <tr>
@@ -62,4 +69,3 @@ const UsersScreenComponent = () => {
 };
 
 export default UsersScreenComponent;
-
