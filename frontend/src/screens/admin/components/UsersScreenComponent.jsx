@@ -3,7 +3,7 @@ import { Row, Col, Table, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 
-const UsersScreenComponent = ({fetchUsers}) => {
+const UsersScreenComponent = ({ fetchUsers }) => {
   const [users, setUsers] = useState([]);
 
   const deleteHandler = () => {
@@ -13,7 +13,13 @@ const UsersScreenComponent = ({fetchUsers}) => {
   useEffect(() => {
     // abort digunakan untuk membatalkan koneksi apabila user pindah halaman
     const abctrl = new AbortController();
-    fetchUsers(abctrl).then((res) => setUsers(res));
+    fetchUsers(abctrl)
+      .then((res) => setUsers(res))
+      .catch((er) =>
+        console.log(
+          er.response.data.message ? er.response.data.message : er.response.data
+        )
+      );
     return () => abctrl.abort();
   }, []);
   return (
@@ -36,34 +42,36 @@ const UsersScreenComponent = ({fetchUsers}) => {
             </tr>
           </thead>
           <tbody>
-            {["bi bi-check-lg text-success", "bi bi-x-lg text-danger"].map(
-              (item, idx) => (
-                <tr key={idx}>
-                  <td>{idx + 1}</td>
-                  <td>Mark</td>
-                  <td>Twain</td>
-                  <td>email@email.com</td>
-                  <td>
-                    <i className={item}></i>
-                  </td>
-                  <td>
-                    <LinkContainer to="/admin/edit-user">
-                      <Button className="btn-sm">
-                        <i className="bi bi-pencil-square"></i>
-                      </Button>
-                    </LinkContainer>
-                    {" / "}
-                    <Button
-                      variant="danger"
-                      className="btn-sm"
-                      onClick={deleteHandler}
-                    >
-                      <i className="bi bi-x-circle"></i>
+            {users.map((user, idx) => (
+              <tr key={idx}>
+                <td>{idx + 1}</td>
+                <td>{user.name}</td>
+                <td>{user.lastName}</td>
+                <td>{user.email}</td>
+                <td>
+                  {user.isAdmin ? (
+                    <i className="bi bi-check-lg text-success"></i>
+                  ) : (
+                    <i className="bi bi-x-lg text-danger"></i>
+                  )}
+                </td>
+                <td>
+                  <LinkContainer to={`/admin/edit-user/${user._id}`}>
+                    <Button className="btn-sm">
+                      <i className="bi bi-pencil-square"></i>
                     </Button>
-                  </td>
-                </tr>
-              )
-            )}
+                  </LinkContainer>
+                  {" / "}
+                  <Button
+                    variant="danger"
+                    className="btn-sm"
+                    onClick={deleteHandler}
+                  >
+                    <i className="bi bi-x-circle"></i>
+                  </Button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </Col>
