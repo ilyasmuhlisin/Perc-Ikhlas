@@ -76,7 +76,7 @@ function App() {
           />
           <Route path="/admin/orders" element={<AdminOrdersScreen />} />
           <Route
-            path="/admin/orders-details"
+            path="/admin/order-details/:id"
             element={<AdminOrderDetailsScreen />}
           />
           <Route path="/admin/chats" element={<AdminChatsScreen />} />
