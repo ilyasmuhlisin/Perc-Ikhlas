@@ -12,7 +12,11 @@ import CartItemComponent from "../../../components/CartItemComponent";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-function OrderDetailsScreenComponent({ getOrder }) {
+function OrderDetailsScreenComponent({
+  getOrder,
+  markAsDelivered,
+  markAsPaid,
+}) {
   const { id } = useParams();
 
   const [userInfo, setUserInfo] = useState({});
@@ -37,14 +41,15 @@ function OrderDetailsScreenComponent({ getOrder }) {
           ? setIsDelivered(order.deliveredAt)
           : setIsDelivered(false);
         setCartSubtotal(order.orderTotal.cartSubtotal);
-        if (order.isDelivered) {
+        if (order.isDelivered & order.isPaid) {
+          setPaidButton("Paid is finished");
           setOrderButtonMessage("Order is finished");
           setButtonDisabled(true);
         }
-        if (order.isPaid) {
-          setPaidButton("Paid is finished");
-          setButtonDisabled(true);
-        }
+        // if (order.isPaid) {
+        //   setPaidButton("Paid is finished");
+        //   setButtonDisabled(true);
+        // }
         setCartItems(order.cartItems);
       })
       .catch((er) =>
@@ -128,6 +133,21 @@ function OrderDetailsScreenComponent({ getOrder }) {
                 <Button
                   size="lg"
                   variant="success"
+                  onClick={() =>
+                    markAsPaid(id)
+                      .then((res) => {
+                        if (res) {
+                          setIsPaid(true);
+                        }
+                      })
+                      .catch((er) =>
+                        console.log(
+                          er.response.data.message
+                            ? er.response.data.message
+                            : er.response.data
+                        )
+                      )
+                  }
                   disabled={buttonDisabled}
                   type="button"
                 >
@@ -140,6 +160,21 @@ function OrderDetailsScreenComponent({ getOrder }) {
                 <Button
                   size="lg"
                   variant="danger"
+                  onClick={() =>
+                    markAsDelivered(id)
+                      .then((res) => {
+                        if (res) {
+                          setIsDelivered(true);
+                        }
+                      })
+                      .catch((er) =>
+                        console.log(
+                          er.response.data.message
+                            ? er.response.data.message
+                            : er.response.data
+                        )
+                      )
+                  }
                   disabled={buttonDisabled}
                   type="button"
                 >

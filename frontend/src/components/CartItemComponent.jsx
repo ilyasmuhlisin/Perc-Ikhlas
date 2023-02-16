@@ -17,11 +17,16 @@ const CartItemComponent = ({ item, orderCreated = false }) => {
             <b>Rp {item.price}</b>
           </Col>
           <Col md={3}>
-            <Form.Group className="mb-3" controlId="formBasicCount">
+            <Form.Group
+              onChange={() => {}}
+              className="mb-3"
+              controlId="formBasicCount"
+            >
               <Form.Control
                 disabled={orderCreated}
+                onChange={() => {}}
                 type="number"
-                value={item.count}
+                defaultValue={item.count}
               />
             </Form.Group>
             {/* <Form.Select>
