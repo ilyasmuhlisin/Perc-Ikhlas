@@ -118,3 +118,6 @@
 65. Dummy objectId
     1. MongoDb ObjectId Genereator
     2. fix path
+66. Fetch order detaild data
+    1. fetch data
+    2. disable input item
