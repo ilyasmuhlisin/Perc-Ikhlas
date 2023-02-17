@@ -123,3 +123,4 @@
     2. disable input item
     3. fix mark button
     4. dummy display cart
+67. Setup Redux
