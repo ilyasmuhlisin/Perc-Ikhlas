@@ -14,21 +14,34 @@ import AddedToCartMessageComponent from "../components/AddedToCartMessageCompone
 import ImageZoom from "js-image-zoom";
 import { useEffect } from "react";
 
+// memanggil tindakan
+// memilih dan membaca dari redux state
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../redux/actions/cartActions";
+
 function ProductDetailsScreen() {
-    var options = {
-      // width: 400,
-      // zoomWidth: 500,
-      // fillContainer: true,
-      // zoomPosition: "bottom",
-      scale: 2,
-      offset: { vertical: 0, horizontal: 0 },
-    };
-    useEffect(() => {
-      new ImageZoom(document.getElementById("first"), options);
-      new ImageZoom(document.getElementById("second"), options);
-      new ImageZoom(document.getElementById("third"), options);
-      new ImageZoom(document.getElementById("fourth"), options);
-    });
+  const dispatch = useDispatch();
+
+  const addToCartHandler = () => {
+    dispatch(addToCart());
+  };
+
+  const products = useSelector((state) => state.cart.value);
+
+  var options = {
+    // width: 400,
+    // zoomWidth: 500,
+    // fillContainer: true,
+    // zoomPosition: "bottom",
+    scale: 2,
+    offset: { vertical: 0, horizontal: 0 },
+  };
+  useEffect(() => {
+    new ImageZoom(document.getElementById("first"), options);
+    new ImageZoom(document.getElementById("second"), options);
+    new ImageZoom(document.getElementById("third"), options);
+    new ImageZoom(document.getElementById("fourth"), options);
+  });
   return (
     <Container>
       <AddedToCartMessageComponent />
@@ -60,7 +73,7 @@ function ProductDetailsScreen() {
             <Col md={8}>
               <ListGroup variant="flush">
                 <ListGroup.Item>
-                  <h1>Product Name</h1>
+                  <h1>Product Name {products}</h1>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   Price <span className="fw-bold">Rp.500</span>
@@ -79,15 +92,19 @@ function ProductDetailsScreen() {
                 </ListGroup.Item>
                 <ListGroup.Item>
                   Quantity:
-                  <Form.Select size="lg" aria-label="Default select example">
-                    <option>500</option>
-                    <option value="1">600</option>
-                    <option value="2">700</option>
-                    <option value="3">800</option>
-                  </Form.Select>
+                  <Form.Group className="mb-3" controlId="formBasicCount">
+                    <Form.Control
+                      name="count"
+                      required
+                      type="number"
+                      defaultValue="1"
+                    />
+                  </Form.Group>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <Button variant="danger">Danger</Button>
+                  <Button onClick={addToCartHandler} variant="danger">
+                    Add to cart
+                  </Button>
                 </ListGroup.Item>
               </ListGroup>
             </Col>
