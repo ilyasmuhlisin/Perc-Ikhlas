@@ -124,3 +124,6 @@
     3. fix mark button
     4. dummy display cart
 67. Setup Redux
+68. Create login function
+    1. fix alert and spinner
+    2. add orfail backend login
