@@ -1,14 +1,20 @@
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
-const LoginScreenComponent = ({ loginUserApiRequest }) => {
+const LoginScreenComponent = ({
+  loginUserApiRequest,
+  reduxDispatch,
+  setReduxUserState,
+}) => {
   const [validated, setValidated] = useState(false);
   const [loginUserResponseState, setLoginUserResponseState] = useState({
     success: "",
     error: "",
     loading: false,
   });
+
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -27,6 +33,16 @@ const LoginScreenComponent = ({ loginUserApiRequest }) => {
             loading: false,
             error: "",
           });
+
+          // userLoggedIn dari backend control
+           if (res.userLoggedIn) {
+             reduxDispatch(setReduxUserState(res.userLoggedIn));
+           }
+
+          if (res.success === "user logged in" && !res.userLoggedIn.isAdmin)
+            // replace tru jika kembali ke halaman sebelumnya tidak menampilkan login paeg
+            navigate("/user", { replace: true });
+          else navigate("/admin/orders", { replace: true });
         })
         .catch((er) =>
           setLoginUserResponseState({

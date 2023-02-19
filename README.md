@@ -127,3 +127,5 @@
 68. Create login function
     1. fix alert and spinner
     2. add orfail backend login
+    3. redirect after login
+    4. create redux user data login
