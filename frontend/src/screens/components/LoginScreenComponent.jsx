@@ -35,14 +35,16 @@ const LoginScreenComponent = ({
           });
 
           // userLoggedIn dari backend control
-           if (res.userLoggedIn) {
-             reduxDispatch(setReduxUserState(res.userLoggedIn));
-           }
+          if (res.userLoggedIn) {
+            reduxDispatch(setReduxUserState(res.userLoggedIn));
+          }
 
           if (res.success === "user logged in" && !res.userLoggedIn.isAdmin)
-            // replace tru jika kembali ke halaman sebelumnya tidak menampilkan login paeg
-            navigate("/user", { replace: true });
-          else navigate("/admin/orders", { replace: true });
+            window.location.href = "/user";
+          else window.location.href = "/admin/orders";
+          //   // replace tru jika kembali ke halaman sebelumnya tidak menampilkan login paeg
+          //   navigate("/user", { replace: true });
+          // else navigate("/admin/orders", { replace: true });
         })
         .catch((er) =>
           setLoginUserResponseState({

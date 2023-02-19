@@ -129,3 +129,6 @@
     2. add orfail backend login
     3. redirect after login
     4. create redux user data login
+    5. save data local storage
+    6. auth login
+    7. fix route

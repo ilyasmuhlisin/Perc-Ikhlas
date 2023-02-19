@@ -9,6 +9,10 @@ const loginUserApiRequest = async (email, password, doNotLogout) => {
     password,
     doNotLogout,
   });
+  if (data.userLoggedIn.doNotLogout)
+    localStorage.setItem("userInfo", JSON.stringify(data.userLoggedIn));
+    // seassion auto login apabila borwser belum di keluarkan
+  else sessionStorage.setItem("userInfo", JSON.stringify(data.userLoggedIn));
   return data;
 };
 
