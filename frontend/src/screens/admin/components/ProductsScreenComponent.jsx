@@ -3,7 +3,12 @@ import { Row, Col, Table, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 
+import { logout } from "../../../redux/actions/userActions";
+import { useDispatch } from "react-redux";
+
 function ProductsScreenComponent({ fetchProducts, deleteProduct }) {
+  const dispatch = useDispatch();
+
   const [products, setProducts] = useState([]);
   const [productDeleted, setProductDeleted] = useState(false);
 
@@ -24,15 +29,15 @@ function ProductsScreenComponent({ fetchProducts, deleteProduct }) {
     fetchProducts(abctrl)
       .then((res) => setProducts(res))
       .catch(
-        (er) =>
-          // menampilkan error di halaman
-          setProducts([
-            {
-              name: er.response.data.message
-                ? er.response.data.message
-                : er.response.data,
-            },
-          ])
+        (er) => dispatch(logout())
+        // menampilkan error di halaman
+        // setProducts([
+        //   {
+        //     name: er.response.data.message
+        //       ? er.response.data.message
+        //       : er.response.data,
+        //   },
+        // ])
         // console.log(
         //   er.response.data.message ? er.response.data.message : er.response.data
         // )

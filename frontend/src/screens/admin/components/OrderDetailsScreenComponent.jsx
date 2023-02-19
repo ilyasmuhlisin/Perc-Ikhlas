@@ -12,12 +12,16 @@ import CartItemComponent from "../../../components/CartItemComponent";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import { logout } from "../../../redux/actions/userActions";
+import { useDispatch } from "react-redux";
+
 function OrderDetailsScreenComponent({
   getOrder,
   markAsDelivered,
   markAsPaid,
 }) {
   const { id } = useParams();
+  const dispatch = useDispatch();
 
   const [userInfo, setUserInfo] = useState({});
   const [paymentMethod, setPaymentMethod] = useState("");
@@ -52,10 +56,11 @@ function OrderDetailsScreenComponent({
         // }
         setCartItems(order.cartItems);
       })
-      .catch((er) =>
-        console.log(
-          er.response.data.message ? er.response.data.message : er.response.data
-        )
+      .catch(
+        (er) => dispatch(logout())
+        // console.log(
+        //   er.response.data.message ? er.response.data.message : er.response.data
+        // )
       );
     // halaman otomatis berubah ketika perubahan dilakukan
   }, [isPaid, isDelivered, id]);

@@ -3,7 +3,12 @@ import { Row, Col, Table, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 
+import { logout } from "../../../redux/actions/userActions";
+import { useDispatch } from "react-redux";
+
 const UsersScreenComponent = ({ fetchUsers, deleteUser }) => {
+  const dispatch = useDispatch();
+
   const [users, setUsers] = useState([]);
   const [userDeleted, setUserDeleted] = useState(false);
 
@@ -22,10 +27,11 @@ const UsersScreenComponent = ({ fetchUsers, deleteUser }) => {
     const abctrl = new AbortController();
     fetchUsers(abctrl)
       .then((res) => setUsers(res))
-      .catch((er) =>
-        console.log(
-          er.response.data.message ? er.response.data.message : er.response.data
-        )
+      .catch(
+        (er) => dispatch(logout())
+        // console.log(
+        //   er.response.data.message ? er.response.data.message : er.response.data
+        // )
       );
     return () => abctrl.abort();
   }, [userDeleted]);

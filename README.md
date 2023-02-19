@@ -132,3 +132,6 @@
     5. save data local storage
     6. auth login
     7. fix route
+69. Create Logout Func
+    1. api logout
+    2. del cookies,local storage,redux data
