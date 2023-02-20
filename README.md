@@ -143,3 +143,5 @@
 72. Update user profile
     1. both password should match
     2. fix alert
+    3. fetch data user
+    4. auto update user in redux

@@ -1,8 +1,20 @@
 import UserProfileScreenComponent from "./components/UserProfileScreenComponent";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { setReduxUserState } from "../../redux/actions/userActions";
 
-const UserProfileScreen = () => {
-  const updateUserApiRequest = async (
+const updateUserApiRequest = async (
+  name,
+  lastName,
+  phoneNumber,
+  address,
+  country,
+  zipCode,
+  city,
+  state,
+  password
+) => {
+  const { data } = await axios.put("/api/users/profile", {
     name,
     lastName,
     phoneNumber,
@@ -11,24 +23,31 @@ const UserProfileScreen = () => {
     zipCode,
     city,
     state,
-    password
-  ) => {
-    const { data } = await axios.put("/api/users/profile", {
-      name,
-      lastName,
-      phoneNumber,
-      address,
-      country,
-      zipCode,
-      city,
-      state,
-      password,
-    });
-    return data;
-  };
+    password,
+  });
+  return data;
+};
+
+const fetchUser = async (id) => {
+  const { data } = await axios.get("/api/users/profile/" + id);
+  return data;
+};
+
+const UserProfileScreen = () => {
+  const reduxDispatch = useDispatch();
+  // feth dari redux
+  const { userInfo } = useSelector((state) => state.userRegisterLogin);
 
   return (
-    <UserProfileScreenComponent updateUserApiRequest={updateUserApiRequest} />
+    <UserProfileScreenComponent
+      updateUserApiRequest={updateUserApiRequest}
+      fetchUser={fetchUser}
+      userInfoFromRedux={userInfo}
+      setReduxUserState={setReduxUserState}
+      reduxDispatch={reduxDispatch}
+      localStorage={window.localStorage}
+      sessionStorage={window.sessionStorage}
+    />
   );
 };
 

@@ -1,23 +1,42 @@
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const UserProfileScreenComponent = ({ updateUserApiRequest }) => {
+const UserProfileScreenComponent = ({
+  updateUserApiRequest,
+  fetchUser,
+  userInfoFromRedux,
+  setReduxUserState,
+  reduxDispatch,
+  localStorage,
+  sessionStorage,
+}) => {
   const [validated, setValidated] = useState(false);
   const [updateUserResponseState, setUpdateUserResponseState] = useState({
     success: "",
     error: "",
   });
   const [passwordsMatchState, setPasswordsMatchState] = useState(true);
+  const [user, setUser] = useState({});
+  const userInfo = userInfoFromRedux;
+
+  useEffect(() => {
+    fetchUser(userInfo._id)
+      .then((data) => setUser(data))
+      .catch((er) => console.log(er));
+    //   setiap id berubah useEffect dipanggil
+  }, [userInfo._id]);
 
   const onChange = () => {
     const password = document.querySelector("input[name=password]");
-    const confirmPassword = document.querySelector("input[name=confirmPassword]");
+    const confirmPassword = document.querySelector(
+      "input[name=confirmPassword]"
+    );
     if (confirmPassword.value === password.value) {
-        setPasswordsMatchState(true);
-    //   confirm.setCustomValidity("");
+      setPasswordsMatchState(true);
+      //   confirm.setCustomValidity("");
     } else {
-        setPasswordsMatchState(false);
-    //   confirm.setCustomValidity("Passwords do not match");
+      setPasswordsMatchState(false);
+      //   confirm.setCustomValidity("Passwords do not match");
     }
   };
 
@@ -53,6 +72,23 @@ const UserProfileScreenComponent = ({ updateUserApiRequest }) => {
       )
         .then((data) => {
           setUpdateUserResponseState({ success: data.success, error: "" });
+          //   auto update profile in redux
+          reduxDispatch(
+            setReduxUserState({
+              doNotLogout: userInfo.doNotLogout,
+              ...data.userUpdated,
+            })
+          );
+          if (userInfo.doNotLogout)
+            localStorage.setItem(
+              "userInfo",
+              JSON.stringify({ doNotLogout: true, ...data.userUpdated })
+            );
+          else
+            sessionStorage.setItem(
+              "userInfo",
+              JSON.stringify({ doNotLogout: false, ...data.userUpdated })
+            );
         })
         .catch((er) =>
           setUpdateUserResponseState({
@@ -89,7 +125,7 @@ const UserProfileScreenComponent = ({ updateUserApiRequest }) => {
               <Form.Control
                 required
                 type="text"
-                defaultValue="John"
+                defaultValue={user.name}
                 name="name"
               />
               <Form.Control.Feedback type="invalid">
@@ -101,7 +137,7 @@ const UserProfileScreenComponent = ({ updateUserApiRequest }) => {
               <Form.Control
                 required
                 type="text"
-                defaultValue="Doe"
+                defaultValue={user.lastName}
                 name="lastName"
               />
               <Form.Control.Feedback type="invalid">
@@ -110,17 +146,14 @@ const UserProfileScreenComponent = ({ updateUserApiRequest }) => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
-              <Form.Control
-                disabled
-                value="john@doe.com   if you want to change email, remove account and create new one with new email address"
-              />
+              <Form.Control disabled value={user.email} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPhone">
               <Form.Label>Phone number</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter your phone number"
-                defaultValue=""
+                defaultValue={user.phoneNumber}
                 name="phoneNumber"
               />
             </Form.Group>
@@ -129,7 +162,7 @@ const UserProfileScreenComponent = ({ updateUserApiRequest }) => {
               <Form.Control
                 type="text"
                 placeholder="Enter your street name and house number"
-                defaultValue=""
+                defaultValue={user.address}
                 name="address"
               />
             </Form.Group>
@@ -138,7 +171,7 @@ const UserProfileScreenComponent = ({ updateUserApiRequest }) => {
               <Form.Control
                 type="text"
                 placeholder="Enter your country"
-                defaultValue=""
+                defaultValue={user.country}
                 name="country"
               />
             </Form.Group>
@@ -147,7 +180,7 @@ const UserProfileScreenComponent = ({ updateUserApiRequest }) => {
               <Form.Control
                 type="text"
                 placeholder="Enter your Zip code"
-                defaultValue=""
+                defaultValue={user.zipCode}
                 name="zipCode"
               />
             </Form.Group>
@@ -156,7 +189,7 @@ const UserProfileScreenComponent = ({ updateUserApiRequest }) => {
               <Form.Control
                 type="text"
                 placeholder="Enter your city"
-                defaultValue=""
+                defaultValue={user.city}
                 name="city"
               />
             </Form.Group>
@@ -165,7 +198,7 @@ const UserProfileScreenComponent = ({ updateUserApiRequest }) => {
               <Form.Control
                 type="text"
                 placeholder="Enter your state"
-                defaultValue=""
+                defaultValue={user.state}
                 name="state"
               />
             </Form.Group>
