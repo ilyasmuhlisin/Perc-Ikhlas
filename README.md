@@ -136,3 +136,5 @@
     1. api logout
     2. del cookies,local storage,redux data
 70. Create Register func
+    1. fix spinner
+    2. fix both password should match
