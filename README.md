@@ -138,3 +138,5 @@
 70. Create Register func
     1. fix spinner
     2. fix both password should match
+71. Integrate Header
+    1. visibili component
