@@ -140,3 +140,6 @@
     2. fix both password should match
 71. Integrate Header
     1. visibili component
+72. Update user profile
+    1. both password should match
+    2. fix alert
