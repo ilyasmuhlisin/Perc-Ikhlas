@@ -146,3 +146,5 @@
     3. fetch data user
     4. auto update user in redux
 73. Fetch data list all product
+74. Fetch data detail product
+    1. fix component details product
