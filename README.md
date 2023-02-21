@@ -148,3 +148,5 @@
 73. Fetch data list all product
 74. Fetch data detail product
     1. fix component details product
+75. Create func addToCart
+    1. setup button

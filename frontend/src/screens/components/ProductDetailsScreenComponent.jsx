@@ -12,13 +12,24 @@ import {
 import AddedToCartMessageComponent from "../../components/AddedToCartMessageComponent";
 
 import ImageZoom from "js-image-zoom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
 
-function ProductDetailsScreenComponent({ addToCartHandler, products }) {
+// { addToCartHandler, products }
+function ProductDetailsScreenComponent({
+  addToCartReduxAction,
+  reduxDispatch,
+}) {
+  // const { id } = useParams();
+  // console.log(id);
+
   const { id } = useParams();
-  console.log(id);
+  const [quantity, setQuantity] = useState(1);
+
+  const addToCartHandler = () => {
+    reduxDispatch(addToCartReduxAction(id, quantity));
+  };
 
   var options = {
     // width: 400,
@@ -65,7 +76,7 @@ function ProductDetailsScreenComponent({ addToCartHandler, products }) {
             <Col md={8}>
               <ListGroup variant="flush">
                 <ListGroup.Item>
-                  <h1>Product Name {products}</h1>
+                  <h1>Product Name</h1>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   Price <span className="fw-bold">Rp.500</span>
@@ -89,7 +100,8 @@ function ProductDetailsScreenComponent({ addToCartHandler, products }) {
                       name="count"
                       required
                       type="number"
-                      defaultValue="1"
+                      value={quantity}
+                      onChange={(e) => setQuantity(e.target.value)}
                     />
                   </Form.Group>
                 </ListGroup.Item>
