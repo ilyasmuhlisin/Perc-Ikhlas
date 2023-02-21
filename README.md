@@ -150,3 +150,5 @@
     1. fix component details product
 75. Create func addToCart
     1. setup button
+    2. add redux data product
+    3. save local storage
