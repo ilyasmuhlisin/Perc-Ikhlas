@@ -145,3 +145,4 @@
     2. fix alert
     3. fetch data user
     4. auto update user in redux
+73. Fetch data list all product

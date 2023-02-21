@@ -1,27 +1,31 @@
 import { Card, Button, Row, Col } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
-const ProductForListComponent = ({ images, idx }) => {
+// {images,idx}
+const ProductForListComponent = ({
+  productId,
+  name,
+  description,
+  price,
+  images,
+}) => {
   return (
     <Card style={{ marginTop: "30px", marginBottom: "50px" }}>
       <Row>
         <Col lg={5}>
           <Card.Img
             variant="top"
-            src={"/images/" + images[idx] + "-category.png"}
+            src={images[0] ? images[0].path : ""}
+            // src={"/images/" + images[idx] + "-category.png"}
           />
         </Col>
         <Col lg={7}>
           <Card.Body>
-            <Card.Title>Product Name Lorem ipsum dolor sit amet</Card.Title>
-            <Card.Text>
-              Product Description Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Magni ipsa ducimus architecto explicabo id
-              accusantium nihil exercitationem autem porro esse.
-            </Card.Text>
+            <Card.Title>{name}</Card.Title>
+            <Card.Text>{description}</Card.Text>
             <Card.Text className="h4">
-              Rp.500{" "}
-              <LinkContainer to="/product-details">
+              Rp.{price}{" "}
+              <LinkContainer to={`/product-details/${productId}`}>
                 <Button variant="danger">See product</Button>
               </LinkContainer>
             </Card.Text>
