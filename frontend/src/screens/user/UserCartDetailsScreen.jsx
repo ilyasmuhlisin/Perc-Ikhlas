@@ -18,6 +18,11 @@ const UserCartDetailsScreen = () => {
     return data;
   };
 
+  const createOrder = async (orderData) => {
+    const { data } = await axios.post("/api/orders", { ...orderData });
+    return data;
+  };
+
   return (
     <UserCartDetailsScreenComponent
       cartItems={cartItems}
@@ -28,6 +33,7 @@ const UserCartDetailsScreen = () => {
       removeFromCart={removeFromCart}
       reduxDispatch={reduxDispatch}
       getUser={getUser}
+      createOrder={createOrder}
     />
   );
 };
