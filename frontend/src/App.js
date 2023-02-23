@@ -56,7 +56,7 @@ function App() {
             element={<UserCartDetailsScreen />}
           />
           <Route
-            path="/user/order-details"
+            path="/user/order-details/:id"
             element={<UserOrderDetailsScreen />}
           />
         </Route>

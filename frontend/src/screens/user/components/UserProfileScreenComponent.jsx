@@ -15,7 +15,7 @@ const UserProfileScreenComponent = ({
     success: "",
     error: "",
   });
-  const [passwordsMatchState, setPasswordsMatchState] = useState(true);
+  // const [passwordsMatchState, setPasswordsMatchState] = useState(true);
   const [user, setUser] = useState({});
   const userInfo = userInfoFromRedux;
 
@@ -26,19 +26,19 @@ const UserProfileScreenComponent = ({
     //   setiap id berubah useEffect dipanggil
   }, [userInfo._id]);
 
-  const onChange = () => {
-    const password = document.querySelector("input[name=password]");
-    const confirmPassword = document.querySelector(
-      "input[name=confirmPassword]"
-    );
-    if (confirmPassword.value === password.value) {
-      setPasswordsMatchState(true);
-      //   confirm.setCustomValidity("");
-    } else {
-      setPasswordsMatchState(false);
-      //   confirm.setCustomValidity("Passwords do not match");
-    }
-  };
+  // const onChange = () => {
+  //   const password = document.querySelector("input[name=password]");
+  //   const confirmPassword = document.querySelector(
+  //     "input[name=confirmPassword]"
+  //   );
+  //   if (confirmPassword.value === password.value) {
+  //     setPasswordsMatchState(true);
+  //     //   confirm.setCustomValidity("");
+  //   } else {
+  //     setPasswordsMatchState(false);
+  //     //   confirm.setCustomValidity("Passwords do not match");
+  //   }
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -53,11 +53,11 @@ const UserProfileScreenComponent = ({
     const zipCode = form.zipCode.value;
     const city = form.city.value;
     const state = form.state.value;
-    const password = form.password.value;
+    // const password = form.password.value;
 
     if (
-      event.currentTarget.checkValidity() === true &&
-      form.password.value === form.confirmPassword.value
+      event.currentTarget.checkValidity() === true 
+      // && form.password.value === form.confirmPassword.value
     ) {
       updateUserApiRequest(
         name,
@@ -68,7 +68,7 @@ const UserProfileScreenComponent = ({
         zipCode,
         city,
         state,
-        password
+        // password
       )
         .then((data) => {
           setUpdateUserResponseState({ success: data.success, error: "" });
@@ -202,7 +202,7 @@ const UserProfileScreenComponent = ({
                 name="state"
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            {/* <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 name="password"
@@ -232,7 +232,7 @@ const UserProfileScreenComponent = ({
               <Form.Control.Feedback type="invalid">
                 Both passwords should match
               </Form.Control.Feedback>
-            </Form.Group>
+            </Form.Group> */}
 
             <Button variant="primary" type="submit">
               Update
