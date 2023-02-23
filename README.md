@@ -156,3 +156,8 @@
 76. Display cart screen
     1. show product add on cart
     2. delete product cart
+77. Fetch data cart details
+    1. fetch product
+    2. fetch user data
+    3. disable button if data not complete
+    4. if data not complete message
