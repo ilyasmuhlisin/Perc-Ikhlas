@@ -10,6 +10,7 @@ import {
 import CartItemComponent from "../../../components/CartItemComponent";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const UserOrderDetailsScreenComponent = ({ userInfo, getUser, getOrder }) => {
   const [userAddress, setUserAddress] = useState({});
@@ -140,6 +141,15 @@ const UserOrderDetailsScreenComponent = ({ userInfo, getUser, getOrder }) => {
                   {orderButtonMessage}
                 </Button>
               </div>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <Link to="/user/my-orders">
+                <div className="d-grid gap-2">
+                  <Button size="lg" variant="primary" type="button">
+                    My orders
+                  </Button>
+                </div>
+              </Link>
             </ListGroup.Item>
           </ListGroup>
         </Col>
