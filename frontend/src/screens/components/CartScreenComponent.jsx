@@ -5,6 +5,7 @@ import CartItemComponent from "../../components/CartItemComponent";
 
 function CartScreenComponent({
   addToCart,
+  removeFromCart,
   cartItems,
   cartSubtotal,
   reduxDispatch,
@@ -12,6 +13,15 @@ function CartScreenComponent({
   // console.log(cartItems);
   const changeCount = (productID, count) => {
     reduxDispatch(addToCart(productID, count));
+  };
+
+  const removeFromCartHandler = (productID, quantity, price) => {
+    if (window.confirm("Are you sure?")) {
+      // console.log(productID);
+      // console.log(quantity);
+      // console.log(price);
+      reduxDispatch(removeFromCart(productID, quantity, price));
+    }
   };
 
   return (
@@ -41,6 +51,7 @@ function CartScreenComponent({
                     item={item}
                     key={idx}
                     changeCount={changeCount}
+                    removeFromCartHandler={removeFromCartHandler}
                   />
                 ))}
               </ListGroup>

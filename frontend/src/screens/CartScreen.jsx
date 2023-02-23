@@ -1,7 +1,7 @@
 import CartScreenComponent from "./components/CartScreenComponent";
 
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart } from "../redux/actions/cartActions";
+import { addToCart, removeFromCart } from "../redux/actions/cartActions";
 
 const CartScreen = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -11,6 +11,7 @@ const CartScreen = () => {
   return (
     <CartScreenComponent
       addToCart={addToCart}
+      removeFromCart={removeFromCart}
       cartItems={cartItems}
       cartSubtotal={cartSubtotal}
       reduxDispatch={reduxDispatch}

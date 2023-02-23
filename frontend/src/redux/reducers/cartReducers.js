@@ -64,6 +64,17 @@ export const cartReducer = (state = CART_INITIAL_STATE, action) => {
       return currentState;
     //   console.log(action.payload);
     //   return state;
+    case actionTypes.REMOVE_FROM_CART:
+      return {
+        // kembalikan nilai lama
+        ...state,
+        cartItems: state.cartItems.filter(
+          (x) => x.productID !== action.payload.productID
+        ),
+        itemsCount: state.itemsCount - action.payload.quantity,
+        cartSubtotal:
+          state.cartSubtotal - action.payload.price * action.payload.quantity,
+      };
     default:
       return state;
   }

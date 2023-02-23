@@ -155,3 +155,4 @@
     4. addtocart message & notif
 76. Display cart screen
     1. show product add on cart
+    2. delete product cart
