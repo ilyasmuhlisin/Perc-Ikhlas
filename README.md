@@ -172,3 +172,4 @@
 81. Edit product admin screen
     1. setup redux list category
     2. get list category form redux
+    3. get field data product

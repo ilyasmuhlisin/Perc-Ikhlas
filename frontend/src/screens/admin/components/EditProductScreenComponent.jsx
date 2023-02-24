@@ -10,8 +10,8 @@ import {
   Alert,
   Image,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 // import { useSelector } from "react-redux";
 
 const onHover = {
@@ -22,19 +22,40 @@ const onHover = {
   transform: "scale(2.7)",
 };
 
-function EditProductScreenComponent({ categories }) {
+function EditProductScreenComponent({
+  categories,
+  fetchProduct,
+  updateProductApiRequest,
+}) {
   const [validated, setValidated] = useState(false);
-
+  const [product, setProduct] = useState({});
   //   const { categories } = useSelector((state) => state.getCategories);
   //   console.log(categories);
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+  const { id } = useParams();
 
+  useEffect(() => {
+    fetchProduct(id)
+      .then((product) => setProduct(product))
+      .catch((er) => console.log(er));
+  }, []);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const form = event.currentTarget.elements;
+    
+    const formInputs = {
+      name: form.name.value,
+      description: form.description.value,
+      count: form.count.value,
+      price: form.price.value,
+      category: form.category.value,
+    };
+
+    if (event.currentTarget.checkValidity() === true) {
+      updateProductApiRequest(id, formInputs);
+    }
     setValidated(true);
   };
   return (
@@ -54,7 +75,7 @@ function EditProductScreenComponent({ categories }) {
                 name="name"
                 required
                 type="text"
-                defaultValue="Panasonic"
+                defaultValue={product.name}
               />
             </Form.Group>
 
@@ -68,7 +89,7 @@ function EditProductScreenComponent({ categories }) {
                 required
                 as="textarea"
                 rows={3}
-                defaultValue="Product description"
+                defaultValue={product.description}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCount">
@@ -77,7 +98,7 @@ function EditProductScreenComponent({ categories }) {
                 name="count"
                 required
                 type="number"
-                defaultValue="2"
+                defaultValue={product.count}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPrice">
@@ -86,7 +107,7 @@ function EditProductScreenComponent({ categories }) {
                 name="price"
                 required
                 type="text"
-                defaultValue="$210"
+                defaultValue={product.price}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCategory">
@@ -97,11 +118,17 @@ function EditProductScreenComponent({ categories }) {
                 aria-label="Default select example"
               >
                 <option value="">Choose category</option>
-                {categories.map((category, idx) => (
-                  <option key={idx} value={category.name}>
-                    {category.name}
-                  </option>
-                ))}
+                {categories.map((category, idx) => {
+                  return product.category === category.name ? (
+                    <option selected key={idx} value={category.name}>
+                      {category.name}
+                    </option>
+                  ) : (
+                    <option key={idx} value={category.name}>
+                      {category.name}
+                    </option>
+                  );
+                })}
                 {/* <option value="">Choose category</option>
                 <option value="1">Laptops</option>
                 <option value="2">TV</option>
@@ -196,14 +223,17 @@ function EditProductScreenComponent({ categories }) {
             <Form.Group controlId="formFileMultiple" className="mb-3 mt-3">
               <Form.Label>Images</Form.Label>
               <Row>
-                <Col style={{ position: "relative" }} xs={3}>
-                  <Image src="/images/monitors-category.png" fluid />
-                  <i style={onHover} className="bi bi-x text-danger"></i>
-                </Col>
-                <Col style={{ position: "relative" }} xs={3}>
-                  <Image src="/images/monitors-category.png" fluid />
-                  <i style={onHover} className="bi bi-x text-danger"></i>
-                </Col>
+                {product.images &&
+                  product.images.map((image, idx) => (
+                    <Col key={idx} style={{ position: "relative" }} xs={3}>
+                      <Image
+                        crossOrigin="anonymous"
+                        src={image.path ?? null}
+                        fluid
+                      />
+                      <i style={onHover} className="bi bi-x text-danger"></i>
+                    </Col>
+                  ))}
               </Row>
               <Form.Control required type="file" multiple />
             </Form.Group>
