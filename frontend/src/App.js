@@ -71,7 +71,7 @@ function App() {
             element={<AdminCreateProductScreen />}
           />
           <Route
-            path="/admin/edit-product"
+            path="/admin/edit-product/:id"
             element={<AdminEditProductScreen />}
           />
           <Route path="/admin/orders" element={<AdminOrdersScreen />} />

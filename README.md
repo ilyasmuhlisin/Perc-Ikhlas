@@ -169,3 +169,6 @@
     4. fix message
 80. Display my order list
     1. fix button user order details
+81. Edit product admin screen
+    1. setup redux list category
+    2. get list category form redux
