@@ -24,8 +24,8 @@ const UsersScreenComponent = ({ fetchUsers, deleteUser }) => {
   };
   useEffect(() => {
     // abort digunakan untuk membatalkan koneksi apabila user pindah halaman
-    const abctrl = new AbortController();
-    fetchUsers(abctrl)
+    // const abctrl = new AbortController();
+    fetchUsers()
       .then((res) => setUsers(res))
       .catch(
         (er) => dispatch(logout())
@@ -33,7 +33,7 @@ const UsersScreenComponent = ({ fetchUsers, deleteUser }) => {
         //   er.response.data.message ? er.response.data.message : er.response.data
         // )
       );
-    return () => abctrl.abort();
+    // return () => abctrl.abort();
   }, [userDeleted]);
   return (
     <Row className="m-5">

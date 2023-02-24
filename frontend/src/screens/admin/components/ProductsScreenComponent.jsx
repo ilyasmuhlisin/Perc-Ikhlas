@@ -25,8 +25,8 @@ function ProductsScreenComponent({ fetchProducts, deleteProduct }) {
   // };
 
   useEffect(() => {
-    const abctrl = new AbortController();
-    fetchProducts(abctrl)
+    // const abctrl = new AbortController();
+    fetchProducts()
       .then((res) => setProducts(res))
       .catch(
         (er) => dispatch(logout())
@@ -42,7 +42,7 @@ function ProductsScreenComponent({ fetchProducts, deleteProduct }) {
         //   er.response.data.message ? er.response.data.message : er.response.data
         // )
       );
-    return () => abctrl.abort();
+    // return () => abctrl.abort();
   }, [productDeleted]);
 
   return (
