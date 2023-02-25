@@ -173,3 +173,5 @@
     1. setup redux list category
     2. get list category form redux
     3. get field data product
+    4. set attribut value form category
+    5. fix seeder data

@@ -1,6 +1,6 @@
 const categories = [
   {
-    name: "Undangan/Ulem",
+    name: "Undangan",
     description:
       "Computers - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
     image: "/images/tablets-category.png",
@@ -8,24 +8,6 @@ const categories = [
       { key: "Kelompok", value: ["Perunggu", "Perak", "Emas"] },
       { key: "Tambahan", value: ["Foto", "Tanpa Foto"] },
     ],
-  },
-  {
-    name: "Computers/Laptops",
-    description:
-      "Computers/Laptops - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
-    image: "/images/tablets-category.png",
-  },
-  {
-    name: "Computers/Laptops/Lenovo",
-    description:
-      "Computers/Laptops/Lenovo - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
-    image: "/images/tablets-category.png",
-  },
-  {
-    name: "Computers/Laptops/Dell",
-    description:
-      "Computers/Laptops/Dell - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
-    image: "/images/tablets-category.png",
   },
   {
     name: "Tablets",

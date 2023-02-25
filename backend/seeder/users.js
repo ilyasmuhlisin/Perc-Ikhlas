@@ -1,4 +1,4 @@
-const bcrypt = require("bcryptjs")
+const bcrypt = require("bcryptjs");
 const ObjectId = require("mongodb").ObjectId;
 
 const users = [
@@ -11,11 +11,11 @@ const users = [
   },
   {
     _id: ObjectId("63edc0958f3f70ad741b74d9"),
-    name: "John",
-    lastName: "Doe",
-    email: "john@doe.com",
-    password: bcrypt.hashSync("john@doe.com", 10),
+    name: "ilyas",
+    lastName: "mhlsn",
+    email: "ilyas@ilyas.com",
+    password: bcrypt.hashSync("ilyas@ilyas.com", 10),
   },
 ];
 
-module.exports = users
+module.exports = users;
