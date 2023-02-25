@@ -178,3 +178,5 @@
     6. update attr if choose another category
     7. display attr table
     8. fix attr table display
+    9. del attr form table
+    10. disable create attr if category value choose category

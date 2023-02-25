@@ -35,6 +35,7 @@ function EditProductScreenComponent({
   });
   const [attributesFromDb, setAttributesFromDb] = useState([]); // select lists
   const [attributesTable, setAttributesTable] = useState([]); // html table
+  const [categoryChoosen, setCategoryChoosen] = useState("Choose category");
   //   const { categories } = useSelector((state) => state.getCategories);
   //   console.log(categories);
 
@@ -81,7 +82,7 @@ function EditProductScreenComponent({
       count: form.count.value,
       price: form.price.value,
       category: form.category.value,
-      attributesTable: [],
+      attributesTable: attributesTable,
     };
 
     if (event.currentTarget.checkValidity() === true) {
@@ -121,6 +122,7 @@ function EditProductScreenComponent({
       }
     }
     setAttributesTable(product.attrs);
+    setCategoryChoosen(product.category);
   }, [product]);
 
   // ketika kategori diubah attr menyesuaikan
@@ -134,6 +136,7 @@ function EditProductScreenComponent({
     } else {
       setAttributesFromDb([]);
     }
+    setCategoryChoosen(e.target.value);
   };
 
   // jika attrVal dipilih masukan ke table
@@ -165,6 +168,10 @@ function EditProductScreenComponent({
         return [{ key: key, value: val }];
       }
     });
+  };
+
+  const deleteAttribute = (key) => {
+    setAttributesTable((table) => table.filter((item) => item.key !== key));
   };
 
   return (
@@ -227,7 +234,7 @@ function EditProductScreenComponent({
                 aria-label="Default select example"
                 onChange={changeCategory}
               >
-                <option value="">Choose category</option>
+                <option value="Choose category">Choose category</option>
                 {categories.map((category, idx) => {
                   return product.category === category.name ? (
                     <option selected key={idx} value={category.name}>
@@ -301,7 +308,9 @@ function EditProductScreenComponent({
                         <td>{item.key}</td>
                         <td>{item.value}</td>
                         <td>
-                          <CloseButton />
+                          <CloseButton
+                            onClick={() => deleteAttribute(item.key)}
+                          />
                         </td>
                       </tr>
                     ))}
@@ -315,9 +324,9 @@ function EditProductScreenComponent({
                 <Form.Group className="mb-3" controlId="formBasicNewAttribute">
                   <Form.Label>Create new attribute</Form.Label>
                   <Form.Control
-                    disabled={false}
+                    disabled={categoryChoosen === "Choose category"}
                     placeholder="first choose or create category"
-                    name="newAttrValue"
+                    name="newAttrKey"
                     type="text"
                   />
                 </Form.Group>
@@ -329,7 +338,7 @@ function EditProductScreenComponent({
                 >
                   <Form.Label>Attribute value</Form.Label>
                   <Form.Control
-                    disabled={false}
+                    disabled={categoryChoosen === "Choose category"}
                     placeholder="first choose or create category"
                     required={true}
                     name="newAttrValue"
