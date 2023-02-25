@@ -180,3 +180,5 @@
     8. fix attr table display
     9. del attr form table
     10. disable create attr if category value choose category
+    11. fix press enter attr form
+    12. add new attr funct

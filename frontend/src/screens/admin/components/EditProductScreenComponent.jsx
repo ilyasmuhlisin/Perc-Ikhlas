@@ -39,6 +39,9 @@ function EditProductScreenComponent({
   //   const { categories } = useSelector((state) => state.getCategories);
   //   console.log(categories);
 
+  const [newAttrKey, setNewAttrKey] = useState(false);
+  const [newAttrValue, setNewAttrValue] = useState(false);
+
   const attrVal = useRef(null);
   const attrKey = useRef(null);
 
@@ -174,6 +177,37 @@ function EditProductScreenComponent({
     setAttributesTable((table) => table.filter((item) => item.key !== key));
   };
 
+  const checkKeyDown = (e) => {
+    if (e.code === "Enter") e.preventDefault();
+  };
+
+  const newAttrKeyHandler = (e) => {
+    e.preventDefault();
+    setNewAttrKey(e.target.value);
+    addNewAttributeManually(e);
+  };
+
+  const newAttrValueHandler = (e) => {
+    e.preventDefault();
+    setNewAttrValue(e.target.value);
+    addNewAttributeManually(e);
+  };
+
+  const addNewAttributeManually = (e) => {
+    // 13 code of enter in keyboard
+    if (e.keyCode && e.keyCode === 13) {
+      if (newAttrKey && newAttrValue) {
+        // console.log("add new attribute");
+        setAttributesTableWrapper(newAttrKey, newAttrValue);
+        e.target.value = "";
+        createNewAttrKey.current.value = "";
+        createNewAttrVal.current.value = "";
+        setNewAttrKey(false);
+        setNewAttrValue(false);
+      }
+    }
+  };
+
   return (
     <Container>
       <Row className="justify-content-md-center mt-5">
@@ -184,7 +218,12 @@ function EditProductScreenComponent({
         </Col>
         <Col md={6}>
           <h1>Edit product</h1>
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
+          <Form
+            noValidate
+            validated={validated}
+            onSubmit={handleSubmit}
+            onKeyDown={(e) => checkKeyDown(e)}
+          >
             <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Label>Name</Form.Label>
               <Form.Control
@@ -324,10 +363,13 @@ function EditProductScreenComponent({
                 <Form.Group className="mb-3" controlId="formBasicNewAttribute">
                   <Form.Label>Create new attribute</Form.Label>
                   <Form.Control
+                    ref={createNewAttrKey}
                     disabled={categoryChoosen === "Choose category"}
                     placeholder="first choose or create category"
                     name="newAttrKey"
                     type="text"
+                    onKeyUp={newAttrKeyHandler}
+                    required={newAttrValue}
                   />
                 </Form.Group>
               </Col>
@@ -338,17 +380,19 @@ function EditProductScreenComponent({
                 >
                   <Form.Label>Attribute value</Form.Label>
                   <Form.Control
+                    ref={createNewAttrVal}
                     disabled={categoryChoosen === "Choose category"}
                     placeholder="first choose or create category"
-                    required={true}
+                    required={newAttrKey}
                     name="newAttrValue"
                     type="text"
+                    onKeyUp={newAttrValueHandler}
                   />
                 </Form.Group>
               </Col>
             </Row>
 
-            <Alert variant="primary">
+            <Alert show={newAttrKey && newAttrValue} variant="primary">
               After typing attribute key and value press enterr on one of the
               field
             </Alert>
