@@ -175,3 +175,5 @@
     3. get field data product
     4. set attribut value form category
     5. fix seeder data
+    6. update attr if choose another category
+    7. display attr table

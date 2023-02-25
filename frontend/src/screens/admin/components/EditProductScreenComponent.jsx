@@ -33,7 +33,8 @@ function EditProductScreenComponent({
     message: "",
     error: "",
   });
-  const [attributesFromDb, setAttributesFromDb] = useState([]);
+  const [attributesFromDb, setAttributesFromDb] = useState([]); // select lists
+  const [attributesTable, setAttributesTable] = useState([]); // html table
   //   const { categories } = useSelector((state) => state.getCategories);
   //   console.log(categories);
 
@@ -119,7 +120,21 @@ function EditProductScreenComponent({
         setAttributesFromDb(mainCategoryOfEditedProductAllData.attrs);
       }
     }
+    setAttributesTable(product.attrs);
   }, [product]);
+
+  // ketika kategori diubah attr menyesuaikan
+  const changeCategory = (e) => {
+    const highLevelCategory = e.target.value.split("/")[0];
+    const highLevelCategoryAllData = categories.find(
+      (cat) => cat.name === highLevelCategory
+    );
+    if (highLevelCategoryAllData && highLevelCategoryAllData.attrs) {
+      setAttributesFromDb(highLevelCategoryAllData.attrs);
+    } else {
+      setAttributesFromDb([]);
+    }
+  };
 
   return (
     <Container>
@@ -179,6 +194,7 @@ function EditProductScreenComponent({
                 required
                 name="category"
                 aria-label="Default select example"
+                onChange={changeCategory}
               >
                 <option value="">Choose category</option>
                 {categories.map((category, idx) => {
@@ -238,24 +254,28 @@ function EditProductScreenComponent({
             )}
 
             <Row>
-              <Table hover>
-                <thead>
-                  <tr>
-                    <th>Attribute</th>
-                    <th>Value</th>
-                    <th>Delete</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>attr key</td>
-                    <td>attr value</td>
-                    <td>
-                      <CloseButton />
-                    </td>
-                  </tr>
-                </tbody>
-              </Table>
+              {attributesTable && attributesTable.length > 0 && (
+                <Table hover>
+                  <thead>
+                    <tr>
+                      <th>Attribute</th>
+                      <th>Value</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {attributesTable.map((item, idx) => (
+                      <tr key={idx}>
+                        <td>{item.key}</td>
+                        <td>{item.value}</td>
+                        <td>
+                          <CloseButton />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              )}
             </Row>
 
             <Row>
