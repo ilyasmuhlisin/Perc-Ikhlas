@@ -136,6 +136,37 @@ function EditProductScreenComponent({
     }
   };
 
+  // jika attrVal dipilih masukan ke table
+  const attributeValueSelected = (e) => {
+    if (e.target.value !== "Choose attribute value") {
+      // console.log(attrKey.current.value);
+      // console.log(e.target.value);
+      setAttributesTableWrapper(attrKey.current.value, e.target.value);
+    }
+  };
+
+  const setAttributesTableWrapper = (key, val) => {
+    setAttributesTable((attr) => {
+      // console.log(attr)
+      if (attr.length !== 0) {
+        var keyExistsInOldTable = false;
+        let modifiedTable = attr.map((item) => {
+          if (item.key === key) {
+            keyExistsInOldTable = true;
+            item.value = val;
+            return item;
+          } else {
+            return item;
+          }
+        });
+        if (keyExistsInOldTable) return [...modifiedTable];
+        else return [...modifiedTable, { key: key, value: val }];
+      } else {
+        return [{ key: key, value: val }];
+      }
+    });
+  };
+
   return (
     <Container>
       <Row className="justify-content-md-center mt-5">
@@ -245,6 +276,7 @@ function EditProductScreenComponent({
                       name="atrrVal"
                       aria-label="Default select example"
                       ref={attrVal}
+                      onChange={attributeValueSelected}
                     >
                       <option>Choose attribute value</option>
                     </Form.Select>

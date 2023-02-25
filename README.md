@@ -177,3 +177,4 @@
     5. fix seeder data
     6. update attr if choose another category
     7. display attr table
+    8. fix attr table display
