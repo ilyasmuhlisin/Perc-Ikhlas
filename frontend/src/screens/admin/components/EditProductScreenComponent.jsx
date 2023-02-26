@@ -26,6 +26,10 @@ function EditProductScreenComponent({
   categories,
   fetchProduct,
   updateProductApiRequest,
+  reduxDispatch,
+  saveAttributeToCatDoc,
+  imageDeleteHandler,
+  uploadHandler,
 }) {
   const [validated, setValidated] = useState(false);
   const [product, setProduct] = useState({});
@@ -44,6 +48,12 @@ function EditProductScreenComponent({
 
   const attrVal = useRef(null);
   const attrKey = useRef(null);
+  const createNewAttrKey = useRef(null);
+  const createNewAttrVal = useRef(null);
+
+  const [imageRemoved, setImageRemoved] = useState(false);
+  const [isUploading, setIsUploading] = useState("");
+  const [imageUploaded, setImageUploaded] = useState(false);
 
   const setValuesForAttrFromDbSelectForm = (e) => {
     if (e.target.value !== "Choose attribute") {
@@ -72,7 +82,7 @@ function EditProductScreenComponent({
     fetchProduct(id)
       .then((product) => setProduct(product))
       .catch((er) => console.log(er));
-  }, []);
+  }, [id, imageRemoved, imageUploaded]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -197,6 +207,9 @@ function EditProductScreenComponent({
     // 13 code of enter in keyboard
     if (e.keyCode && e.keyCode === 13) {
       if (newAttrKey && newAttrValue) {
+        reduxDispatch(
+          saveAttributeToCatDoc(newAttrKey, newAttrValue, categoryChoosen)
+        );
         // console.log("add new attribute");
         setAttributesTableWrapper(newAttrKey, newAttrValue);
         e.target.value = "";
@@ -408,11 +421,38 @@ function EditProductScreenComponent({
                         src={image.path ?? null}
                         fluid
                       />
-                      <i style={onHover} className="bi bi-x text-danger"></i>
+                      <i
+                        style={onHover}
+                        onClick={() =>
+                          imageDeleteHandler(image.path, id).then((data) =>
+                            setImageRemoved(!imageRemoved)
+                          )
+                        }
+                        className="bi bi-x text-danger"
+                      ></i>
                     </Col>
                   ))}
               </Row>
-              <Form.Control required type="file" multiple />
+              <Form.Control
+                type="file"
+                multiple
+                onChange={(e) => {
+                  setIsUploading("upload files in progress ...");
+                  uploadHandler(e.target.files, id)
+                    .then((data) => {
+                      setIsUploading("upload file completed");
+                      setImageUploaded(!imageUploaded);
+                    })
+                    .catch((er) =>
+                      setIsUploading(
+                        er.response.data.message
+                          ? er.response.data.message
+                          : er.response.data
+                      )
+                    );
+                }}
+              />
+              {isUploading}
             </Form.Group>
             <Button variant="primary" type="submit">
               UPDATE

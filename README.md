@@ -182,3 +182,6 @@
     10. disable create attr if category value choose category
     11. fix press enter attr form
     12. add new attr funct
+    13. save attr redux
+    14. del path of image
+    15. upload image
