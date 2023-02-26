@@ -189,4 +189,4 @@
     1. API req create product
     2. API upload cloudinary img
     3. del img cloudinary
-83. Create func cloudinary seperated
+    4. add new category

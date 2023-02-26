@@ -16,6 +16,9 @@ function CreateProductScreenComponent({
   createProductApiRequest,
   uploadImagesApiRequest,
   uploadImagesCloudinaryApiRequest,
+  categories,
+  reduxDispatch,
+  newCategory,
 }) {
   const [validated, setValidated] = useState(false);
   const [attributesTable, setAttributesTable] = useState([]);
@@ -25,6 +28,7 @@ function CreateProductScreenComponent({
     message: "",
     error: "",
   });
+  const [categoryChoosen, setCategoryChoosen] = useState("Choose category");
 
   const navigate = useNavigate();
 
@@ -41,10 +45,10 @@ function CreateProductScreenComponent({
       attributesTable: attributesTable,
     };
     if (event.currentTarget.checkValidity() === true) {
-       if (images.length > 3) {
-         setIsCreating("to many files");
-         return;
-       }
+      if (images.length > 3) {
+        setIsCreating("to many files");
+        return;
+      }
       createProductApiRequest(formInputs)
         .then((data) => {
           //   console.log(data);
@@ -90,6 +94,19 @@ function CreateProductScreenComponent({
     setImages(images);
   };
 
+  const newCategoryHandler = (e) => {
+    if (e.keyCode && e.keyCode === 13 && e.target.value) {
+      reduxDispatch(newCategory(e.target.value));
+      // auto field new cat
+      setTimeout(() => {
+        let element = document.getElementById("cats");
+        element.value = e.target.value;
+        setCategoryChoosen(e.target.value);
+        e.target.value = "";
+      }, 200);
+    }
+  };
+
   return (
     <Container>
       <Row className="justify-content-md-center mt-5">
@@ -132,14 +149,17 @@ function CreateProductScreenComponent({
                 <CloseButton />(<small>remove selected</small>)
               </Form.Label>
               <Form.Select
+                id="cats"
                 required
                 name="category"
                 aria-label="Default select example"
               >
-                <option value="">Choose category</option>
-                <option value="1">Laptops</option>
-                <option value="2">TV</option>
-                <option value="3">Games</option>
+                <option value="Choose category">Choose category</option>
+                {categories.map((category, idx) => (
+                  <option key={idx} value={category.name}>
+                    {category.name}
+                  </option>
+                ))}
               </Form.Select>
             </Form.Group>
 
@@ -147,7 +167,11 @@ function CreateProductScreenComponent({
               <Form.Label>
                 Or create a new category (e.g. Computers/Laptops/Intel){" "}
               </Form.Label>
-              <Form.Control name="newCategory" type="text" />
+              <Form.Control
+                onKeyUp={newCategoryHandler}
+                name="newCategory"
+                type="text"
+              />
             </Form.Group>
 
             <Row className="mt-5">
@@ -205,7 +229,7 @@ function CreateProductScreenComponent({
                 <Form.Group className="mb-3" controlId="formBasicNewAttribute">
                   <Form.Label>Create new attribute</Form.Label>
                   <Form.Control
-                    disabled={false}
+                    disabled={categoryChoosen === "Choose category"}
                     placeholder="first choose or create category"
                     name="newAttrValue"
                     type="text"
@@ -219,7 +243,7 @@ function CreateProductScreenComponent({
                 >
                   <Form.Label>Attribute value</Form.Label>
                   <Form.Control
-                    disabled={false}
+                    disabled={categoryChoosen === "Choose category"}
                     placeholder="first choose or create category"
                     required={true}
                     name="newAttrValue"
