@@ -435,6 +435,7 @@ function EditProductScreenComponent({
               </Row>
               <Form.Control
                 type="file"
+                // required
                 multiple
                 onChange={(e) => {
                   setIsUploading("upload files in progress ...");

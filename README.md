@@ -185,3 +185,5 @@
     13. save attr redux
     14. del path of image
     15. upload image
+82. Create product screen func
+    1. API req create product
