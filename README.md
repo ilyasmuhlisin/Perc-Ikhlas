@@ -187,3 +187,5 @@
     15. upload image
 82. Create product screen func
     1. API req create product
+    2. API upload cloudinary img
+    3. del img cloudinary

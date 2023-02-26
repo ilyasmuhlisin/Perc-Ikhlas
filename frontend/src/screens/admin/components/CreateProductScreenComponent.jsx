@@ -15,6 +15,7 @@ import { useState } from "react";
 function CreateProductScreenComponent({
   createProductApiRequest,
   uploadImagesApiRequest,
+  uploadImagesCloudinaryApiRequest,
 }) {
   const [validated, setValidated] = useState(false);
   const [attributesTable, setAttributesTable] = useState([]);
@@ -43,18 +44,30 @@ function CreateProductScreenComponent({
       createProductApiRequest(formInputs)
         .then((data) => {
           //   console.log(data);
-          if (images) {
-            uploadImagesApiRequest(images, data.productId)
-              .then((res) => {})
-              .catch((er) =>
-                setIsCreating(
-                  er.response.data.message
-                    ? er.response.data.message
-                    : er.response.data
-                )
-              );
-          }
-          if (data.message === "product created") navigate("/admin/products");
+            if (images) {
+              if (process.env.NODE_ENV === "production") {
+                // to do: change to !==
+                uploadImagesApiRequest(images, data.productId)
+                  .then((res) => {})
+                  .catch((er) =>
+                    setIsCreating(
+                      er.response.data.message
+                        ? er.response.data.message
+                        : er.response.data
+                    )
+                  );
+              } else {
+                uploadImagesCloudinaryApiRequest(images, data.productId);
+              }
+            }
+            return data;
+        })
+        .then((data) => {
+          setIsCreating("Product is being created....");
+          setTimeout(() => {
+            setIsCreating("");
+            if (data.message === "product created") navigate("/admin/products");
+          }, 2000);
         })
         .catch((er) => {
           setCreateProductResponseState({
