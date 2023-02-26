@@ -19,18 +19,59 @@ const updateProductApiRequest = async (productId, formInputs) => {
   return data;
 };
 
-const uploadHandler = async (images, productId) => {
-  // func js
+const uploadImagesApiRequest = async (images, productId) => {
   const formData = new FormData();
-
   Array.from(images).forEach((image) => {
     formData.append("images", image);
   });
-  await axios.post(
+  // await axios.post(
+  //   "/api/products/admin/upload?productId=" + productId,
+  //   formData
+  // );
+  const { data } = await axios.post(
     "/api/products/admin/upload?productId=" + productId,
     formData
   );
+  return data;
 };
+
+const uploadImagesCloudinaryApiRequest = (images, productId) => {
+  const url = "https://api.cloudinary.com/v1_1/doihjccbr/image/upload";
+  const formData = new FormData();
+  for (let i = 0; i < images.length; i++) {
+    let file = images[i];
+    formData.append("file", file);
+    // preset upload
+    formData.append("upload_preset", "zq7exajr");
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        // console.log(data);
+        axios.post(
+          "/api/products/admin/upload?cloudinary=true&productId=" + productId,
+          data
+        );
+      });
+  }
+};
+
+// const uploadHandler = async (images, productId) => {
+//   // func js
+//   const formData = new FormData();
+
+//   Array.from(images).forEach((image) => {
+//     formData.append("images", image);
+//   });
+//   await axios.post(
+//     "/api/products/admin/upload?productId=" + productId,
+//     formData
+//   );
+// };
 
 const AdminEditProductScreen = () => {
   const { categories } = useSelector((state) => state.getCategories);
@@ -40,7 +81,7 @@ const AdminEditProductScreen = () => {
   const imageDeleteHandler = async (imagePath, productId) => {
     // encode digunakan untuk menyandikan /
     let encoded = encodeURIComponent(imagePath);
-    if (process.env.NODE_ENV === "production") {
+    if (process.env.NODE_ENV !== "production") {
       // to do: change to !==
       await axios.delete(`/api/products/admin/image/${encoded}/${productId}`);
     } else {
@@ -59,7 +100,9 @@ const AdminEditProductScreen = () => {
       reduxDispatch={reduxDispatch}
       saveAttributeToCatDoc={saveAttributeToCatDoc}
       imageDeleteHandler={imageDeleteHandler}
-      uploadHandler={uploadHandler}
+      // uploadHandler={uploadHandler}
+      uploadImagesApiRequest={uploadImagesApiRequest}
+      uploadImagesCloudinaryApiRequest={uploadImagesCloudinaryApiRequest}
     />
   );
 };

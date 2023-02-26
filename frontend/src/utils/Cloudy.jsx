@@ -1,12 +1,6 @@
-import CreateProductScreenComponent from "./components/CreateProductScreenComponent";
 import axios from "axios";
 
-const createProductApiRequest = async (formInputs) => {
-  const { data } = await axios.post(`/api/products/admin`, { ...formInputs });
-  return data;
-};
-
-const uploadImagesApiRequest = async (images, productId) => {
+export const uploadImagesApiRequest = async (images, productId) => {
   const formData = new FormData();
   Array.from(images).forEach((image) => {
     formData.append("images", image);
@@ -22,7 +16,7 @@ const uploadImagesApiRequest = async (images, productId) => {
   return data;
 };
 
-const uploadImagesCloudinaryApiRequest = (images, productId) => {
+export const uploadImagesCloudinaryApiRequest = (images, productId) => {
   const url = "https://api.cloudinary.com/v1_1/doihjccbr/image/upload";
   const formData = new FormData();
   for (let i = 0; i < images.length; i++) {
@@ -46,15 +40,3 @@ const uploadImagesCloudinaryApiRequest = (images, productId) => {
       });
   }
 };
-
-const AdminCreateProductScreen = () => {
-  return (
-    <CreateProductScreenComponent
-      createProductApiRequest={createProductApiRequest}
-      uploadImagesApiRequest={uploadImagesApiRequest}
-      uploadImagesCloudinaryApiRequest={uploadImagesCloudinaryApiRequest}
-    />
-  );
-};
-
-export default AdminCreateProductScreen;

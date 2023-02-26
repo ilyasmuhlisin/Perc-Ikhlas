@@ -41,34 +41,39 @@ function CreateProductScreenComponent({
       attributesTable: attributesTable,
     };
     if (event.currentTarget.checkValidity() === true) {
+       if (images.length > 3) {
+         setIsCreating("to many files");
+         return;
+       }
       createProductApiRequest(formInputs)
         .then((data) => {
           //   console.log(data);
-            if (images) {
-              if (process.env.NODE_ENV === "production") {
-                // to do: change to !==
-                uploadImagesApiRequest(images, data.productId)
-                  .then((res) => {})
-                  .catch((er) =>
-                    setIsCreating(
-                      er.response.data.message
-                        ? er.response.data.message
-                        : er.response.data
-                    )
-                  );
-              } else {
-                uploadImagesCloudinaryApiRequest(images, data.productId);
-              }
+          if (images) {
+            if (process.env.NODE_ENV !== "production") {
+              // to do: change to !==
+              uploadImagesApiRequest(images, data.productId)
+                .then((res) => {})
+                .catch((er) =>
+                  setIsCreating(
+                    er.response.data.message
+                      ? er.response.data.message
+                      : er.response.data
+                  )
+                );
+            } else {
+              uploadImagesCloudinaryApiRequest(images, data.productId);
             }
-            return data;
+          }
+          // return data;
+          if (data.message === "product created") navigate("/admin/products");
         })
-        .then((data) => {
-          setIsCreating("Product is being created....");
-          setTimeout(() => {
-            setIsCreating("");
-            if (data.message === "product created") navigate("/admin/products");
-          }, 2000);
-        })
+        // .then((data) => {
+        //   setIsCreating("Product is being created....");
+        //   setTimeout(() => {
+        //     setIsCreating("");
+        //     if (data.message === "product created") navigate("/admin/products");
+        //   }, 2000);
+        // })
         .catch((er) => {
           setCreateProductResponseState({
             error: er.response.data.message
