@@ -290,7 +290,7 @@ const adminUpload = async (req, res, next) => {
         }
       });
     }
-
+    await product.save();
     return res.send("Files uploaded!");
   } catch (err) {
     next(err);
