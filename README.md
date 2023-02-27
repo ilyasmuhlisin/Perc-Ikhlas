@@ -191,3 +191,5 @@
     3. del img cloudinary
     4. add new category
     5. del category
+    6. Refactoring(seperated change categ & setAttr)
+    7. del attr table
