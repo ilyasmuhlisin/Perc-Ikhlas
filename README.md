@@ -194,3 +194,6 @@
     6. Refactoring(seperated change categ & setAttr)
     7. del attr table
     8. save attr
+83. Edit User admin screen
+    1. get data user
+    2. fix user controller
