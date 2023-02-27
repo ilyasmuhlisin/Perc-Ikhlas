@@ -197,3 +197,6 @@
 83. Edit User admin screen
     1. get data user
     2. fix user controller
+84. Fetch Data Product details
+    1. get imgs
+    2. get reviews
