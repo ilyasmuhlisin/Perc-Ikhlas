@@ -193,3 +193,4 @@
     5. del category
     6. Refactoring(seperated change categ & setAttr)
     7. del attr table
+    8. save attr
