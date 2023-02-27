@@ -19,6 +19,7 @@ function CreateProductScreenComponent({
   categories,
   reduxDispatch,
   newCategory,
+  deleteCategory,
 }) {
   const [validated, setValidated] = useState(false);
   const [attributesTable, setAttributesTable] = useState([]);
@@ -107,6 +108,12 @@ function CreateProductScreenComponent({
     }
   };
 
+  const deleteCategoryHandler = () => {
+    let element = document.getElementById("cats");
+    reduxDispatch(deleteCategory(element.value));
+    setCategoryChoosen("Choose category");
+  };
+
   return (
     <Container>
       <Row className="justify-content-md-center mt-5">
@@ -146,7 +153,8 @@ function CreateProductScreenComponent({
             <Form.Group className="mb-3" controlId="formBasicCategory">
               <Form.Label>
                 Category
-                <CloseButton />(<small>remove selected</small>)
+                <CloseButton onClick={deleteCategoryHandler} />(
+                <small>remove selected</small>)
               </Form.Label>
               <Form.Select
                 id="cats"

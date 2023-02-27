@@ -190,3 +190,4 @@
     2. API upload cloudinary img
     3. del img cloudinary
     4. add new category
+    5. del category

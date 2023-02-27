@@ -1,7 +1,10 @@
 import CreateProductScreenComponent from "./components/CreateProductScreenComponent";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { newCategory } from "../../redux/actions/categoryActions";
+import {
+  newCategory,
+  deleteCategory,
+} from "../../redux/actions/categoryActions";
 import { useDispatch } from "react-redux";
 
 const createProductApiRequest = async (formInputs) => {
@@ -62,6 +65,7 @@ const AdminCreateProductScreen = () => {
       categories={categories}
       reduxDispatch={dispatch}
       newCategory={newCategory}
+      deleteCategory={deleteCategory}
     />
   );
 };
