@@ -11,12 +11,21 @@ import { useEffect, useState } from "react";
 
 const ProductListScreenComponent = ({ getProducts }) => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     getProducts()
-      .then((products) => setProducts(products.products))
-      .catch((er) => console.log(er));
+      .then((products) => {
+        setProducts(products.products);
+        setLoading(false);
+      })
+      .catch((er) => {
+        console.log(er);
+        setError(true);
+      });
   }, []);
+
   return (
     <Container fluid>
       <Row>
@@ -45,16 +54,6 @@ const ProductListScreenComponent = ({ getProducts }) => {
           </ListGroup>
         </Col>
         <Col md={9}>
-          {products.map((product) => (
-            <ProductForListComponent
-              key={product._id}
-              images={product.images}
-              name={product.name}
-              description={product.description}
-              price={product.price}
-              productId={product._id}
-            />
-          ))}
           {/* {Array.from({ length: 5 }).map((_, idx) => (
             <ProductForListComponent
               key={idx}
@@ -62,6 +61,22 @@ const ProductListScreenComponent = ({ getProducts }) => {
               idx={idx}
             />
           ))} */}
+          {loading ? (
+            <h1>Loading products ....</h1>
+          ) : error ? (
+            <h1>Error while loading products. Try again later.</h1>
+          ) : (
+            products.map((product) => (
+              <ProductForListComponent
+                key={product._id}
+                images={product.images}
+                name={product.name}
+                description={product.description}
+                price={product.price}
+                productId={product._id}
+              />
+            ))
+          )}
           <PaginationComponent />
         </Col>
       </Row>
