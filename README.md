@@ -200,3 +200,6 @@
 84. Fetch Data Product details
     1. get imgs
     2. get reviews
+85. write review handling
+    1. API req
+    2. move down scrollbar 

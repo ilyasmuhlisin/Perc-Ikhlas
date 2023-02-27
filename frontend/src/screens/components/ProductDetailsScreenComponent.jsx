@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   Row,
   Col,
@@ -21,6 +21,8 @@ function ProductDetailsScreenComponent({
   addToCartReduxAction,
   reduxDispatch,
   getProductDetails,
+  userInfo,
+  writeReviewApiRequest,
 }) {
   // const { id } = useParams();
   // console.log(id);
@@ -31,11 +33,22 @@ function ProductDetailsScreenComponent({
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [productReviewed, setProductReviewed] = useState(false);
+
+  const messagesEndRef = useRef(null);
 
   const addToCartHandler = () => {
     reduxDispatch(addToCartReduxAction(id, quantity));
     setShowCartMessage(true);
   };
+
+  useEffect(() => {
+    if (productReviewed) {
+      setTimeout(() => {
+        messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+      }, 200);
+    }
+  }, [productReviewed]);
 
   // var options = {
   //   // width: 400,
@@ -81,7 +94,32 @@ function ProductDetailsScreenComponent({
           er.response.data.message ? er.response.data.message : er.response.data
         )
       );
-  }, []);
+  }, [id, productReviewed]);
+
+  const sendReviewHandler = (e) => {
+    e.preventDefault();
+    const form = e.currentTarget.elements;
+    const formInputs = {
+      comment: form.comment.value,
+      // rating: form.rating.value,
+    };
+    if (e.currentTarget.checkValidity() === true) {
+      // console.log(product._id, formInputs);
+      writeReviewApiRequest(product._id, formInputs)
+        .then((data) => {
+          if (data === "review created") {
+            setProductReviewed("You successfuly reviewed the page!");
+          }
+        })
+        .catch((er) =>
+          setProductReviewed(
+            er.response.data.message
+              ? er.response.data.message
+              : er.response.data
+          )
+        );
+    }
+  };
 
   return (
     <Container>
@@ -186,20 +224,37 @@ function ProductDetailsScreenComponent({
                         consectetur adipisicing elit. Perferendis, illo.
                       </ListGroup.Item>
                     ))} */}
+                    <div ref={messagesEndRef} />
                   </ListGroup>
                 </Col>
               </Row>
               <hr />
-              <Alert variant="danger">Login first to write a review</Alert>
-              <Form>
+              {!userInfo.name && (
+                <Alert variant="danger">Login first to write a review</Alert>
+              )}
+              <Form onSubmit={sendReviewHandler}>
                 <Form.Group
                   className="mb-3"
                   controlId="exampleForm.ControlTextarea1"
                 >
                   <Form.Label>Write a review</Form.Label>
-                  <Form.Control as="textarea" rows={3} />
+                  <Form.Control
+                    name="comment"
+                    required
+                    as="textarea"
+                    disabled={!userInfo.name}
+                    rows={3}
+                  />
                 </Form.Group>
-                <Button variant="primary">Primary</Button>
+                <Button
+                  disabled={!userInfo.name}
+                  type="submit"
+                  className="mb-3 mt-3"
+                  variant="primary"
+                >
+                  Submit
+                </Button>
+                {productReviewed}
               </Form>
             </Col>
           </>
