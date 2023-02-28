@@ -8,7 +8,7 @@ import CategoryFilterComponent from "../../components/filterQueryResultOptions/C
 import AttributesFilterComponent from "../../components/filterQueryResultOptions/AttributesFilterComponent";
 
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 const ProductListScreenComponent = ({ getProducts, categories }) => {
   const [products, setProducts] = useState([]);
@@ -25,6 +25,7 @@ const ProductListScreenComponent = ({ getProducts, categories }) => {
   const [categoriesFromFilter, setCategoriesFromFilter] = useState({});
 
   const { categoryName } = useParams() || "";
+  const location = useLocation();
 
   useEffect(() => {
     if (categoryName) {
@@ -105,11 +106,13 @@ const ProductListScreenComponent = ({ getProducts, categories }) => {
             {/* <ListGroup.Item>
               <RatingFilterComponent />
             </ListGroup.Item> */}
-            <ListGroup.Item>
-              <CategoryFilterComponent
-                setCategoriesFromFilter={setCategoriesFromFilter}
-              />
-            </ListGroup.Item>
+            {!location.pathname.match(/\/category/) && (
+              <ListGroup.Item>
+                <CategoryFilterComponent
+                  setCategoriesFromFilter={setCategoriesFromFilter}
+                />
+              </ListGroup.Item>
+            )}
             <ListGroup.Item>
               <AttributesFilterComponent
                 attrsFilter={attrsFilter}

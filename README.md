@@ -212,3 +212,4 @@
     1. collect id num select category
     2. non rleated disabled
     3. show attr match category
+    4. if click cat form home cat not show
