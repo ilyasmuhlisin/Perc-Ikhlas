@@ -25,30 +25,30 @@ const CategoryFilterComponent = ({ setCategoriesFromFilter }) => {
       return acc;
     }, []);
     // console.log(indexesOfMainCategory);
-     if (e.target.checked) {
-       setSelectedCategories((old) => [...old, "cat"]);
-       myRefs.current.map((_, idx) => {
-         if (!indexesOfMainCategory.includes(idx))
-           myRefs.current[idx].disabled = true;
-         return "";
-       });
-     } else {
-       setSelectedCategories((old) => {
-         var a = [...old];
-         a.pop();
-         if (a.length === 0) {
-           window.location.href = "/product-list";
-         }
-         return a;
-       });
-       myRefs.current.map((_, idx2) => {
-         if (allCategories.length === 1) {
-           if (idx2 !== idx) myRefs.current[idx2].disabled = false;
-         } else if (selectedCategories.length === 1)
-           myRefs.current[idx2].disabled = false;
-         return "";
-       });
-     }
+    //  if (e.target.checked) {
+    //    setSelectedCategories((old) => [...old, "cat"]);
+    //    myRefs.current.map((_, idx) => {
+    //      if (!indexesOfMainCategory.includes(idx))
+    //        myRefs.current[idx].disabled = true;
+    //      return "";
+    //    });
+    //  } else {
+    //    setSelectedCategories((old) => {
+    //      var a = [...old];
+    //      a.pop();
+    //      if (a.length === 0) {
+    //        window.location.href = "/product-list";
+    //      }
+    //      return a;
+    //    });
+    //    myRefs.current.map((_, idx2) => {
+    //      if (allCategories.length === 1) {
+    //        if (idx2 !== idx) myRefs.current[idx2].disabled = false;
+    //      } else if (selectedCategories.length === 1)
+    //        myRefs.current[idx2].disabled = false;
+    //      return "";
+    //    });
+    //  }
   };
 
   return (
@@ -60,7 +60,7 @@ const CategoryFilterComponent = ({ setCategoriesFromFilter }) => {
             {/* check-api2 dapat input checkbox di halaman yang sama */}
             <Form.Check type="checkbox" id={`check-api2-${idx}`}>
               <Form.Check.Input
-                ref={(el) => (myRefs.current[idx] = el)}
+                // ref={(el) => (myRefs.current[idx] = el)}
                 type="checkbox"
                 isValid
                 onChange={(e) => selectCategory(e, category, idx)}

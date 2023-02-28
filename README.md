@@ -211,3 +211,4 @@
 89. Category filter
     1. collect id num select category
     2. non rleated disabled
+    3. show attr match category
