@@ -36,11 +36,11 @@ function App() {
         <Route element={<RoutesWithUserChatComponent />}>
           {/* public */}
           <Route path="/" element={<HomeScreen />} />
+          <Route path="/product-list" element={<ProductListScreen />} />
           <Route
             path="/product-list/category/:categoryName"
             element={<ProductListScreen />}
           />
-          {/* <Route path="/product-list" element={<ProductListScreen />} /> */}
           {/* <Route path="/product-details" element={<ProductDetailsScreen />} /> */}
           <Route
             path="/product-details/:id"

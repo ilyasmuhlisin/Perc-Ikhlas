@@ -16,9 +16,12 @@ const ProductListScreenComponent = ({ getProducts, categories }) => {
   const [error, setError] = useState(false);
   const [attrsFilter, setAttrsFilter] = useState([]);
   const [attrsFromFilter, setAttrsFromFilter] = useState([]);
+  const [showResetFiltersButton, setShowResetFiltersButton] = useState(false);
 
-  console.log(attrsFromFilter);
+  const [filters, setFilters] = useState({});
+  console.log(filters);
 
+  // console.log(attrsFromFilter);
 
   const { categoryName } = useParams() || "";
 
@@ -49,6 +52,19 @@ const ProductListScreenComponent = ({ getProducts, categories }) => {
       });
   }, []);
 
+  const handleFilters = () => {
+    setShowResetFiltersButton(true);
+    setFilters({
+      attrs: attrsFromFilter,
+    });
+  };
+
+  const resetFilters = () => {
+    setShowResetFiltersButton(false);
+    setFilters({});
+    window.location.href = "/product-list";
+  };
+
   return (
     <Container fluid>
       <Row>
@@ -74,8 +90,14 @@ const ProductListScreenComponent = ({ getProducts, categories }) => {
               />
             </ListGroup.Item>
             <ListGroup.Item>
-              <Button variant="primary">Filter</Button>{" "}
-              <Button variant="danger">Reset filters</Button>
+              <Button variant="primary" onClick={handleFilters}>
+                Filter
+              </Button>{" "}
+              {showResetFiltersButton && (
+                <Button onClick={resetFilters} variant="danger">
+                  Reset filters
+                </Button>
+              )}
             </ListGroup.Item>
           </ListGroup>
         </Col>
