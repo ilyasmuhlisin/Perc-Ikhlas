@@ -1,12 +1,17 @@
 import { Form } from "react-bootstrap";
 
-const PriceFilterComponent = () => {
+const PriceFilterComponent = ({ price, setPrice }) => {
   return (
     <>
       <Form.Label>
-        <span className="fw-bold">Price no greater than:</span> Rp.500
+        <span className="fw-bold">Price no greater than:</span> Rp.{price}
       </Form.Label>
-      <Form.Range min={500} max={5000} step={100} />
+      <Form.Range
+        min={10}
+        max={5000}
+        step={10}
+        onChange={(e) => setPrice(e.target.value)}
+      />
     </>
   );
 };
