@@ -37,11 +37,32 @@ function App() {
           {/* public */}
           <Route path="/" element={<HomeScreen />} />
           <Route path="/product-list" element={<ProductListScreen />} />
+          <Route path="/product-list/:pageNum" element={<ProductListScreen />} />
           <Route
             path="/product-list/category/:categoryName"
             element={<ProductListScreen />}
           />
           {/* <Route path="/product-details" element={<ProductDetailsScreen />} /> */}
+          <Route
+            path="/product-list/category/:categoryName/:pageNum"
+            element={<ProductListScreen />}
+          />
+          <Route
+            path="/product-list/search/:searchQuery"
+            element={<ProductListScreen />}
+          />
+          <Route
+            path="/product-list/search/:searchQuery/:pageNum"
+            element={<ProductListScreen />}
+          />
+          <Route
+            path="/product-list/category/:categoryName/search/:searchQuery"
+            element={<ProductListScreen />}
+          />
+          <Route
+            path="/product-list/category/:categoryName/search/:searchQuery/:pageNum"
+            element={<ProductListScreen />}
+          />
           <Route
             path="/product-details/:id"
             element={<ProductDetailsScreen />}
