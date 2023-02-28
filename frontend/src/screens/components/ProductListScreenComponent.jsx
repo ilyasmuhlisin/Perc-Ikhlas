@@ -22,7 +22,7 @@ const ProductListScreenComponent = ({ getProducts, categories }) => {
   const [filters, setFilters] = useState({}); // collect all filters
   const [price, setPrice] = useState(500);
   // console.log(filters);
-
+  const [categoriesFromFilter, setCategoriesFromFilter] = useState({});
 
   const { categoryName } = useParams() || "";
 
@@ -58,6 +58,7 @@ const ProductListScreenComponent = ({ getProducts, categories }) => {
     setShowResetFiltersButton(true);
     setFilters({
       price: price,
+      category: categoriesFromFilter,
       attrs: attrsFromFilter,
     });
   };
@@ -84,7 +85,9 @@ const ProductListScreenComponent = ({ getProducts, categories }) => {
               <RatingFilterComponent />
             </ListGroup.Item> */}
             <ListGroup.Item>
-              <CategoryFilterComponent />
+              <CategoryFilterComponent
+                setCategoriesFromFilter={setCategoriesFromFilter}
+              />
             </ListGroup.Item>
             <ListGroup.Item>
               <AttributesFilterComponent
