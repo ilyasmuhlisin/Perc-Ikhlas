@@ -8,11 +8,34 @@ import CategoryFilterComponent from "../../components/filterQueryResultOptions/C
 import AttributesFilterComponent from "../../components/filterQueryResultOptions/AttributesFilterComponent";
 
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-const ProductListScreenComponent = ({ getProducts }) => {
+const ProductListScreenComponent = ({ getProducts, categories }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [attrsFilter, setAttrsFilter] = useState([]);
+  const [attrsFromFilter, setAttrsFromFilter] = useState([]);
+
+  console.log(attrsFromFilter);
+
+
+  const { categoryName } = useParams() || "";
+
+  useEffect(() => {
+    if (categoryName) {
+      let categoryAllData = categories.find(
+        (item) => item.name === categoryName.replaceAll(",", "/")
+      );
+      if (categoryAllData) {
+        let mainCategory = categoryAllData.name.split("/")[0];
+        let index = categories.findIndex((item) => item.name === mainCategory);
+        setAttrsFilter(categories[index].attrs);
+      }
+    } else {
+      setAttrsFilter([]);
+    }
+  }, [categoryName, categories]);
 
   useEffect(() => {
     getProducts()
@@ -45,7 +68,10 @@ const ProductListScreenComponent = ({ getProducts }) => {
               <CategoryFilterComponent />
             </ListGroup.Item>
             <ListGroup.Item>
-              <AttributesFilterComponent />
+              <AttributesFilterComponent
+                attrsFilter={attrsFilter}
+                setAttrsFromFilter={setAttrsFromFilter}
+              />
             </ListGroup.Item>
             <ListGroup.Item>
               <Button variant="primary">Filter</Button>{" "}

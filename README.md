@@ -203,3 +203,6 @@
 85. write review handling
     1. API req
     2. move down scrollbar 
+86. Filter attr func
+    1. fetch data filter
+    2. choosen attr
