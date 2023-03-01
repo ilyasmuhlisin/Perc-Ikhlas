@@ -12,7 +12,7 @@ import {
   InputGroup,
 } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../redux/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -25,10 +25,39 @@ function HeaderComponent() {
   const { categories } = useSelector((state) => state.getCategories);
 
   const [searchCategoryToggle, setSearchCategoryToggle] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
+
+  const submitHandler = (e) => {
+    if (e.keyCode && e.keyCode !== 13) return;
+    e.preventDefault();
+    // console.log(searchQuery);
+    // potong space kiri
+    if (searchQuery.trim()) {
+      if (searchCategoryToggle === "All") {
+        navigate(`/product-list/search/${searchQuery}`);
+      } else {
+        navigate(
+          `/product-list/category/${searchCategoryToggle.replaceAll(
+            "/",
+            ","
+          )}/search/${searchQuery}`
+        );
+      }
+      //search empty
+    } else if (searchCategoryToggle !== "All") {
+      navigate(
+        `/product-list/category/${searchCategoryToggle.replaceAll("/", ",")}`
+      );
+    } else {
+      navigate("/product-list");
+    }
+  };
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -62,8 +91,13 @@ function HeaderComponent() {
                 <Dropdown.Item>MMT/Spanduk</Dropdown.Item>
                 <Dropdown.Item>Bungkus Makanan</Dropdown.Item>
               </DropdownButton> */}
-              <Form.Control type="text" placeholder="Search" />
-              <Button variant="warning">
+              <Form.Control
+                onKeyUp={submitHandler}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                type="text"
+                placeholder="Search"
+              />
+              <Button onClick={submitHandler} variant="warning">
                 <i className="bi bi-search text-dark"></i>
               </Button>
             </InputGroup>

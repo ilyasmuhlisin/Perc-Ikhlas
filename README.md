@@ -222,3 +222,4 @@
 92. Filter func
     1. commit all filter
 93. Category header
+94. SearchBox func
