@@ -37,14 +37,17 @@ function App() {
           {/* public */}
           <Route path="/" element={<HomeScreen />} />
           <Route path="/product-list" element={<ProductListScreen />} />
-          <Route path="/product-list/:pageNum" element={<ProductListScreen />} />
+          <Route
+            path="/product-list/:pageNumParam"
+            element={<ProductListScreen />}
+          />
           <Route
             path="/product-list/category/:categoryName"
             element={<ProductListScreen />}
           />
           {/* <Route path="/product-details" element={<ProductDetailsScreen />} /> */}
           <Route
-            path="/product-list/category/:categoryName/:pageNum"
+            path="/product-list/category/:categoryName/:pageNumParam"
             element={<ProductListScreen />}
           />
           <Route
@@ -52,7 +55,7 @@ function App() {
             element={<ProductListScreen />}
           />
           <Route
-            path="/product-list/search/:searchQuery/:pageNum"
+            path="/product-list/search/:searchQuery/:pageNumParam"
             element={<ProductListScreen />}
           />
           <Route
@@ -60,7 +63,7 @@ function App() {
             element={<ProductListScreen />}
           />
           <Route
-            path="/product-list/category/:categoryName/search/:searchQuery/:pageNum"
+            path="/product-list/category/:categoryName/search/:searchQuery/:pageNumParam"
             element={<ProductListScreen />}
           />
           <Route
