@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Navbar,
   Nav,
@@ -15,12 +15,16 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import { logout } from "../redux/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { getCategories } from "../redux/actions/categoryActions";
 
 function HeaderComponent() {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.userRegisterLogin);
   const itemsCount = useSelector((state) => state.cart.cartItems.length);
+  const { categories } = useSelector((state) => state.getCategories);
+
+  const [searchCategoryToggle, setSearchCategoryToggle] = useState("All");
 
   useEffect(() => {
     dispatch(getCategories());
@@ -36,12 +40,28 @@ function HeaderComponent() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <InputGroup>
-              <DropdownButton id="dropdown-basic-button" title="All">
+              <DropdownButton
+                id="dropdown-basic-button"
+                title={searchCategoryToggle}
+              >
+                <Dropdown.Item onClick={() => setSearchCategoryToggle("All")}>
+                  All
+                </Dropdown.Item>
+                {categories.map((category, id) => (
+                  <Dropdown.Item
+                    key={id}
+                    onClick={() => setSearchCategoryToggle(category.name)}
+                  >
+                    {category.name}
+                  </Dropdown.Item>
+                ))}
+              </DropdownButton>
+              {/* <DropdownButton id="dropdown-basic-button" title="All">
                 <Dropdown.Item>Undangan</Dropdown.Item>
                 <Dropdown.Item>Serat Ulem</Dropdown.Item>
                 <Dropdown.Item>MMT/Spanduk</Dropdown.Item>
                 <Dropdown.Item>Bungkus Makanan</Dropdown.Item>
-              </DropdownButton>
+              </DropdownButton> */}
               <Form.Control type="text" placeholder="Search" />
               <Button variant="warning">
                 <i className="bi bi-search text-dark"></i>
