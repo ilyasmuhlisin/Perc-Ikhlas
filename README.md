@@ -214,3 +214,7 @@
     3. show attr match category
     4. if click cat form home cat not show
 90. Sort product list
+91. Pagination
+    1. visibility
+    2. pagination FE
+    3. remove pagenum if filter
