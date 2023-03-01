@@ -219,3 +219,5 @@
     2. pagination FE
     3. remove pagenum if filter
     4. pagination BE
+92. Filter func
+    1. commit all filter
