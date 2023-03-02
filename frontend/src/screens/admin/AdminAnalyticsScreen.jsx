@@ -1,5 +1,6 @@
 import AnalyticsScreenComponent from "./components/AnalyticsScreenComponent";
 import axios from "axios";
+import socketIOClient from "socket.io-client";
 
 const fetchOrdersForFirstDate = async (firstDateToCompare) => {
   const { data } = await axios.get(
@@ -20,6 +21,7 @@ const AdminAnalyticsScreen = () => {
     <AnalyticsScreenComponent
       fetchOrdersForFirstDate={fetchOrdersForFirstDate}
       fetchOrdersForSecondDate={fetchOrdersForSecondDate}
+      socketIOClient={socketIOClient}
     />
   );
 };

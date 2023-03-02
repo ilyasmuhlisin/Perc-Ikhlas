@@ -202,7 +202,7 @@
     2. get reviews
 85. write review handling
     1. API req
-    2. move down scrollbar 
+    2. move down scrollbar
 86. Filter attr func
     1. fetch data filter
     2. choosen attr
@@ -226,3 +226,5 @@
 95. analytics screen
     1. fetch order data
     2. chart data
+    3. instal & configure socket io
+    4. get order data change real time

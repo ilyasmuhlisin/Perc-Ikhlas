@@ -16,6 +16,7 @@ import { useEffect } from "react";
 function AnalyticsScreenComponent({
   fetchOrdersForFirstDate,
   fetchOrdersForSecondDate,
+  socketIOClient,
 }) {
   const [firstDateToCompare, setFirstDateToCompare] = useState(
     new Date().toISOString().substring(0, 10)
@@ -28,6 +29,16 @@ function AnalyticsScreenComponent({
 
   const [dataForFirstSet, setDataForFirstSet] = useState([]);
   const [dataForSecondSet, setDataForSecondSet] = useState([]);
+
+  useEffect(() => {
+    const socket = socketIOClient();
+    socket.on("newOrder", (data) => console.log(data));
+  }, [
+    setDataForFirstSet,
+    setDataForSecondSet,
+    firstDateToCompare,
+    secondDateToCompare,
+  ]);
 
   useEffect(() => {
     // const abctrl = new AbortController();
