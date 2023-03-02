@@ -228,3 +228,5 @@
     2. chart data
     3. instal & configure socket io
     4. get order data change real time
+    5. handler listening socket io
+    6. real time chart
