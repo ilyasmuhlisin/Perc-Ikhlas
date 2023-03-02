@@ -230,3 +230,5 @@
     4. get order data change real time
     5. handler listening socket io
     6. real time chart
+96. Chatting func
+    1. connect FE BE
