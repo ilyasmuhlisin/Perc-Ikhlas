@@ -232,4 +232,5 @@
     6. real time chart
 96. Chatting func
     1. connect FE BE
-    2. display chat for user
+    2. display message for user
+    3. admin recive message 
