@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 function AdminChatsScreen() {
 
 const { chatRooms } = useSelector((state) => state.adminChat);
-console.log(chatRooms);
+// console.log(chatRooms);
 
   return (
     <Row className="m-5">
@@ -17,7 +17,9 @@ console.log(chatRooms);
       </Col>
       <Col md={10}>
         <Row>
-          <AdminChatRoomComponent />
+          {Object.entries(chatRooms).map((chatRoom, index) => (
+            <AdminChatRoomComponent key={index} chatRoom={chatRoom} />
+          ))}
         </Row>
       </Col>
     </Row>
