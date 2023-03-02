@@ -236,3 +236,4 @@
     3. admin recive message 
     4. redux for chat
     5. chat box for admin
+    6. admin can close chatbox
