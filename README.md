@@ -234,3 +234,4 @@
     1. connect FE BE
     2. display message for user
     3. admin recive message 
+    4. redux for chat
