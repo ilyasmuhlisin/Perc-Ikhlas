@@ -225,3 +225,4 @@
 94. SearchBox func
 95. analytics screen
     1. fetch order data
+    2. chart data
