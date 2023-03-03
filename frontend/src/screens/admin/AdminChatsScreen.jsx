@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 function AdminChatsScreen() {
 
-const { chatRooms } = useSelector((state) => state.adminChat);
+const { chatRooms, socket } = useSelector((state) => state.adminChat);
 // console.log(chatRooms);
 
   return (
@@ -22,6 +22,7 @@ const { chatRooms } = useSelector((state) => state.adminChat);
               key={index}
               chatRoom={chatRoom}
               roomIndex={index + 1}
+              socket={socket}
               socketUser={chatRoom[0]}
             />
           ))}

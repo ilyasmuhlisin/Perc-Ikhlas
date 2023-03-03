@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getCategories } from "../redux/actions/categoryActions";
 import socketIOClient from "socket.io-client";
-import { setChatRooms } from "../redux/actions/chatActions";
+import { setChatRooms, setSocket } from "../redux/actions/chatActions";
 
 function HeaderComponent() {
   const dispatch = useDispatch();
@@ -66,6 +66,7 @@ function HeaderComponent() {
       const socket = socketIOClient();
       // menangkap dari server
       socket.on("server sends message from client to admin", ({ message }) => {
+        dispatch(setSocket(socket));
         // console.log(message);
         //   let chatRooms = {
         //     fddf54gfgfSocketID: [{ "client": "dsfdf" }, { "client": "dsfdf" }, { "admin": "dsfdf" }],

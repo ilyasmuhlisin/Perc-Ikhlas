@@ -17,6 +17,14 @@ function UserChatComponent() {
   useEffect(() => {
     if (!userInfo.isAdmin) {
       const socket = socketIOClient();
+      // mendapatkan pesan
+      socket.on("server sends message from admin to client", (msg) => {
+        setChat((chat) => {
+          return [...chat, { admin: msg }];
+        });
+        const chatMessages = document.querySelector(".cht-msg");
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      });
       setSocket(socket);
       // ketika halaman ditutup auto disconn
       return () => socket.disconnect();

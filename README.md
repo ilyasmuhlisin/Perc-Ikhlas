@@ -239,3 +239,4 @@
     6. admin can close chatbox
     7. display chat message form client
     8. display written admin adminchatbox
+    9. send admin message to client
