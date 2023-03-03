@@ -12,11 +12,14 @@ function UserChatComponent() {
   //   ]
   const [chat, setChat] = useState([]);
   const [messageReceived, setMessageReceived] = useState(false);
+  const [chatConnectionInfo, setChatConnectionInfo] = useState(false);
+  const [reconnect, setReconnect] = useState(false);
 
   const userInfo = useSelector((state) => state.userRegisterLogin.userInfo);
 
   useEffect(() => {
     if (!userInfo.isAdmin) {
+      setReconnect(false);
       const socket = socketIOClient();
       socket.on("no admin", (msg) => {
         setChat((chat) => {
@@ -33,15 +36,23 @@ function UserChatComponent() {
         chatMessages.scrollTop = chatMessages.scrollHeight;
       });
       setSocket(socket);
+      socket.on("admin closed chat", () => {
+        setChat([]);
+        setChatConnectionInfo(
+          "Admin closed chat. Type something and submit to reconnect"
+        );
+        setReconnect(true);
+      });
       // ketika halaman ditutup auto disconn
       return () => socket.disconnect();
     }
-  }, [userInfo.isAdmin]);
+  }, [userInfo.isAdmin, reconnect]);
 
   const clientSubmitChatMsg = (e) => {
     if (e.keyCode && e.keyCode !== 13) {
       return;
     }
+    setChatConnectionInfo("");
     setMessageReceived(false);
     const msg = document.getElementById("clientChatMsg");
     //  menghilangkan kosong kanan didalm teksbox
@@ -82,6 +93,7 @@ function UserChatComponent() {
         </div>
         <div className="chat-form">
           <div className="cht-msg">
+            <p>{chatConnectionInfo}</p>
             {chat.map((item, id) => (
               <div key={id}>
                 {item.client && (
