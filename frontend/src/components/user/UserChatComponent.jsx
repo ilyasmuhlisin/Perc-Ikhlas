@@ -18,11 +18,11 @@ function UserChatComponent() {
   useEffect(() => {
     if (!userInfo.isAdmin) {
       const socket = socketIOClient();
-      // socket.on("no admin", (msg) => {
-      //   setChat((chat) => {
-      //     return [...chat, { admin: "no admin here now" }];
-      //   });
-      // });
+      socket.on("no admin", (msg) => {
+        setChat((chat) => {
+          return [...chat, { admin: "no admin here now" }];
+        });
+      });
       // mendapatkan pesan
       socket.on("server sends message from admin to client", (msg) => {
         setChat((chat) => {

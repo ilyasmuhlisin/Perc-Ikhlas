@@ -69,20 +69,23 @@ function HeaderComponent() {
   useEffect(() => {
     if (userInfo.isAdmin) {
       const socket = socketIOClient();
-      // socket.emit(
-      //   "admin connected with server",
-      //   "Admin" + Math.floor(Math.random() * 1000000000000)
-      // );
+      socket.emit(
+        "admin connected with server",
+        "Admin" + Math.floor(Math.random() * 1000000000000)
+      );
       // menangkap dari server
-      socket.on("server sends message from client to admin", ({ message }) => {
-        dispatch(setSocket(socket));
-        // console.log(message);
-        //   let chatRooms = {
-        //     fddf54gfgfSocketID: [{ "client": "dsfdf" }, { "client": "dsfdf" }, { "admin": "dsfdf" }],
-        //   };
-        dispatch(setChatRooms("exampleUser", message));
-        dispatch(setMessageReceived(true));
-      });
+      socket.on(
+        "server sends message from client to admin",
+        ({ user, message }) => {
+          dispatch(setSocket(socket));
+          // console.log(message);
+          //   let chatRooms = {
+          //     fddf54gfgfSocketID: [{ "client": "dsfdf" }, { "client": "dsfdf" }, { "admin": "dsfdf" }],
+          //   };
+          dispatch(setChatRooms(user, message));
+          dispatch(setMessageReceived(true));
+        }
+      );
       return () => socket.disconnect();
     }
   }, [userInfo.isAdmin]);

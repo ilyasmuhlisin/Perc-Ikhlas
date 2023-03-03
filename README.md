@@ -241,3 +241,5 @@
     8. display written admin adminchatbox
     9. send admin message to client
     10. notif receive message
+    11. if admin not login
+    12. one to one communicat
