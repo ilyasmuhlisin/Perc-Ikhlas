@@ -243,3 +243,5 @@
     10. notif receive message
     11. if admin not login
     12. one to one communicat
+    13. client disconnect
+    14. remove chat if disconnect

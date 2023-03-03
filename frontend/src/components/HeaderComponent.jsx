@@ -22,6 +22,7 @@ import {
   setChatRooms,
   setSocket,
   setMessageReceived,
+  removeChatRoom,
 } from "../redux/actions/chatActions";
 
 function HeaderComponent() {
@@ -86,6 +87,10 @@ function HeaderComponent() {
           dispatch(setMessageReceived(true));
         }
       );
+      socket.on("disconnected", ({ reason, socketId }) => {
+        //   console.log(socketId, reason)
+        dispatch(removeChatRoom(socketId));
+      });
       return () => socket.disconnect();
     }
   }, [userInfo.isAdmin]);
