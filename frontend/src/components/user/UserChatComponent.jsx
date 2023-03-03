@@ -11,21 +11,23 @@ function UserChatComponent() {
   //       {"admin": "msg"},
   //   ]
   const [chat, setChat] = useState([]);
+  const [messageReceived, setMessageReceived] = useState(false);
 
   const userInfo = useSelector((state) => state.userRegisterLogin.userInfo);
 
   useEffect(() => {
     if (!userInfo.isAdmin) {
       const socket = socketIOClient();
+      setSocket(socket);
       // mendapatkan pesan
       socket.on("server sends message from admin to client", (msg) => {
         setChat((chat) => {
           return [...chat, { admin: msg }];
         });
+        setMessageReceived(true);
         const chatMessages = document.querySelector(".cht-msg");
         chatMessages.scrollTop = chatMessages.scrollHeight;
       });
-      setSocket(socket);
       // ketika halaman ditutup auto disconn
       return () => socket.disconnect();
     }
@@ -35,6 +37,7 @@ function UserChatComponent() {
     if (e.keyCode && e.keyCode !== 13) {
       return;
     }
+    setMessageReceived(false);
     const msg = document.getElementById("clientChatMsg");
     //  menghilangkan kosong kanan didalm teksbox
     let v = msg.value.trim();
@@ -62,7 +65,10 @@ function UserChatComponent() {
       <input type="checkbox" id="check" />
       <label className="chat-btn" htmlFor="check">
         <i className="bi bi-chat-dots comment"></i>
-        <span className="position-absolute top-0 start-10 translate-middle p-2 bg-danger border border-light rounded-circle"></span>
+        {messageReceived && (
+          <span className="position-absolute top-0 start-10 translate-middle p-2 bg-danger border border-light rounded-circle"></span>
+        )}
+        {/* <span className="position-absolute top-0 start-10 translate-middle p-2 bg-danger border border-light rounded-circle"></span> */}
         <i className="bi bi-x-circle close"></i>
       </label>
       <div className="chat-wrapper">

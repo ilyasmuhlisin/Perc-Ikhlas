@@ -1,5 +1,7 @@
 import { Toast, Button, Form } from "react-bootstrap";
 import { Fragment, useEffect, useState } from "react";
+import { setMessageReceived } from "../../redux/actions/chatActions";
+import { useDispatch } from "react-redux";
 
 const AdminChatRoomComponent = ({
   chatRoom,
@@ -7,6 +9,7 @@ const AdminChatRoomComponent = ({
   socket,
   socketUser,
 }) => {
+  const dispatch = useDispatch();
   // const [toast1, closeToast1] = useState(true);
   // const close1 = () => closeToast1(false);
   // const [toast2, closeToast2] = useState(true);
@@ -37,6 +40,7 @@ const AdminChatRoomComponent = ({
     });
     setRerender(!rerender);
     msg.focus();
+    dispatch(setMessageReceived(false));
     setTimeout(() => {
       msg.value = "";
       const chatMessages = document.querySelector(`.cht-msg${socketUser}`);
