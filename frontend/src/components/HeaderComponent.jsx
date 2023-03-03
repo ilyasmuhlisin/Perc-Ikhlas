@@ -69,6 +69,10 @@ function HeaderComponent() {
   useEffect(() => {
     if (userInfo.isAdmin) {
       const socket = socketIOClient();
+      // socket.emit(
+      //   "admin connected with server",
+      //   "Admin" + Math.floor(Math.random() * 1000000000000)
+      // );
       // menangkap dari server
       socket.on("server sends message from client to admin", ({ message }) => {
         dispatch(setSocket(socket));
