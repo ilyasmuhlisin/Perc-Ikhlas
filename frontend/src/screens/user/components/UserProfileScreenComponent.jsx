@@ -1,5 +1,6 @@
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const UserProfileScreenComponent = ({
   updateUserApiRequest,
@@ -72,6 +73,7 @@ const UserProfileScreenComponent = ({
       )
         .then((data) => {
           setUpdateUserResponseState({ success: data.success, error: "" });
+          window.location.href = "/user/family-data";
           //   auto update profile in redux
           reduxDispatch(
             setReduxUserState({
@@ -233,10 +235,12 @@ const UserProfileScreenComponent = ({
                 Both passwords should match
               </Form.Control.Feedback>
             </Form.Group> */}
-
             <Button variant="primary" type="submit">
               Update
-            </Button>
+            </Button>{" "}
+            <Link to="/user/family-data">
+              <Button variant="success">Skip</Button>
+            </Link>
             <Alert
               show={
                 updateUserResponseState && updateUserResponseState.error !== ""

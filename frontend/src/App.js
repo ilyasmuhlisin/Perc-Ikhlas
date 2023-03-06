@@ -11,6 +11,7 @@ import UserCartDetailsScreen from "./screens/user/UserCartDetailsScreen";
 import UserOrderDetailsScreen from "./screens/user/UserOrderDetailsScreen";
 import UserOrdersScreen from "./screens/user/UserOrdersScreen";
 import UserProfileScreen from "./screens/user/UserProfileScreen";
+import UserFamilyScreen from "./screens/user/UserFamilyScreen";
 // admin
 import AdminUsersScreen from "./screens/admin/AdminUsersScreen";
 import AdminEditUserScreen from "./screens/admin/AdminEditUserScreen";
@@ -19,13 +20,18 @@ import AdminCreateProductScreen from "./screens/admin/AdminCreateProductScreen";
 import AdminEditProductScreen from "./screens/admin/AdminEditProductScreen";
 import AdminOrdersScreen from "./screens/admin/AdminOrdersScreen";
 import AdminOrderDetailsScreen from "./screens/admin/AdminOrderDetailsScreen";
+import AdminOfflineOrdersScreen from "./screens/admin/AdminOfflineOrdersScreen";
 import AdminChatsScreen from "./screens/admin/AdminChatsScreen";
 import AdminAnalyticsScreen from "./screens/admin/AdminAnalyticsScreen";
+import AdminAddOfflineOrdersScreen from "./screens/admin/AdminAddOfflineOrdersScreen";
+import AdminOfflineOrderDetailsScreen from "./screens/admin/AdminOfflineOrderDetailsScreen";
 // component
 import HeaderComponent from "./components/HeaderComponent";
 import FooterComponent from "./components/FooterComponent";
 import RoutesWithUserChatComponent from "./components/user/RoutesWithUserChatComponent";
 import ScrollToTop from "./utils/ScrollToTop";
+
+
 
 function App() {
   return (
@@ -78,6 +84,7 @@ function App() {
         {/* user screen */}
         <Route element={<ProtectedRoutesComponent admin={false} />}>
           <Route path="/user" element={<UserProfileScreen />} />
+          <Route path="/user/family-data" element={<UserFamilyScreen />} />
           <Route path="/user/my-orders" element={<UserOrdersScreen />} />
           <Route
             path="/user/cart-details"
@@ -106,6 +113,18 @@ function App() {
             element={<AdminEditProductScreen />}
           />
           <Route path="/admin/orders" element={<AdminOrdersScreen />} />
+          <Route
+            path="/admin/offline-orders"
+            element={<AdminOfflineOrdersScreen />}
+          />
+          <Route
+            path="/admin/add-offline-order"
+            element={<AdminAddOfflineOrdersScreen />}
+          />
+          <Route
+            path="/admin/offline-order-details"
+            element={<AdminOfflineOrderDetailsScreen />}
+          />
           <Route
             path="/admin/order-details/:id"
             element={<AdminOrderDetailsScreen />}
