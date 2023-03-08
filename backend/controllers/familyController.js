@@ -6,9 +6,7 @@ const User = require("../models/UserModel");
 const getFamilyById = async (req, res, next) => {
   try {
     // didalam detail produk menampilkan ulasan sesuai id
-    const user = await User.findById(req.params.id)
-      .populate("families")
-      .orFail();
+    const user = await User.findById(req.params.id).orFail();
     res.json(user);
   } catch (err) {
     next(err);
@@ -166,73 +164,103 @@ const adminUpdateUserFamily = async (req, res, next) => {
   }
 };
 
-// menambahkan data nama keluarga
 const createUserFamily = async (req, res, next) => {
   try {
-    // karena 2 model digunakan jadi harus saling berkaitan
-    // jika tambah review keduanya harus sama
-    const session = await Family.startSession();
+    const user = await User.findById(req.user._id).orFail();
+    user.families.maleName = req.body.maleName || user.families.maleName;
+    user.families.maleParent = req.body.maleParent || user.families.maleParen;
+    user.families.maleAddress =
+      req.body.maleAddress || user.families.maleAddress;
+    user.families.receptionDate =
+      req.body.receptionDate || user.families.receptionDate;
+    user.families.receptionPlace =
+      req.body.receptionPlace || user.families.receptionPlace;
+    user.families.femaleName = req.body.femaleName || user.families.femaleName;
+    user.families.femaleParent =
+      req.body.femaleParent || user.families.femaleParent;
+    user.families.femaleAddress =
+      req.body.femaleAddress || user.families.femaleAddress;
+    user.families.agreementDate =
+      req.body.agreementDate || user.families.agreementDate;
+    user.families.agreementPlace =
+      req.body.agreementPlace || user.families.agreementPlace;
 
-    const {
-      maleName,
-      maleParent,
-      maleAddress,
-      receptionDate,
-      receptionPlace,
-      femaleName,
-      femaleParent,
-      femaleAddress,
-      agreementDate,
-      agreementPlace,
-    } = req.body;
+    await user.save();
 
-    // create review id manually because it is needed also for saving in Product collection
-    const ObjectId = require("mongodb").ObjectId;
-    let familyId = ObjectId();
-
-    session.startTransaction();
-    await Family.create(
-      [
-        {
-          _id: familyId,
-          maleName: maleName,
-          maleParent: maleParent,
-          maleAddress: maleAddress,
-          receptionDate: receptionDate,
-          receptionPlace: receptionPlace,
-          femaleName: femaleName,
-          femaleParent: femaleParent,
-          femaleAddress: femaleAddress,
-          agreementDate: agreementDate,
-          agreementPlace: agreementPlace,
-          user: {
-            _id: req.user._id,
-            name: req.user.name + " " + req.user.lastName,
-          },
-        },
-      ],
-      { session: session }
-    );
-
-    // populate = auto field ref on product
-    const user = await User.findById(req.user._id)
-      .populate("families")
-      .session(session);
-
-    // res.send(product)
-    // simpan review ke product model
-    user.families.push(familyId);
-
-    await product.save();
-
-    await session.commitTransaction();
-    session.endSession();
-    res.send("data family created");
+    res.json({
+      success: "create user family updated",
+    });
   } catch (err) {
-    await session.abortTransaction();
     next(err);
   }
 };
+
+// const createUserFamily = async (req, res, next) => {
+//   try {
+//     // karena 2 model digunakan jadi harus saling berkaitan
+//     // jika tambah review keduanya harus sama
+//     const session = await Family.startSession();
+
+//     const {
+//       maleName,
+//       maleParent,
+//       maleAddress,
+//       receptionDate,
+//       receptionPlace,
+//       femaleName,
+//       femaleParent,
+//       femaleAddress,
+//       agreementDate,
+//       agreementPlace,
+//     } = req.body;
+
+//     // create review id manually because it is needed also for saving in Product collection
+//     const ObjectId = require("mongodb").ObjectId;
+//     let familyId = ObjectId();
+
+//     session.startTransaction();
+//     await Family.create(
+//       [
+//         {
+//           _id: familyId,
+//           maleName: maleName,
+//           maleParent: maleParent,
+//           maleAddress: maleAddress,
+//           receptionDate: receptionDate,
+//           receptionPlace: receptionPlace,
+//           femaleName: femaleName,
+//           femaleParent: femaleParent,
+//           femaleAddress: femaleAddress,
+//           agreementDate: agreementDate,
+//           agreementPlace: agreementPlace,
+//           user: {
+//             _id: req.user._id,
+//             name: req.user.name + " " + req.user.lastName,
+//           },
+//         },
+//       ],
+//       { session: session }
+//     );
+
+//     // populate = auto field ref on product
+//     const user = await User.findById(req.user._id)
+//       .populate("families")
+//       .session(session);
+
+//     // res.send(product)
+//     // simpan review ke product model
+//     user.families.push(familyId);
+
+//     await user.save();
+
+//     await session.commitTransaction();
+//     session.endSession();
+//     res.send("data family created");
+//   } catch (err) {
+//     await session.abortTransaction();
+//     next(err);
+//   }
+// };
 
 module.exports = {
   adminDeleteOffline,

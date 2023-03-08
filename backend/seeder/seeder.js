@@ -41,14 +41,14 @@ const importData = async () => {
         return { ...product };
       });
       await Product.insertMany(sampleProducts);
-      const families = await Family.insertMany(familyData);
-      const sampleUsers = userData.map((user) => {
-        families.map((family) => {
-          user.families.push(family._id);
-        });
-        return { ...user };
-      });
-      await User.insertMany(sampleUsers);
+      // const families = await Family.insertMany(familyData);
+      // const sampleUsers = userData.map((user) => {
+      //   families.map((family) => {
+      //     user.families.push(family._id);
+      //   });
+      //   return { ...user };
+      // });
+      await User.insertMany(userData);
       await Order.insertMany(orderData);
       await Offline.insertMany(offlineData);
 

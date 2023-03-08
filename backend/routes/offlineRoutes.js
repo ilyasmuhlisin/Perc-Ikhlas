@@ -10,6 +10,7 @@ const {
   adminUpdateOfflineOrders,
   adminUpdateUserFamily,
   getOfflineOrdersById, 
+  getFamilyById,
   createUserFamily,
   adminGetOfflineOrders,
   adminCreateOfflineOrders,
@@ -17,7 +18,8 @@ const {
 
 // user routes
 router.use(verifyIsLoggedIn);
-router.post("/", createUserFamily);
+router.post("/:userId", createUserFamily);
+router.get("/get-one/:id", getFamilyById);
 
 // admin routes
 router.use(verifyIsAdmin);

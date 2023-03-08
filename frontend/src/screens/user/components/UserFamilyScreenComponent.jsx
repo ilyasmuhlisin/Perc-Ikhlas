@@ -1,31 +1,78 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
+import { useNavigate } from "react-router";
 
-function UserFamilyScreenComponent() {
+function UserFamilyScreenComponent({
+  createUserFamilyApiRequest,
+  userInfo,
+  getOfflineOrdersDetails,
+}) {
   const [validated, setValidated] = useState(false);
-  const [date, setDate] = useState(new Date());
+  const [createUserFamilyResponseState, setCreateUserFamilyResponseState] =
+    useState({
+      message: "",
+      error: "",
+    });
 
-  console.log("DATE", date);
+  const [user, setUser] = useState({});
+  const [error, setError] = useState(false);
+  const [receptionDate, setReceptionDate] = useState(new Date());
+  const [agreementDate, setAgreementDate] = useState(new Date());
 
-  const onChange = () => {
-    const password = document.querySelector("input[name=password]");
-    const confirm = document.querySelector("input[name=confirmPassword]");
-    if (confirm.value === password.value) {
-      confirm.setCustomValidity("");
-    } else {
-      confirm.setCustomValidity("Passwords do not match");
-    }
-  };
+  // const families = user.families;
+  // console.log(user.maleName);
+  useEffect(() => {
+    getOfflineOrdersDetails(userInfo._id)
+      .then((data) => {
+        setUser(data.families);
+        // setLoading(false);
+      })
+      .catch((er) =>
+        setError(
+          er.response.data.message ? er.response.data.message : er.response.data
+        )
+      );
+  }, [userInfo._id]);
+
+  //  console.log("DATE", date);
+
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+    event.preventDefault();
+    event.stopPropagation();
+    const form = event.currentTarget.elements;
+    const formInputs = {
+      maleName: form.maleName.value,
+      maleParent: form.maleParent.value,
+      maleAddress: form.maleAddress.value,
+      receptionDate: form.receptionDate.value,
+      receptionPlace: form.receptionPlace.value,
+      femaleName: form.femaleName.value,
+      femaleParent: form.femaleParent.value,
+      femaleAddress: form.femaleAddress.value,
+      agreementDate: form.agreementDate.value,
+      agreementPlace: form.agreementPlace.value,
+    };
+    if (event.currentTarget.checkValidity() === true) {
+      createUserFamilyApiRequest(userInfo._id, formInputs)
+        .then((data) => {
+          console.log(data);
+          if (data.message === "create user family updated")
+            window.location.href = "/";
+        })
+        .catch((er) => {
+          setCreateUserFamilyResponseState({
+            error: er.response.data.message
+              ? er.response.data.message
+              : er.response.data,
+          });
+        });
     }
 
     setValidated(true);
   };
+
   return (
     <Container>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
@@ -37,7 +84,7 @@ function UserFamilyScreenComponent() {
               <Form.Control
                 required
                 type="text"
-                defaultValue="Dimas"
+                defaultValue={user.maleName}
                 name="maleName"
               />
               <Form.Control.Feedback type="invalid">
@@ -49,8 +96,8 @@ function UserFamilyScreenComponent() {
               <Form.Control
                 required
                 type="text"
-                defaultValue="Sumarno & Ningsih"
-                name="maleFamilyName"
+                defaultValue={user.maleParent}
+                name="maleParent"
               />
               <Form.Control.Feedback type="invalid">
                 Masukkan nama kedua orang tua
@@ -61,7 +108,7 @@ function UserFamilyScreenComponent() {
               <Form.Control
                 required
                 type="text"
-                defaultValue="jl. durian, dusun, desa"
+                defaultValue={user.maleAddress}
                 name="maleAddress"
               />
               <Form.Control.Feedback type="invalid">
@@ -74,23 +121,24 @@ function UserFamilyScreenComponent() {
                 type="date"
                 name="receptionDate"
                 placeholder="Tanggal resepsi"
-                // value={date}
-                // onChange={(e) => setDate(e.target.value)}
+                value={receptionDate}
+                onChange={(e) => setReceptionDate(e.target.value)}
               />
               <Form.Control.Feedback type="invalid">
                 Masukkan tanggal
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicReceptionPlace">
-              <Form.Label>Alamat Tempat Resepsi</Form.Label>
+            <Form.Group className="mb-3" controlId="agreementDate">
+              <Form.Label>Tanggal Akad</Form.Label>
               <Form.Control
-                required
-                type="text"
-                defaultValue="jl. durian, dusun, desa"
-                name="receptionPlace"
+                type="date"
+                name="agreementDate"
+                placeholder="Tanggal akad"
+                value={agreementDate}
+                onChange={(e) => setAgreementDate(e.target.value)}
               />
               <Form.Control.Feedback type="invalid">
-                Masukkan alamat resepsi
+                Masukkan tanggal
               </Form.Control.Feedback>
             </Form.Group>
           </Col>
@@ -100,7 +148,7 @@ function UserFamilyScreenComponent() {
               <Form.Control
                 required
                 type="text"
-                defaultValue="annggi"
+                defaultValue={user.femaleName}
                 name="femaleName"
               />
               <Form.Control.Feedback type="invalid">
@@ -112,8 +160,8 @@ function UserFamilyScreenComponent() {
               <Form.Control
                 required
                 type="text"
-                defaultValue="Sumarno & Ningsih"
-                name="femaleFamilyName"
+                defaultValue={user.femaleParent}
+                name="femaleParent"
               />
               <Form.Control.Feedback type="invalid">
                 Masukkan nama kedua orang tua
@@ -124,24 +172,11 @@ function UserFamilyScreenComponent() {
               <Form.Control
                 required
                 type="text"
-                defaultValue="jl. durian, dusun, desa"
+                defaultValue={user.femaleAddress}
                 name="femaleAddress"
               />
               <Form.Control.Feedback type="invalid">
                 Masukkan alamat
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="agreementDate">
-              <Form.Label>Tanggal Akad</Form.Label>
-              <Form.Control
-                type="date"
-                name="agreementDate"
-                placeholder="Tanggal akad"
-                // value={date}
-                // onChange={(e) => setDate(e.target.value)}
-              />
-              <Form.Control.Feedback type="invalid">
-                Masukkan tanggal
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicAgreementPlace">
@@ -149,24 +184,37 @@ function UserFamilyScreenComponent() {
               <Form.Control
                 required
                 type="text"
-                defaultValue="jl. durian, dusun, desa"
+                defaultValue={user.agreementPlace}
                 name="agreementPlace"
               />
               <Form.Control.Feedback type="invalid">
                 Masukkan alamat akad
               </Form.Control.Feedback>
             </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicReceptionPlace">
+              <Form.Label>Alamat Tempat Resepsi</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                defaultValue={user.receptionPlace}
+                name="receptionPlace"
+              />
+              <Form.Control.Feedback type="invalid">
+                Masukkan alamat resepsi
+              </Form.Control.Feedback>
+            </Form.Group>
           </Col>
         </Row>
-        <Button className="text-align-center" variant="primary" type="submit">
+        <Button variant="primary" type="submit">
           Submit
         </Button>
-        <Alert show={true} variant="danger">
+        {createUserFamilyResponseState.error ?? ""}
+        {/* <Alert show={true} variant="danger">
           User with that email already exists!
         </Alert>
         <Alert show={true} variant="info">
           User updated
-        </Alert>
+        </Alert> */}
       </Form>
     </Container>
   );

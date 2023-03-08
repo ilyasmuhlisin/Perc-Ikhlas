@@ -34,12 +34,18 @@ const userSchema = mongoose.Schema(
     state: {
       type: String,
     },
-    families: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: Family,
-      },
-    ],
+    families: {
+      maleName: { type: String },
+      maleParent: { type: String },
+      maleAddress: { type: String },
+      receptionDate: { type: String },
+      receptionPlace: { type: String },
+      femaleName: { type: String },
+      femaleParent: { type: String },
+      femaleAddress: { type: String },
+      agreementDate: { type: String },
+      agreementPlace: { type: String },
+    },
     password: {
       type: String,
       required: true,
