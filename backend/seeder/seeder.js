@@ -6,12 +6,16 @@ const productData = require("./products");
 const reviewData = require("./reviews");
 const userData = require("./users");
 const orderData = require("./orders");
+const familyData = require("./families");
+const offlineData = require("./offlines");
 
 const Category = require("../models/CategoryModel");
 const Product = require("../models/ProductModel");
 const Review = require("../models/ReviewModel");
 const User = require("../models/UserModel");
 const Order = require("../models/OrderModel");
+const Offline = require("../models/OfflineOrdersModel");
+const Family = require("../models/FamilyModel");
 
 const importData = async () => {
   try {
@@ -23,6 +27,8 @@ const importData = async () => {
     await Review.collection.deleteMany({});
     await User.collection.deleteMany({});
     await Order.collection.deleteMany({});
+    await Family.collection.deleteMany({});
+    await Offline.collection.deleteMany({});
 
     if (process.argv[2] !== "-d") {
       // relasi / memasukan data ke review di product
@@ -35,8 +41,16 @@ const importData = async () => {
         return { ...product };
       });
       await Product.insertMany(sampleProducts);
-      await User.insertMany(userData);
+      const families = await Family.insertMany(familyData);
+      const sampleUsers = userData.map((user) => {
+        families.map((family) => {
+          user.families.push(family._id);
+        });
+        return { ...user };
+      });
+      await User.insertMany(sampleUsers);
       await Order.insertMany(orderData);
+      await Offline.insertMany(offlineData);
 
       console.log("Seeder data imported successfully");
       process.exit();

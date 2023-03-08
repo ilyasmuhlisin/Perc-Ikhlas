@@ -31,8 +31,6 @@ import FooterComponent from "./components/FooterComponent";
 import RoutesWithUserChatComponent from "./components/user/RoutesWithUserChatComponent";
 import ScrollToTop from "./utils/ScrollToTop";
 
-
-
 function App() {
   return (
     <BrowserRouter>
@@ -122,7 +120,7 @@ function App() {
             element={<AdminAddOfflineOrdersScreen />}
           />
           <Route
-            path="/admin/offline-order-details"
+            path="/admin/offline-order-details/:id"
             element={<AdminOfflineOrderDetailsScreen />}
           />
           <Route

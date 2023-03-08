@@ -1,0 +1,247 @@
+const Offline = require("../models/OfflineOrdersModel");
+const Family = require("../models/FamilyModel");
+const User = require("../models/UserModel");
+// const ObjectId = require("mongodb").ObjectId;
+
+const getFamilyById = async (req, res, next) => {
+  try {
+    // didalam detail produk menampilkan ulasan sesuai id
+    const user = await User.findById(req.params.id)
+      .populate("families")
+      .orFail();
+    res.json(user);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const getOfflineOrdersById = async (req, res, next) => {
+  try {
+    // didalam detail produk menampilkan ulasan sesuai id
+    const offlines = await Offline.findById(req.params.id).orFail();
+    res.json(offlines);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// mendapatkan prder offline
+const adminGetOfflineOrders = async (req, res, next) => {
+  try {
+    const offlines = await Offline.find({});
+    return res.json(offlines);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// membuat order offline
+const adminCreateOfflineOrders = async (req, res, next) => {
+  try {
+    const offline = new Offline();
+    const {
+      maleName,
+      maleParent,
+      maleAddress,
+      receptionDate,
+      receptionPlace,
+      femaleName,
+      femaleParent,
+      femaleAddress,
+      agreementDate,
+      agreementPlace,
+    } = req.body;
+
+    offline.maleName = maleName;
+    offline.maleParent = maleParent;
+    offline.maleAddress = maleAddress;
+    offline.receptionDate = receptionDate;
+    offline.receptionPlace = receptionPlace;
+    offline.femaleName = femaleName;
+    offline.femaleParent = femaleParent;
+    offline.femaleAddress = femaleAddress;
+    offline.agreementDate = agreementDate;
+    offline.agreementPlace = agreementPlace;
+
+    await offline.save();
+
+    res.json({
+      message: "offline orders created",
+      offlineId: offline._id,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const adminDeleteOffline = async (req, res, next) => {
+  try {
+    const offline = await Offline.findById(req.params.id).orFail();
+    await offline.remove();
+    res.json({ message: "offline orders removed" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const adminDeleteFamily = async (req, res, next) => {
+  try {
+    const family = await Family.findById(req.params.id).orFail();
+    await family.remove();
+    res.json({ message: "user family removed" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const adminUpdateOfflineOrders = async (req, res, next) => {
+  try {
+    const offline = await Offline.findById(req.params.id).orFail();
+    const {
+      maleName,
+      maleParent,
+      maleAddress,
+      receptionDate,
+      receptionPlace,
+      femaleName,
+      femaleParent,
+      femaleAddress,
+      agreementDate,
+      agreementPlace,
+    } = req.body;
+
+    offline.maleName = maleName || offline.maleName;
+    offline.maleParent = maleParent || offline.maleParen;
+    offline.maleAddress = maleAddress || offline.maleAddress;
+    offline.receptionDate = receptionDate || offline.receptionDate;
+    offline.receptionPlace = receptionPlace || offline.receptionPlace;
+    offline.femaleName = femaleName || offline.femaleName;
+    offline.femaleParent = femaleParent || offline.femaleParent;
+    offline.femaleAddress = femaleAddress || offline.femaleAddress;
+    offline.agreementDate = agreementDate || offline.agreementDate;
+    offline.agreementPlace = agreementPlace || offline.agreementPlace;
+
+    await offline.save();
+    res.json({
+      message: "offline orders updated",
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const adminUpdateUserFamily = async (req, res, next) => {
+  try {
+    const family = await Family.findById(req.params.id).orFail();
+    const {
+      maleName,
+      maleParent,
+      maleAddress,
+      receptionDate,
+      receptionPlace,
+      femaleName,
+      femaleParent,
+      femaleAddress,
+      agreementDate,
+      agreementPlace,
+    } = req.body;
+
+    family.maleName = maleName || family.maleName;
+    family.maleParent = maleParent || family.maleParen;
+    family.maleAddress = maleAddress || family.maleAddress;
+    family.receptionDate = receptionDate || family.receptionDate;
+    family.receptionPlace = receptionPlace || family.receptionPlace;
+    family.femaleName = femaleName || family.femaleName;
+    family.femaleParent = femaleParent || family.femaleParent;
+    family.femaleAddress = femaleAddress || family.femaleAddress;
+    family.agreementDate = agreementDate || family.agreementDate;
+    family.agreementPlace = agreementPlace || family.agreementPlace;
+
+    await family.save();
+    res.json({
+      message: "user family updated",
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+// menambahkan data nama keluarga
+const createUserFamily = async (req, res, next) => {
+  try {
+    // karena 2 model digunakan jadi harus saling berkaitan
+    // jika tambah review keduanya harus sama
+    const session = await Family.startSession();
+
+    const {
+      maleName,
+      maleParent,
+      maleAddress,
+      receptionDate,
+      receptionPlace,
+      femaleName,
+      femaleParent,
+      femaleAddress,
+      agreementDate,
+      agreementPlace,
+    } = req.body;
+
+    // create review id manually because it is needed also for saving in Product collection
+    const ObjectId = require("mongodb").ObjectId;
+    let familyId = ObjectId();
+
+    session.startTransaction();
+    await Family.create(
+      [
+        {
+          _id: familyId,
+          maleName: maleName,
+          maleParent: maleParent,
+          maleAddress: maleAddress,
+          receptionDate: receptionDate,
+          receptionPlace: receptionPlace,
+          femaleName: femaleName,
+          femaleParent: femaleParent,
+          femaleAddress: femaleAddress,
+          agreementDate: agreementDate,
+          agreementPlace: agreementPlace,
+          user: {
+            _id: req.user._id,
+            name: req.user.name + " " + req.user.lastName,
+          },
+        },
+      ],
+      { session: session }
+    );
+
+    // populate = auto field ref on product
+    const user = await User.findById(req.user._id)
+      .populate("families")
+      .session(session);
+
+    // res.send(product)
+    // simpan review ke product model
+    user.families.push(familyId);
+
+    await product.save();
+
+    await session.commitTransaction();
+    session.endSession();
+    res.send("data family created");
+  } catch (err) {
+    await session.abortTransaction();
+    next(err);
+  }
+};
+
+module.exports = {
+  adminDeleteOffline,
+  adminDeleteFamily,
+  adminUpdateOfflineOrders,
+  adminUpdateUserFamily,
+  getFamilyById,
+  getOfflineOrdersById,
+  createUserFamily,
+  adminGetOfflineOrders,
+  adminCreateOfflineOrders,
+};
