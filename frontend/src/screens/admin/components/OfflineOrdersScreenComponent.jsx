@@ -57,7 +57,7 @@ function OfflineOrdersScreenComponent({ fetchOfflineOrders }) {
               <th>Tanggal Resepsi</th>
               <th>Tempat Akad</th>
               <th>Tempat Resepsi</th>
-              <th>Detail</th>
+              <th>Details</th>
             </tr>
           </thead>
           <tbody>
@@ -72,7 +72,9 @@ function OfflineOrdersScreenComponent({ fetchOfflineOrders }) {
                 <td>{item.receptionPlace}</td>
                 <td>
                   <Link to={`/admin/offline-order-details/${item._id}`}>
-                    details
+                    <Button variant="success" className="btn-sm">
+                      Data details
+                    </Button>
                   </Link>
                 </td>
                 {/* <td>

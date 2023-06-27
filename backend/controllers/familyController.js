@@ -7,76 +7,7 @@ const getFamilyById = async (req, res, next) => {
   try {
     // didalam detail produk menampilkan ulasan sesuai id
     const user = await User.findById(req.params.id).orFail();
-    res.json(user);
-  } catch (err) {
-    next(err);
-  }
-};
-
-const getOfflineOrdersById = async (req, res, next) => {
-  try {
-    // didalam detail produk menampilkan ulasan sesuai id
-    const offlines = await Offline.findById(req.params.id).orFail();
-    res.json(offlines);
-  } catch (err) {
-    next(err);
-  }
-};
-
-// mendapatkan prder offline
-const adminGetOfflineOrders = async (req, res, next) => {
-  try {
-    const offlines = await Offline.find({});
-    return res.json(offlines);
-  } catch (err) {
-    next(err);
-  }
-};
-
-// membuat order offline
-const adminCreateOfflineOrders = async (req, res, next) => {
-  try {
-    const offline = new Offline();
-    const {
-      maleName,
-      maleParent,
-      maleAddress,
-      receptionDate,
-      receptionPlace,
-      femaleName,
-      femaleParent,
-      femaleAddress,
-      agreementDate,
-      agreementPlace,
-    } = req.body;
-
-    offline.maleName = maleName;
-    offline.maleParent = maleParent;
-    offline.maleAddress = maleAddress;
-    offline.receptionDate = receptionDate;
-    offline.receptionPlace = receptionPlace;
-    offline.femaleName = femaleName;
-    offline.femaleParent = femaleParent;
-    offline.femaleAddress = femaleAddress;
-    offline.agreementDate = agreementDate;
-    offline.agreementPlace = agreementPlace;
-
-    await offline.save();
-
-    res.json({
-      message: "offline orders created",
-      offlineId: offline._id,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
-const adminDeleteOffline = async (req, res, next) => {
-  try {
-    const offline = await Offline.findById(req.params.id).orFail();
-    await offline.remove();
-    res.json({ message: "offline orders removed" });
+    return res.send(user);
   } catch (err) {
     next(err);
   }
@@ -87,42 +18,6 @@ const adminDeleteFamily = async (req, res, next) => {
     const family = await Family.findById(req.params.id).orFail();
     await family.remove();
     res.json({ message: "user family removed" });
-  } catch (err) {
-    next(err);
-  }
-};
-
-const adminUpdateOfflineOrders = async (req, res, next) => {
-  try {
-    const offline = await Offline.findById(req.params.id).orFail();
-    const {
-      maleName,
-      maleParent,
-      maleAddress,
-      receptionDate,
-      receptionPlace,
-      femaleName,
-      femaleParent,
-      femaleAddress,
-      agreementDate,
-      agreementPlace,
-    } = req.body;
-
-    offline.maleName = maleName || offline.maleName;
-    offline.maleParent = maleParent || offline.maleParen;
-    offline.maleAddress = maleAddress || offline.maleAddress;
-    offline.receptionDate = receptionDate || offline.receptionDate;
-    offline.receptionPlace = receptionPlace || offline.receptionPlace;
-    offline.femaleName = femaleName || offline.femaleName;
-    offline.femaleParent = femaleParent || offline.femaleParent;
-    offline.femaleAddress = femaleAddress || offline.femaleAddress;
-    offline.agreementDate = agreementDate || offline.agreementDate;
-    offline.agreementPlace = agreementPlace || offline.agreementPlace;
-
-    await offline.save();
-    res.json({
-      message: "offline orders updated",
-    });
   } catch (err) {
     next(err);
   }
@@ -145,7 +40,7 @@ const adminUpdateUserFamily = async (req, res, next) => {
     } = req.body;
 
     family.maleName = maleName || family.maleName;
-    family.maleParent = maleParent || family.maleParen;
+    family.maleParent = maleParent || family.maleParent;
     family.maleAddress = maleAddress || family.maleAddress;
     family.receptionDate = receptionDate || family.receptionDate;
     family.receptionPlace = receptionPlace || family.receptionPlace;
@@ -168,7 +63,7 @@ const createUserFamily = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id).orFail();
     user.families.maleName = req.body.maleName || user.families.maleName;
-    user.families.maleParent = req.body.maleParent || user.families.maleParen;
+    user.families.maleParent = req.body.maleParent || user.families.maleParent;
     user.families.maleAddress =
       req.body.maleAddress || user.families.maleAddress;
     user.families.receptionDate =
@@ -263,13 +158,8 @@ const createUserFamily = async (req, res, next) => {
 // };
 
 module.exports = {
-  adminDeleteOffline,
   adminDeleteFamily,
-  adminUpdateOfflineOrders,
   adminUpdateUserFamily,
   getFamilyById,
-  getOfflineOrdersById,
   createUserFamily,
-  adminGetOfflineOrders,
-  adminCreateOfflineOrders,
 };

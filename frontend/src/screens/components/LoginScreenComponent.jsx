@@ -1,6 +1,6 @@
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
 const LoginScreenComponent = ({
   loginUserApiRequest,
@@ -14,7 +14,7 @@ const LoginScreenComponent = ({
     loading: false,
   });
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -47,6 +47,11 @@ const LoginScreenComponent = ({
           // else navigate("/admin/orders", { replace: true });
         })
         .catch((er) =>
+          // console.log(
+          //   er.response.data.message
+          //     ? er.response.data.message
+          //     : er.response.data
+          // )
           setLoginUserResponseState({
             error: er.response.data.message
               ? er.response.data.message
@@ -104,7 +109,11 @@ const LoginScreenComponent = ({
               </Col>
             </Row>
 
-            <Button variant="primary" type="submit">
+            <Button
+              variant="primary"
+              type="submit"
+              style={{ marginBottom: "10px" }}
+            >
               {loginUserResponseState &&
               loginUserResponseState.loading === true ? (
                 <Spinner
@@ -120,14 +129,14 @@ const LoginScreenComponent = ({
               Login
             </Button>
             <Alert
+              // error wong cred berasal dari res backend
               show={
                 loginUserResponseState &&
-                // error wong cred berasal dari res backend
                 loginUserResponseState.error === "wrong credentials"
               }
               variant="danger"
             >
-              Wrong credentials
+              Incorrect email or password
             </Alert>
           </Form>
         </Col>

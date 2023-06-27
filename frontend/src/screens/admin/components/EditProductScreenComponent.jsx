@@ -304,7 +304,7 @@ function EditProductScreenComponent({
                   )
                 }
               >
-                <option value="Choose category">Choose category</option>
+                <option value="">Choose category</option>
                 {categories.map((category, idx) => {
                   return product.category === category.name ? (
                     <option selected key={idx} value={category.name}>

@@ -75,6 +75,7 @@ function OfflineOrderDetailsScreenComponent({ getOfflineOrder }) {
                 type="text"
                 defaultValue={maleName}
                 name="maleName"
+                readOnly
               />
               <Form.Control.Feedback type="invalid">
                 Masukkan nama pengantin pria
@@ -87,6 +88,7 @@ function OfflineOrderDetailsScreenComponent({ getOfflineOrder }) {
                 type="text"
                 defaultValue={maleParent}
                 name="maleFamilyName"
+                readOnly
               />
               <Form.Control.Feedback type="invalid">
                 Masukkan nama kedua orang tua
@@ -99,6 +101,7 @@ function OfflineOrderDetailsScreenComponent({ getOfflineOrder }) {
                 type="text"
                 defaultValue={maleAddress}
                 name="maleAddress"
+                readOnly
               />
               <Form.Control.Feedback type="invalid">
                 Masukkan alamat
@@ -111,6 +114,7 @@ function OfflineOrderDetailsScreenComponent({ getOfflineOrder }) {
                 name="receptionDate"
                 placeholder={receptionDate}
                 value={receptionDate}
+                readOnly
                 // onChange={(e) => setDate(e.target.value)}
               />
               <Form.Control.Feedback type="invalid">
@@ -124,6 +128,7 @@ function OfflineOrderDetailsScreenComponent({ getOfflineOrder }) {
                 type="text"
                 defaultValue={receptionPlace}
                 name="receptionPlace"
+                readOnly
               />
               <Form.Control.Feedback type="invalid">
                 Masukkan alamat resepsi
@@ -138,6 +143,7 @@ function OfflineOrderDetailsScreenComponent({ getOfflineOrder }) {
                 type="text"
                 defaultValue={femaleName}
                 name="femaleName"
+                readOnly
               />
               <Form.Control.Feedback type="invalid">
                 Masukkan nama pengantin wanita
@@ -150,6 +156,7 @@ function OfflineOrderDetailsScreenComponent({ getOfflineOrder }) {
                 type="text"
                 defaultValue={femaleParent}
                 name="femaleFamilyName"
+                readOnly
               />
               <Form.Control.Feedback type="invalid">
                 Masukkan nama kedua orang tua
@@ -162,6 +169,7 @@ function OfflineOrderDetailsScreenComponent({ getOfflineOrder }) {
                 type="text"
                 defaultValue={femaleAddress}
                 name="femaleAddress"
+                readOnly
               />
               <Form.Control.Feedback type="invalid">
                 Masukkan alamat
@@ -174,6 +182,7 @@ function OfflineOrderDetailsScreenComponent({ getOfflineOrder }) {
                 name="agreementDate"
                 placeholder="Tanggal akad"
                 value={agreementDate}
+                readOnly
                 // onChange={(e) => setDate(e.target.value)}
               />
               <Form.Control.Feedback type="invalid">
@@ -187,6 +196,7 @@ function OfflineOrderDetailsScreenComponent({ getOfflineOrder }) {
                 type="text"
                 defaultValue={agreementPlace}
                 name="agreementPlace"
+                readOnly
               />
               <Form.Control.Feedback type="invalid">
                 Masukkan alamat akad

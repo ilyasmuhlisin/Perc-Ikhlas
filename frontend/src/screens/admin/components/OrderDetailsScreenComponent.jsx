@@ -25,13 +25,13 @@ function OrderDetailsScreenComponent({
 
   const [userInfo, setUserInfo] = useState({});
   const [paymentMethod, setPaymentMethod] = useState("");
-  const [paidButton, setPaidButton] = useState("Mark as paid");
+  const [paidButton, setPaidButton] = useState("Tandai lunas");
   const [isPaid, setIsPaid] = useState(false);
   const [isDelivered, setIsDelivered] = useState(false);
   const [cartSubtotal, setCartSubtotal] = useState(0);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [orderButtonMessage, setOrderButtonMessage] =
-    useState("Mark as delivered");
+    useState("Tandai diproses");
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
@@ -46,8 +46,8 @@ function OrderDetailsScreenComponent({
           : setIsDelivered(false);
         setCartSubtotal(order.orderTotal.cartSubtotal);
         if (order.isDelivered & order.isPaid) {
-          setPaidButton("Paid is finished");
-          setOrderButtonMessage("Order is finished");
+          setPaidButton("Sudah lunas");
+          setOrderButtonMessage("Diproses");
           setButtonDisabled(true);
         }
         // if (order.isPaid) {
@@ -92,15 +92,15 @@ function OrderDetailsScreenComponent({
                   variant={isDelivered ? "success" : "danger"}
                 >
                   {isDelivered ? (
-                    <>Delivered at {isDelivered}</>
+                    <>Diproses {isDelivered}</>
                   ) : (
-                    <>Not delivered</>
+                    <>Belum diproses</>
                   )}
                 </Alert>
               </Col>
               <Col>
                 <Alert className="mt-3" variant={isPaid ? "success" : "danger"}>
-                  {isPaid ? <>Paid on {isPaid}</> : <>Not paid yet</>}
+                  {isPaid ? <>Lunas {isPaid}</> : <>Belum lunas</>}
                 </Alert>
               </Col>
             </Row>

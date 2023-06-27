@@ -251,6 +251,7 @@ function ProductDetailsScreenComponent({
                   type="submit"
                   className="mb-3 mt-3"
                   variant="primary"
+                  style={{ marginRight: "5px" }}
                 >
                   Submit
                 </Button>

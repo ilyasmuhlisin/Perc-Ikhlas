@@ -53,11 +53,10 @@ const UserProfileScreenComponent = ({
     const country = form.country.value;
     const zipCode = form.zipCode.value;
     const city = form.city.value;
-    const state = form.state.value;
     // const password = form.password.value;
 
     if (
-      event.currentTarget.checkValidity() === true 
+      event.currentTarget.checkValidity() === true
       // && form.password.value === form.confirmPassword.value
     ) {
       updateUserApiRequest(
@@ -67,8 +66,7 @@ const UserProfileScreenComponent = ({
         address,
         country,
         zipCode,
-        city,
-        state,
+        city
         // password
       )
         .then((data) => {
@@ -195,7 +193,7 @@ const UserProfileScreenComponent = ({
                 name="city"
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicState">
+            {/* <Form.Group className="mb-3" controlId="formBasicState">
               <Form.Label>State</Form.Label>
               <Form.Control
                 type="text"
@@ -203,7 +201,7 @@ const UserProfileScreenComponent = ({
                 defaultValue={user.state}
                 name="state"
               />
-            </Form.Group>
+            </Form.Group> */}
             {/* <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control

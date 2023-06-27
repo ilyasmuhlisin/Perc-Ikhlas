@@ -33,14 +33,14 @@ const importData = async () => {
     if (process.argv[2] !== "-d") {
       // relasi / memasukan data ke review di product
       await Category.insertMany(categoryData);
-      const reviews = await Review.insertMany(reviewData);
-      const sampleProducts = productData.map((product) => {
-        reviews.map((review) => {
-          product.reviews.push(review._id);
-        });
-        return { ...product };
-      });
-      await Product.insertMany(sampleProducts);
+      // const reviews = await Review.insertMany(reviewData);
+      // const sampleProducts = productData.map((product) => {
+      //   reviews.map((review) => {
+      //     product.reviews.push(review._id);
+      //   });
+      //   return { ...product };
+      // });
+      await Product.insertMany(productData);
       // const families = await Family.insertMany(familyData);
       // const sampleUsers = userData.map((user) => {
       //   families.map((family) => {
@@ -49,8 +49,8 @@ const importData = async () => {
       //   return { ...user };
       // });
       await User.insertMany(userData);
-      await Order.insertMany(orderData);
-      await Offline.insertMany(offlineData);
+      // await Order.insertMany(orderData);
+      // await Offline.insertMany(offlineData);
 
       console.log("Seeder data imported successfully");
       process.exit();

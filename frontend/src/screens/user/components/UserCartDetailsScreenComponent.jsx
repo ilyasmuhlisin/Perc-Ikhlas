@@ -25,7 +25,7 @@ function UserCartDetailsScreenComponent({
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [userAddress, setUserAddress] = useState(false);
   const [missingAddress, setMissingAddress] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState("diambil");
+  const [paymentMethod, setPaymentMethod] = useState("dikirim");
 
   const navigate = useNavigate();
 
@@ -44,18 +44,10 @@ function UserCartDetailsScreenComponent({
   useEffect(() => {
     getUser()
       .then((data) => {
-        if (
-          !data.address ||
-          !data.city ||
-          !data.country ||
-          !data.zipCode ||
-          !data.state ||
-          !data.phoneNumber
-        ) {
+        console.log(data.address);
+        if (!data.address || !data.city || !data.country || !data.phoneNumber) {
           setButtonDisabled(true);
-          setMissingAddress(
-            " .In order to make order, fill out your profile with correct address, city etc."
-          );
+          setMissingAddress(" .Lengkapi data diri profile terlebih dahulu");
         } else {
           setUserAddress({
             address: data.address,
@@ -129,12 +121,12 @@ function UserCartDetailsScreenComponent({
             <Row>
               <Col>
                 <Alert className="mt-3" variant="danger">
-                  Not delivered {missingAddress}
+                  Belum dapat diproses {missingAddress}
                 </Alert>
               </Col>
               <Col>
-                <Alert className="mt-3" variant="success">
-                  Not paid yet
+                <Alert className="mt-3" variant="danger">
+                  Belum lunas
                 </Alert>
               </Col>
             </Row>
@@ -193,6 +185,19 @@ function UserCartDetailsScreenComponent({
                   Order now
                 </Button>
               </div>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <div style={{ paddingBottom: "5px" }}>
+                No. Rekening BRI:{" "}
+                <span className="fw-bold">695701006143508</span> <br />
+                Atas Nama: <span className="fw-bold">Suratno</span>
+              </div>
+              <Alert show={true} variant="warning">
+                - Proses akan dilakukan apabila sudah melakukan pembayaran 50%{" "}
+                <br />- Status proses akan berubah setelah dikonfirmasi admin{" "}
+                <br />- Lakukan pesanan untuk melihat apakah status sudah
+                berubah
+              </Alert>
             </ListGroup.Item>
           </ListGroup>
         </Col>

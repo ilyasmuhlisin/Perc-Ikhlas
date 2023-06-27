@@ -50,14 +50,15 @@ const UserOrderDetailsScreenComponent = ({ userInfo, getUser, getOrder }) => {
           : setIsDelivered(false);
         data.isPaid ? setIsPaid(data.paidAt) : setIsPaid(false);
         if (data.isPaid) {
-          setOrderButtonMessage("Your order is finished");
+          setOrderButtonMessage("Pesanan sudah lunas");
           setButtonDisabled(true);
         } else {
           if (data.paymentMethod === "dikirim") {
-            setOrderButtonMessage("Wait for your order. You pay on delivery");
+            setOrderButtonMessage("Pelunasan Bisa Ditempat");
+            setButtonDisabled(true);
           } else if (data.paymentMethod === "diambil") {
             setButtonDisabled(true);
-            setOrderButtonMessage("Pay on the spot");
+            setOrderButtonMessage("Pelunasan Bisa Ditempat");
           }
         }
       })
@@ -92,15 +93,15 @@ const UserOrderDetailsScreenComponent = ({ userInfo, getUser, getOrder }) => {
                   variant={isDelivered ? "success" : "danger"}
                 >
                   {isDelivered ? (
-                    <>Delivered at {isDelivered}</>
+                    <>Diproses {isDelivered}</>
                   ) : (
-                    <>Not delivered</>
+                    <>Belum diproses</>
                   )}
                 </Alert>
               </Col>
               <Col>
                 <Alert className="mt-3" variant={isPaid ? "success" : "danger"}>
-                  {isPaid ? <>Paid on {isPaid}</> : <>Not paid yet</>}
+                  {isPaid ? <>Lunas {isPaid}</> : <>Belum lunas</>}
                 </Alert>
               </Col>
             </Row>
@@ -146,10 +147,22 @@ const UserOrderDetailsScreenComponent = ({ userInfo, getUser, getOrder }) => {
               <Link to="/user/my-orders">
                 <div className="d-grid gap-2">
                   <Button size="lg" variant="primary" type="button">
-                    My orders
+                    Cek Pesanan
                   </Button>
                 </div>
               </Link>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <div style={{ paddingBottom: "5px" }}>
+                No. Rekening BRI:{" "}
+                <span className="fw-bold">695701006143508</span> <br />
+                Atas Nama: <span className="fw-bold">Suratno</span>
+              </div>
+              <Alert show={true} variant="warning">
+                - Proses akan dilakukan apabila sudah melakukan pembayaran 50%{" "}
+                <br />- Status proses akan berubah setelah dikonfirmasi admin{" "}
+                <br />- Status lunas akan berubah setelah dikonfirmasi admin
+              </Alert>
             </ListGroup.Item>
           </ListGroup>
         </Col>

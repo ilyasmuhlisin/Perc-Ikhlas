@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 function UserFamilyScreenComponent({
   createUserFamilyApiRequest,
@@ -57,9 +58,10 @@ function UserFamilyScreenComponent({
     if (event.currentTarget.checkValidity() === true) {
       createUserFamilyApiRequest(userInfo._id, formInputs)
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           if (data.message === "create user family updated")
             window.location.href = "/";
+          navigate("/");
         })
         .catch((er) => {
           setCreateUserFamilyResponseState({
@@ -84,7 +86,8 @@ function UserFamilyScreenComponent({
               <Form.Control
                 required
                 type="text"
-                defaultValue={user.maleName}
+                defaultValue={user && "maleName" in user ? user.maleName : ""}
+                // defaultValue={user.maleName !== undefined ? user.maleName : ""}
                 name="maleName"
               />
               <Form.Control.Feedback type="invalid">
@@ -96,7 +99,9 @@ function UserFamilyScreenComponent({
               <Form.Control
                 required
                 type="text"
-                defaultValue={user.maleParent}
+                defaultValue={
+                  user && "maleParent" in user ? user.maleParent : ""
+                }
                 name="maleParent"
               />
               <Form.Control.Feedback type="invalid">
@@ -108,7 +113,9 @@ function UserFamilyScreenComponent({
               <Form.Control
                 required
                 type="text"
-                defaultValue={user.maleAddress}
+                defaultValue={
+                  user && "maleAddress" in user ? user.maleAddress : ""
+                }
                 name="maleAddress"
               />
               <Form.Control.Feedback type="invalid">
@@ -148,7 +155,9 @@ function UserFamilyScreenComponent({
               <Form.Control
                 required
                 type="text"
-                defaultValue={user.femaleName}
+                defaultValue={
+                  user && "femaleName" in user ? user.femaleName : ""
+                }
                 name="femaleName"
               />
               <Form.Control.Feedback type="invalid">
@@ -160,7 +169,9 @@ function UserFamilyScreenComponent({
               <Form.Control
                 required
                 type="text"
-                defaultValue={user.femaleParent}
+                defaultValue={
+                  user && "femaleParent" in user ? user.femaleParent : ""
+                }
                 name="femaleParent"
               />
               <Form.Control.Feedback type="invalid">
@@ -172,7 +183,9 @@ function UserFamilyScreenComponent({
               <Form.Control
                 required
                 type="text"
-                defaultValue={user.femaleAddress}
+                defaultValue={
+                  user && "femaleAddress" in user ? user.femaleAddress : ""
+                }
                 name="femaleAddress"
               />
               <Form.Control.Feedback type="invalid">
@@ -184,7 +197,9 @@ function UserFamilyScreenComponent({
               <Form.Control
                 required
                 type="text"
-                defaultValue={user.agreementPlace}
+                defaultValue={
+                  user && "agreementPlace" in user ? user.agreementPlace : ""
+                }
                 name="agreementPlace"
               />
               <Form.Control.Feedback type="invalid">
@@ -196,7 +211,9 @@ function UserFamilyScreenComponent({
               <Form.Control
                 required
                 type="text"
-                defaultValue={user.receptionPlace}
+                defaultValue={
+                  user && "receptionPlace" in user ? user.receptionPlace : ""
+                }
                 name="receptionPlace"
               />
               <Form.Control.Feedback type="invalid">
@@ -207,7 +224,10 @@ function UserFamilyScreenComponent({
         </Row>
         <Button variant="primary" type="submit">
           Submit
-        </Button>
+        </Button>{" "}
+        <Link to="/">
+          <Button variant="success">Skip</Button>
+        </Link>
         {createUserFamilyResponseState.error ?? ""}
         {/* <Alert show={true} variant="danger">
           User with that email already exists!

@@ -131,7 +131,7 @@ const updateUserProfile = async (req, res, next) => {
     user.country = req.body.country;
     user.zipCode = req.body.zipCode;
     user.city = req.body.city;
-    user.state = req.body.state;
+    // user.state = req.body.state;
     // if (req.body.password !== user.password) {
     //   user.password = hashPassword(req.body.password);
     // }

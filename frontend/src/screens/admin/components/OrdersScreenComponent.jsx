@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Table } from "react-bootstrap";
+import { Row, Col, Table, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 
@@ -38,7 +38,7 @@ function OrdersScreenComponent({ getOrders }) {
               <th>Total</th>
               <th>Delivered</th>
               <th>Payment Method</th>
-              <th>Order details</th>
+              <th>Details</th>
             </tr>
           </thead>
           <tbody>
@@ -63,8 +63,19 @@ function OrdersScreenComponent({ getOrders }) {
                 </td>
                 <td>{order.paymentMethod}</td>
                 <td>
-                  <Link to={`/admin/order-details/${order._id}`}>
-                    go to order
+                  <Link
+                    style={{ textDecoration: "none" }}
+                    to={`/admin/order-details/${order._id}`}
+                  >
+                    <Button className="btn-sm">Order details</Button>
+                  </Link>
+                  <Link
+                    style={{ marginLeft: "5px", textDecoration: "none" }}
+                    to={`/admin/family-order-data/${order.user._id}`}
+                  >
+                    <Button variant="success" className="btn-sm">
+                      Data details
+                    </Button>
                   </Link>
                 </td>
               </tr>

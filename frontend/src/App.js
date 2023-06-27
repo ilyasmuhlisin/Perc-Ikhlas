@@ -30,6 +30,7 @@ import HeaderComponent from "./components/HeaderComponent";
 import FooterComponent from "./components/FooterComponent";
 import RoutesWithUserChatComponent from "./components/user/RoutesWithUserChatComponent";
 import ScrollToTop from "./utils/ScrollToTop";
+import AdminOrdersFamilyScreen from "./screens/admin/AdminOrdersFamilyScreen";
 
 function App() {
   return (
@@ -118,6 +119,10 @@ function App() {
           <Route
             path="/admin/add-offline-order"
             element={<AdminAddOfflineOrdersScreen />}
+          />
+          <Route
+            path="/admin/family-order-data/:id"
+            element={<AdminOrdersFamilyScreen />}
           />
           <Route
             path="/admin/offline-order-details/:id"

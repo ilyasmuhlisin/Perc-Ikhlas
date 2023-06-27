@@ -3,7 +3,6 @@ import PaginationComponent from "../../components/PaginationComponent";
 import ProductForListComponent from "../../components/ProductForListComponent";
 import SortOptionsComponent from "../../components/SortOptionsComponent";
 import PriceFilterComponent from "../../components/filterQueryResultOptions/PriceFilterComponent";
-import RatingFilterComponent from "../../components/filterQueryResultOptions/RatingFilterComponent";
 import CategoryFilterComponent from "../../components/filterQueryResultOptions/CategoryFilterComponent";
 import AttributesFilterComponent from "../../components/filterQueryResultOptions/AttributesFilterComponent";
 
@@ -20,7 +19,7 @@ const ProductListScreenComponent = ({ getProducts, categories }) => {
   const [showResetFiltersButton, setShowResetFiltersButton] = useState(false);
 
   const [filters, setFilters] = useState({}); // collect all filters
-  const [price, setPrice] = useState(500);
+  const [price, setPrice] = useState(5000);
   // console.log(filters);
   const [categoriesFromFilter, setCategoriesFromFilter] = useState({});
   const [sortOption, setSortOption] = useState("");
@@ -87,7 +86,7 @@ const ProductListScreenComponent = ({ getProducts, categories }) => {
 
   const handleFilters = () => {
     // jika setelah garis miring ada num ganti dengan string kosong
-    navigate(location.pathname.replace(/\/[0-9]+$/, "")); 
+    navigate(location.pathname.replace(/\/[0-9]+$/, ""));
     setShowResetFiltersButton(true);
     setFilters({
       price: price,

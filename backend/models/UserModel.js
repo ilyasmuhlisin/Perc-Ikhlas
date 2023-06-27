@@ -31,9 +31,6 @@ const userSchema = mongoose.Schema(
     city: {
       type: String,
     },
-    state: {
-      type: String,
-    },
     families: {
       maleName: { type: String },
       maleParent: { type: String },

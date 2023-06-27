@@ -1,63 +1,56 @@
 const categories = [
   {
-    name: "Undangan",
+    name: "Kertas Film",
     description:
-      "Computers - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
-    image: "/images/tablets-category.png",
+      "Kertas Film - Kertas berbahan lumayan tebal dan kokoh dibanding yang lain serta mengkilap.",
+    image: "/images/products/kertasFilm.jpg",
     attrs: [
-      { key: "Kelompok", value: ["Perunggu", "Perak", "Emas"] },
+      { key: "Warna", value: ["1 Warna", "4 Warna"] },
       { key: "Tambahan", value: ["Foto", "Tanpa Foto"] },
     ],
   },
   {
-    name: "Tablets",
+    name: "Kertas Biasa",
     description:
-      "Tablets - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
-    image: "/images/tablets-category.png",
+      "Kertas Biasa - Kertas berbahan standar kartu undangan biasa hanya bisa satu warna.",
+    image: "/images/products/kertasBiasa.jpg",
+    attrs: [{ key: "Tambahan", value: ["Foto", "Tanpa Foto"] }],
   },
   {
-    name: "Monitors",
+    name: "Kertas Jadi",
     description:
-      "Monitors - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
-    image: "/images/monitors-category.png",
-  },
-  {
-    name: "Games",
-    description:
-      "Games - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
-    image: "/images/games-category.png",
-  },
-  {
-    name: "Printers",
-    description:
-      "Printers - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
-    image: "/images/tablets-category.png",
-  },
-  {
-    name: "Software",
-    description:
-      "Software - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
-    image: "/images/monitors-category.png",
-  },
-  {
-    name: "Cameras",
-    description:
-      "Cameras - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
-    image: "/images/games-category.png",
-  },
-  {
-    name: "Books",
-    description:
-      "Books - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
-    image: "/images/tablets-category.png",
-    attrs: [{ key: "genre", value: ["movie", "comedy", "thriller"] }],
-  },
-  {
-    name: "Videos",
-    description:
-      "Videos - Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, magnam qui. Accusamus similique placeat at nisi autem eaque molestiae velit.",
-    image: "/images/monitors-category.png",
+      "Kertas Jadi - Kertas berbahan sedikit tebal dan desain serta warna tidak dapat diubah.",
+    image: "/images/products/kertasJadi.jpg",
+    attrs: [{ key: "Tambahan", value: ["Foto", "Tanpa Foto"] }],
   },
 ];
 
 module.exports = categories;
+// const categories = [
+//   {
+//     name: "Film",
+//     description:
+//       "Kertas Film - Kertas berbahan lumayan tebal dan kokoh dibanding yang lain serta mengkilap.",
+//     image: "/images/products/kertasFilm.jpg",
+//     attrs: [
+//       { key: "Warna", value: ["1 Warna", "4 Warna"] },
+//       { key: "Tambahan", value: ["Foto", "Tanpa Foto"] },
+//     ],
+//   },
+//   {
+//     name: "Biasa",
+//     description:
+//       "Kertas Biasa - Kertas berbahan standar kartu undangan biasa hanya bisa satu warna.",
+//     image: "/images/products/kertasBiasa.jpg",
+//     attrs: [{ key: "Tambahan", value: ["Foto", "Tanpa Foto"] }],
+//   },
+//   {
+//     name: "Jadi",
+//     description:
+//       "Kertas Jadi - Kertas berbahan sedikit tebal dan desain serta warna tidak dapat diubah.",
+//     image: "/images/products/kertasJadi.jpg",
+//     attrs: [{ key: "Tambahan", value: ["Foto", "Tanpa Foto"] }],
+//   },
+// ];
+
+// module.exports = categories;

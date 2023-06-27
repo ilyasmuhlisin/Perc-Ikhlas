@@ -96,7 +96,13 @@ function HeaderComponent() {
   }, [userInfo.isAdmin]);
 
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      bg="dark"
+      variant="dark"
+      className="border-bottom border-white"
+    >
       <Container>
         <LinkContainer to="/">
           <Navbar.Brand href="/">Perc. Ikhlas</Navbar.Brand>

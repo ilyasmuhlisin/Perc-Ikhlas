@@ -5,16 +5,19 @@ const {
   verifyIsAdmin,
 } = require("../middleware/verifyAuthToken");
 const {
-  adminDeleteOffline,
   adminDeleteFamily,
-  adminUpdateOfflineOrders,
   adminUpdateUserFamily,
-  getOfflineOrdersById, 
   getFamilyById,
   createUserFamily,
+} = require("../controllers/familyController");
+
+const {
+  adminDeleteOffline,
+  adminUpdateOfflineOrders,
+  getOfflineOrdersById,
   adminGetOfflineOrders,
   adminCreateOfflineOrders,
-} = require("../controllers/familyController");
+} = require("../controllers/offlineController");
 
 // user routes
 router.use(verifyIsLoggedIn);
@@ -26,6 +29,6 @@ router.use(verifyIsAdmin);
 router.delete("/admin/:id", adminDeleteOffline);
 router.get("/admin", adminGetOfflineOrders);
 router.get("/admin/get-one/:id", getOfflineOrdersById);
-router.post("/admin", adminCreateOfflineOrders);
+router.post("/create/admin", adminCreateOfflineOrders);
 
 module.exports = router;

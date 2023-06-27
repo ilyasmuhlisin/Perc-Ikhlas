@@ -15,6 +15,12 @@ const ProductForListComponent = ({
         <Col lg={5}>
           <Card.Img
             variant="top"
+            // style={{
+            //   width: "70%",
+            //   height: "60%",
+            //   marginTop: "20px",
+            //   marginLeft: "50px",
+            // }}
             src={images[0] ? images[0].path : ""}
             // src={"/images/" + images[idx] + "-category.png"}
           />

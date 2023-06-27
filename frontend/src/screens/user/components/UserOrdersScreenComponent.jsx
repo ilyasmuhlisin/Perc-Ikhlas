@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Table } from "react-bootstrap";
+import { Row, Col, Table, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 const UserOrdersScreenComponent = ({ getOrders }) => {
   // getOrders().then((orders) => console.log(orders));
@@ -21,7 +21,7 @@ const UserOrdersScreenComponent = ({ getOrders }) => {
               <th>User</th>
               <th>Date</th>
               <th>Total</th>
-              <th>Delivered</th>
+              <th>Process</th>
               <th>Order details</th>
             </tr>
           </thead>
@@ -41,7 +41,7 @@ const UserOrdersScreenComponent = ({ getOrders }) => {
                 </td>
                 <td>
                   <Link to={`/user/order-details/${order._id}`}>
-                    go to order
+                    <Button className="btn-sm">Order details</Button>
                   </Link>
                 </td>
               </tr>

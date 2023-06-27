@@ -3,9 +3,9 @@ import AddOfflineOrdersScreenComponent from "./components/AddOfflineOrdersScreen
 
 import axios from "axios";
 
-const createOfflineOrdersApiRequest = async (formInputs) => {
-  const { data } = await axios.post(`/api/offline-orders/admin`, {
-    ...formInputs,
+const createOfflineOrdersApiRequest = async (formxInputs) => {
+  const { data } = await axios.post(`/api/offline-orders/create/admin`, {
+    ...formxInputs,
   });
   return data;
 };

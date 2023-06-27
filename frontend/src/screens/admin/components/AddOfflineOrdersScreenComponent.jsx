@@ -23,7 +23,7 @@ function AddOfflineOrdersScreenComponent({ createOfflineOrdersApiRequest }) {
     event.preventDefault();
     event.stopPropagation();
     const form = event.currentTarget.elements;
-    const formInputs = {
+    const formxInputs = {
       maleName: form.maleName.value,
       maleParent: form.maleParent.value,
       maleAddress: form.maleAddress.value,
@@ -36,13 +36,18 @@ function AddOfflineOrdersScreenComponent({ createOfflineOrdersApiRequest }) {
       agreementPlace: form.agreementPlace.value,
     };
     if (event.currentTarget.checkValidity() === true) {
-      createOfflineOrdersApiRequest(formInputs)
+      createOfflineOrdersApiRequest(formxInputs)
         .then((data) => {
           console.log(data);
           if (data.message === "offline orders created")
             navigate("/admin/offline-orders");
         })
         .catch((er) => {
+          console.log(
+            er.response.data.message
+              ? er.response.data.message
+              : er.response.data
+          );
           setCreateOfflineOrdersResponseState({
             error: er.response.data.message
               ? er.response.data.message
