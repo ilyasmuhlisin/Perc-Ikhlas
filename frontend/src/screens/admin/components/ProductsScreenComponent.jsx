@@ -26,24 +26,21 @@ function ProductsScreenComponent({ fetchProducts, deleteProduct }) {
 
   useEffect(() => {
     // const abctrl = new AbortController();
-    fetchProducts()
-      .then((res) => setProducts(res))
-      .catch(
-        (er) => dispatch(logout())
-        // menampilkan error di halaman
-        // setProducts([
-        //   {
-        //     name: er.response.data.message
-        //       ? er.response.data.message
-        //       : er.response.data,
-        //   },
-        // ])
-        // console.log(
-        //   er.response.data.message ? er.response.data.message : er.response.data
-        // )
-      );
+    const fetchData = async () => {
+      try {
+        const res = await fetchProducts();
+        setProducts(res);
+      } catch (error) {
+        dispatch(logout());
+        console.log(
+          error.response?.data?.message || error.response?.data || error.message
+        );
+      }
+    };
+
+    fetchData();
     // return () => abctrl.abort();
-  }, [productDeleted]);
+  }, [products, productDeleted, dispatch]);
 
   return (
     <Row className="m-5">

@@ -36,8 +36,8 @@ function OrdersScreenComponent({ getOrders }) {
               <th>User</th>
               <th>Date</th>
               <th>Total</th>
-              <th>Delivered</th>
-              <th>Payment Method</th>
+              <th>Process</th>
+              <th>Picking Method</th>
               <th>Details</th>
             </tr>
           </thead>

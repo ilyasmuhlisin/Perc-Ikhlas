@@ -67,12 +67,12 @@ function CartScreenComponent({
               </h3>
             </ListGroup.Item>
             <ListGroup.Item>
-              Price: <span className="fw-bold">Rp.{cartSubtotal}</span>
+              Harga: <span className="fw-bold">Rp.{cartSubtotal}</span>
             </ListGroup.Item>
             <ListGroup.Item>
               <LinkContainer to="/user/cart-details">
                 <Button disabled={cartSubtotal === 0} type="button">
-                  Proceed To Checkout
+                  Poses pesanan
                 </Button>
               </LinkContainer>
             </ListGroup.Item>

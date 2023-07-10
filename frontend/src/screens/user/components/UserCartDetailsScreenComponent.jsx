@@ -29,9 +29,9 @@ function UserCartDetailsScreenComponent({
 
   const navigate = useNavigate();
 
-  const changeCount = (productID, count) => {
-    reduxDispatch(addToCart(productID, count));
-  };
+  // const changeCount = (productID, count) => {
+  //   reduxDispatch(addToCart(productID, count));
+  // };
 
   const removeFromCartHandler = (productID, quantity, price) => {
     if (window.confirm("Are you sure?")) {
@@ -80,7 +80,7 @@ function UserCartDetailsScreenComponent({
           price: item.price,
           image: { path: item.image ? item.image.path ?? null : null },
           quantity: item.quantity,
-          count: item.count,
+          // count: item.count,
         };
       }),
       paymentMethod: paymentMethod,
@@ -105,14 +105,14 @@ function UserCartDetailsScreenComponent({
           <br />
           <Row>
             <Col md={6}>
-              <h2>Shipping</h2>
+              <h2>User data</h2>
               <b>Name</b>: {userInfo.name} {userInfo.lastName} <br />
               <b>Address</b>: {userAddress.address} {userAddress.city}{" "}
               {userAddress.state} {userAddress.zipCode} <br />
               <b>Phone</b>: {userAddress.phoneNumber}
             </Col>
             <Col md={6}>
-              <h2>Payment method</h2>
+              <h2>Picking method</h2>
               <Form.Select onChange={choosePayment}>
                 <option value="dikirim">Dikirim</option>
                 <option value="diambil">Diambil</option>
@@ -139,7 +139,7 @@ function UserCartDetailsScreenComponent({
                 item={item}
                 key={idx}
                 removeFromCartHandler={removeFromCartHandler}
-                changeCount={changeCount}
+                // changeCount={changeCount}
               />
             ))}
             {/* {Array.from({ length: 3 }).map((item, idx) => (
@@ -162,7 +162,7 @@ function UserCartDetailsScreenComponent({
               <h3>Order summary</h3>
             </ListGroup.Item>
             <ListGroup.Item>
-              Items price: <span className="fw-bold">Rp.{cartSubtotal}</span>
+              Harga produk: <span className="fw-bold">Rp.{cartSubtotal}</span>
             </ListGroup.Item>
             {/* <ListGroup.Item>
               Shipping: <span className="fw-bold">included</span>
@@ -171,7 +171,7 @@ function UserCartDetailsScreenComponent({
               Tax: <span className="fw-bold">included</span>
             </ListGroup.Item> */}
             <ListGroup.Item className="text-danger">
-              Total price: <span className="fw-bold">Rp.{cartSubtotal}</span>
+              Harga total: <span className="fw-bold">Rp.{cartSubtotal}</span>
             </ListGroup.Item>
             <ListGroup.Item>
               <div className="d-grid gap-2">
@@ -182,7 +182,7 @@ function UserCartDetailsScreenComponent({
                   onClick={orderHandler}
                   disabled={buttonDisabled}
                 >
-                  Order now
+                  Pesan Sekarang
                 </Button>
               </div>
             </ListGroup.Item>

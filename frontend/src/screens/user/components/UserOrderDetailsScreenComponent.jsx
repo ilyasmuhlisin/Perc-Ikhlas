@@ -73,14 +73,14 @@ const UserOrderDetailsScreenComponent = ({ userInfo, getUser, getOrder }) => {
           <br />
           <Row>
             <Col md={6}>
-              <h2>Shipping</h2>
+              <h2>User Data</h2>
               <b>Name</b>: {userInfo.name} {userInfo.lastName} <br />
               <b>Address</b>: {userAddress.address} {userAddress.city}{" "}
               {userAddress.state} {userAddress.zipCode} <br />
               <b>Phone</b>: {userAddress.phoneNumber}
             </Col>
             <Col md={6}>
-              <h2>Payment method</h2>
+              <h2>Picking method</h2>
               <Form.Select value={paymentMethod} disabled={true}>
                 <option value="dikirim">Dikirim</option>
                 <option value="diambil">Diambil</option>
@@ -95,7 +95,7 @@ const UserOrderDetailsScreenComponent = ({ userInfo, getUser, getOrder }) => {
                   {isDelivered ? (
                     <>Diproses {isDelivered}</>
                   ) : (
-                    <>Belum diproses</>
+                    <>Belum diproses, tunggu konfirmasi</>
                   )}
                 </Alert>
               </Col>

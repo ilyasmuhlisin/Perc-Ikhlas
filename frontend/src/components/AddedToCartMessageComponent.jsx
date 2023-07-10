@@ -19,13 +19,13 @@ const AddedToCartMessageComponent = ({
       onClose={() => setShowCartMessage(false)}
       dismissible
     >
-      <Alert.Heading>The product was added to your cart!</Alert.Heading>
+      <Alert.Heading>Produk berhasil ditambahkan!</Alert.Heading>
       <p>
         <Button variant="success" onClick={goBack}>
-          Go back
+          Kembali
         </Button>{" "}
         <Link to="/cart">
-          <Button variant="danger">Go to cart</Button>
+          <Button variant="danger">Lihat keranjang</Button>
         </Link>
       </p>
     </Alert>

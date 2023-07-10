@@ -55,7 +55,7 @@ function CreateProductScreenComponent({
     const formInputs = {
       name: form.name.value,
       description: form.description.value,
-      count: form.count.value,
+      // count: form.count.value,
       price: form.price.value,
       category: form.category.value,
       attributesTable: attributesTable,
@@ -69,7 +69,7 @@ function CreateProductScreenComponent({
         .then((data) => {
           //   console.log(data);
           if (images) {
-            if (process.env.NODE_ENV !== "production") {
+            if (process.env.NODE_ENV === "production") {
               // to do: change to !==
               uploadImagesApiRequest(images, data.productId)
                 .then((res) => {})
@@ -209,10 +209,10 @@ function CreateProductScreenComponent({
                 rows={3}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCount">
+            {/* <Form.Group className="mb-3" controlId="formBasicCount">
               <Form.Label>Count in stock</Form.Label>
               <Form.Control name="count" required type="number" />
-            </Form.Group>
+            </Form.Group> */}
             <Form.Group className="mb-3" controlId="formBasicPrice">
               <Form.Label>Price</Form.Label>
               <Form.Control name="price" required type="text" />

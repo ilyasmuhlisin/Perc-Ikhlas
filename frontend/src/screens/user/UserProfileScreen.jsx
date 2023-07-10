@@ -22,7 +22,6 @@ const updateUserApiRequest = async (
     country,
     zipCode,
     city,
-    state,
     password,
   });
   return data;

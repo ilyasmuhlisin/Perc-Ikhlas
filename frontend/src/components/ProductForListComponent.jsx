@@ -32,7 +32,7 @@ const ProductForListComponent = ({
             <Card.Text className="h4">
               Rp.{price}{" "}
               <LinkContainer to={`/product-details/${productId}`}>
-                <Button variant="danger">See product</Button>
+                <Button variant="danger">Lihat produk</Button>
               </LinkContainer>
             </Card.Text>
           </Card.Body>

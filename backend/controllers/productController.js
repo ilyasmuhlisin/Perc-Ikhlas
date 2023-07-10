@@ -198,11 +198,10 @@ const adminDeleteProduct = async (req, res, next) => {
 const adminCreateProduct = async (req, res, next) => {
   try {
     const product = new Product();
-    const { name, description, count, price, category, attributesTable } =
-      req.body;
+    const { name, description, price, category, attributesTable } = req.body;
     product.name = name;
     product.description = description;
-    product.count = count;
+    // product.count = count;
     product.price = price;
     product.category = category;
     if (attributesTable.length > 0) {
@@ -224,11 +223,10 @@ const adminCreateProduct = async (req, res, next) => {
 const adminUpdateProduct = async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id).orFail();
-    const { name, description, count, price, category, attributesTable } =
-      req.body;
+    const { name, description, price, category, attributesTable } = req.body;
     product.name = name || product.name;
     product.description = description || product.description;
-    product.count = count || product.count;
+    // product.count = count || product.count;
     product.price = price || product.price;
     product.category = category || product.category;
     if (attributesTable.length > 0) {

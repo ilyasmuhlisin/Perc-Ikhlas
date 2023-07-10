@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server-prod": "node server.js",
-    "server-dev": "npx nodemon server.js",
+    "server-dev": "nodemon server.js",
+    "build": "npm i",
     "client": "npm start --prefix ../frontend",
     "dev": "concurrently --kill-others-on-fail \"npm run server-dev\" \"npm run client\"",
     "seed:data": "node seeder/seeder",
@@ -22,6 +23,7 @@
     "express": "^4.18.2",
     "express-fileupload": "^1.4.0",
     "gitignore": "^0.7.0",
+    "helmet": "^5.1.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.1",
     "socket.io": "^4.6.1",

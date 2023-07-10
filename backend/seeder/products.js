@@ -3,7 +3,7 @@ const products = [
     name: "A-001 Undangan atau Ulem",
     description:
       "Kartu undangan pernikahan dibuat dengan kertas biasa dan hanya menggunakan 1 warna.",
-    count: 9999,
+
     price: 900,
     category: "Kertas Biasa",
     images: [
@@ -19,7 +19,7 @@ const products = [
     name: "A-002 Undangan atau Ulem",
     description:
       "Kartu undangan pernikahan dibuat dengan kertas biasa dan hanya menggunakan 1 warna.",
-    count: 9999,
+
     price: 900,
     category: "Kertas Biasa",
     images: [
@@ -35,7 +35,7 @@ const products = [
     name: "A-003 Undangan atau Ulem",
     description:
       "Kartu undangan pernikahan dibuat dengan kertas biasa dan hanya menggunakan 1 warna.",
-    count: 9999,
+
     price: 900,
     category: "Kertas Biasa",
     images: [
@@ -51,7 +51,6 @@ const products = [
     name: "A-004 Undangan atau Ulem",
     description:
       "Kartu undangan pernikahan dibuat dengan kertas biasa dan hanya menggunakan 1 warna.",
-    count: 9999,
     price: 900,
     category: "Kertas Biasa",
     images: [
@@ -67,7 +66,7 @@ const products = [
     name: "A-005 Undangan atau Ulem",
     description:
       "Kartu undangan pernikahan dibuat dengan kertas biasa dan hanya menggunakan 1 warna.",
-    count: 9999,
+
     price: 1000,
     category: "Kertas Biasa",
     images: [
@@ -83,7 +82,7 @@ const products = [
     name: "A-006 Undangan atau Ulem",
     description:
       "Kartu undangan pernikahan dibuat dengan kertas biasa dan hanya menggunakan 1 warna.",
-    count: 9999,
+
     price: 900,
     category: "Kertas Biasa",
     images: [
@@ -99,7 +98,7 @@ const products = [
     name: "B-001 Undangan atau Ulem",
     description:
       "Kartu undangan pernikahan dibuat dengan kertas lumayan tebal serta mengkilap dengan kombinasi 4 warna atau 1 warna.",
-    count: 9999,
+
     price: 1500,
     category: "Kertas Film",
     images: [
@@ -118,7 +117,7 @@ const products = [
     name: "B-002 Undangan atau Ulem",
     description:
       "Kartu undangan pernikahan dibuat dengan kertas lumayan tebal serta mengkilap dengan kombinasi 4 warna atau 1 warna.",
-    count: 9999,
+
     price: 1500,
     category: "Kertas Film",
     images: [
@@ -137,7 +136,7 @@ const products = [
     name: "B-003 Undangan atau Ulem",
     description:
       "Kartu undangan pernikahan dibuat dengan kertas lumayan tebal serta mengkilap dengan kombinasi 4 warna atau 1 warna.",
-    count: 9999,
+
     price: 1500,
     category: "Kertas Film",
     images: [
@@ -156,7 +155,7 @@ const products = [
     name: "B-004 Undangan atau Ulem",
     description:
       "Kartu undangan pernikahan dibuat dengan kertas lumayan tebal serta mengkilap dengan kombinasi 4 warna atau 1 warna.",
-    count: 9999,
+
     price: 1200,
     category: "Kertas Film",
     images: [
@@ -175,7 +174,7 @@ const products = [
     name: "B-005 Undangan atau Ulem",
     description:
       "Kartu undangan pernikahan dibuat dengan kertas lumayan tebal serta mengkilap dengan kombinasi 4 warna atau 1 warna.",
-    count: 9999,
+
     price: 1200,
     category: "Kertas Film",
     images: [
@@ -194,7 +193,7 @@ const products = [
     name: "B-006 Undangan atau Ulem",
     description:
       "Kartu undangan pernikahan dibuat dengan kertas lumayan tebal serta mengkilap dengan kombinasi 4 warna atau 1 warna.",
-    count: 9999,
+
     price: 1200,
     category: "Kertas Film",
     images: [
@@ -213,7 +212,7 @@ const products = [
     name: "C-001 Undangan atau Ulem",
     description:
       "Kartu undangan pernikahan dibuat dengan kertas jadi, warna dan desain tetap.",
-    count: 9999,
+
     price: 1200,
     category: "Kertas Jadi",
     images: [
@@ -229,7 +228,7 @@ const products = [
     name: "C-002 Undangan atau Ulem",
     description:
       "Kartu undangan pernikahan dibuat dengan kertas jadi, warna dan desain tetap.",
-    count: 9999,
+
     price: 1500,
     category: "Kertas Jadi",
     images: [
@@ -245,7 +244,7 @@ const products = [
     name: "C-003 Undangan atau Ulem",
     description:
       "Kartu undangan pernikahan dibuat dengan kertas jadi, warna dan desain tetap.",
-    count: 9999,
+
     price: 1200,
     category: "Kertas Jadi",
     images: [
@@ -261,7 +260,7 @@ const products = [
     name: "C-004 Undangan atau Ulem",
     description:
       "Kartu undangan pernikahan dibuat dengan kertas jadi, warna dan desain tetap.",
-    count: 9999,
+
     price: 1500,
     category: "Kertas Jadi",
     images: [
@@ -277,7 +276,7 @@ const products = [
     name: "C-005 Undangan atau Ulem",
     description:
       "Kartu undangan pernikahan dibuat dengan kertas jadi, warna dan desain tetap.",
-    count: 9999,
+
     price: 1500,
     category: "Kertas Jadi",
     images: [
@@ -293,7 +292,7 @@ const products = [
     name: "C-006 Undangan atau Ulem",
     description:
       "Kartu undangan pernikahan dibuat dengan kertas jadi, warna dan desain tetap.",
-    count: 9999,
+
     price: 1250,
     category: "Kertas Jadi",
     images: [

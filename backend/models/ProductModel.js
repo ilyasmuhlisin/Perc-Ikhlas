@@ -19,10 +19,6 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    count: {
-      type: Number,
-      required: true,
-    },
     price: {
       type: Number,
       required: true,
@@ -53,9 +49,12 @@ const productSchema = mongoose.Schema(
 productSchema.index();
 const Product = mongoose.model("Product", productSchema);
 // pencarian gabungan nama dan deskripsi
-productSchema.index({name: "text", description: "text"}, {name: "TextIndex"})
+productSchema.index(
+  { name: "text", description: "text" },
+  { name: "TextIndex" }
+);
 // pencarian misalnya dari a sampai z
-productSchema.index({"attrs.key":1, "attrs.value":1})
+productSchema.index({ "attrs.key": 1, "attrs.value": 1 });
 // pencarian misalnya dari z sampai a
 // productSchema.index({name: -1})
 

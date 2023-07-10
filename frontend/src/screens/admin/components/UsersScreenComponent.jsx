@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Table, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
@@ -15,26 +15,28 @@ const UsersScreenComponent = ({ fetchUsers, deleteUser }) => {
   const deleteHandler = async (userId) => {
     if (window.confirm("Are you sure?")) {
       const data = await deleteUser(userId);
-      // respon dari backend
       if (data.message === "user removed") {
         setUserDeleted(!userDeleted);
       }
     }
-    // alert("User deleted!");
   };
+
   useEffect(() => {
-    // abort digunakan untuk membatalkan koneksi apabila user pindah halaman
-    // const abctrl = new AbortController();
-    fetchUsers()
-      .then((res) => setUsers(res))
-      .catch(
-        (er) => dispatch(logout())
-        // console.log(
-        //   er.response.data.message ? er.response.data.message : er.response.data
-        // )
-      );
-    // return () => abctrl.abort();
-  }, [userDeleted]);
+    const fetchData = async () => {
+      try {
+        const res = await fetchUsers();
+        setUsers(res);
+      } catch (error) {
+        dispatch(logout());
+        console.log(
+          error.response?.data?.message || error.response?.data || error.message
+        );
+      }
+    };
+
+    fetchData();
+  }, [users, userDeleted, dispatch]);
+
   return (
     <Row className="m-5">
       <Col md={2}>
@@ -42,7 +44,6 @@ const UsersScreenComponent = ({ fetchUsers, deleteUser }) => {
       </Col>
       <Col md={10}>
         <h1>User List</h1>
-        {console.log(users)}
         <Table striped bordered hover responsive>
           <thead>
             <tr>

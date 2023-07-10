@@ -99,7 +99,7 @@ function EditProductScreenComponent({
     const formInputs = {
       name: form.name.value,
       description: form.description.value,
-      count: form.count.value,
+      // count: form.count.value,
       price: form.price.value,
       category: form.category.value,
       attributesTable: attributesTable,
@@ -271,7 +271,7 @@ function EditProductScreenComponent({
                 defaultValue={product.description}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCount">
+            {/* <Form.Group className="mb-3" controlId="formBasicCount">
               <Form.Label>Count in stock</Form.Label>
               <Form.Control
                 name="count"
@@ -279,7 +279,7 @@ function EditProductScreenComponent({
                 type="number"
                 defaultValue={product.count}
               />
-            </Form.Group>
+            </Form.Group> */}
             <Form.Group className="mb-3" controlId="formBasicPrice">
               <Form.Label>Price</Form.Label>
               <Form.Control
@@ -463,7 +463,7 @@ function EditProductScreenComponent({
                 multiple
                 onChange={(e) => {
                   setIsUploading("upload files in progress ...");
-                  if (process.env.NODE_ENV !== "production") {
+                  if (process.env.NODE_ENV === "production") {
                     // to do: change to !==
                     uploadImagesApiRequest(e.target.files, id)
                       .then((data) => {

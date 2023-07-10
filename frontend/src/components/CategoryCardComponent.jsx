@@ -16,7 +16,7 @@ function CategoryCardComponent({ category, idx }) {
         <Card.Title>{category.name}</Card.Title>
         <Card.Text>{category.description}</Card.Text>
         <LinkContainer to={`/product-list/category/${category.name}`}>
-          <Button variant="primary">Go to the Category</Button>
+          <Button variant="primary">Lihat Kategori</Button>
         </LinkContainer>
       </Card.Body>
     </Card>

@@ -1,3 +1,6 @@
+require("dotenv").config();
+// nodejs security
+var helmet = require("helmet");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const express = require("express");
@@ -5,6 +8,8 @@ const fileUpload = require("express-fileupload");
 const cookieParser = require("cookie-parser");
 const app = express();
 // const port = 5000;
+
+app.use(helmet());
 
 const httpServer = createServer(app);
 global.io = new Server(httpServer);
