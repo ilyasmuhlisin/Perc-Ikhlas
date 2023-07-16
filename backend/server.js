@@ -11,6 +11,12 @@ const app = express();
 
 app.use(helmet());
 
+app.use(cors({
+  origin:["https://deploy-mern-1whq-vercel.app"],
+  methods:["POST","GET"],
+  credentials: true
+}))
+
 const httpServer = createServer(app);
 global.io = new Server(httpServer);
 
