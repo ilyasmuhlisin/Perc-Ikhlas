@@ -3,7 +3,7 @@ const categories = [
     name: "Kertas Film",
     description:
       "Kertas Film - Kertas berbahan lumayan tebal dan kokoh dibanding yang lain serta mengkilap.",
-    image: "/images/products/kertasFilm.jpg",
+    image: "/images/products/kertasFilm.jpeg",
     attrs: [
       { key: "Warna", value: ["1 Warna", "4 Warna"] },
       { key: "Tambahan", value: ["Foto", "Tanpa Foto"] },
@@ -13,14 +13,14 @@ const categories = [
     name: "Kertas Biasa",
     description:
       "Kertas Biasa - Kertas berbahan standar kartu undangan biasa hanya bisa satu warna.",
-    image: "/images/products/kertasBiasa.jpg",
+    image: "/images/products/kertasBiasa.jpeg",
     attrs: [{ key: "Tambahan", value: ["Foto", "Tanpa Foto"] }],
   },
   {
     name: "Kertas Jadi",
     description:
       "Kertas Jadi - Kertas berbahan sedikit tebal dan desain serta warna tidak dapat diubah.",
-    image: "/images/products/kertasJadi.jpg",
+    image: "/images/products/kertasJadi.jpeg",
     attrs: [{ key: "Tambahan", value: ["Foto", "Tanpa Foto"] }],
   },
 ];
