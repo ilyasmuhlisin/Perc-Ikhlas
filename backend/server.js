@@ -1,4 +1,5 @@
 require("dotenv").config();
+// import path from "path";
 // nodejs security
 var helmet = require("helmet");
 const { createServer } = require("http");
@@ -7,15 +8,16 @@ const express = require("express");
 const fileUpload = require("express-fileupload");
 const cookieParser = require("cookie-parser");
 const app = express();
+// const __dirname = path.resolve();
 // const port = 5000;
 
 app.use(helmet());
 
-app.use(cors({
-  origin:["https://deploy-mern-1whq-vercel.app"],
-  methods:["POST","GET"],
-  credentials: true
-}))
+// app.use(cors({
+//   origin:["https://deploy-mern-1whq-vercel.app"],
+//   methods:["POST","GET"],
+//   credentials: true
+// }))
 
 const httpServer = createServer(app);
 global.io = new Server(httpServer);
@@ -24,6 +26,18 @@ global.io = new Server(httpServer);
 app.use(express.json());
 app.use(cookieParser());
 app.use(fileUpload());
+
+// cyclic
+// app.use(express.static(path.join(__dirname, "./client/build")));
+
+// app.get("*", function (_, res) {
+//   res.sendFile(
+//     path.join(__dirname, "./client/build/index.html"),
+//     function (err) {
+//       res.status(500).send(err);
+//     }
+//   );
+// });
 
 const admins = [];
 let activeChats = [];
@@ -105,15 +119,27 @@ io.on("connection", (socket) => {
 
 const apiRoutes = require("./routes/apiRoutes");
 
-app.get("/", async (req, res, next) => {
-  res.json({ message: "API running..." });
-});
+// app.get("/", async (req, res, next) => {
+//   res.json({ message: "API running..." });
+// });
 
 // mongodb connection
 const connectDB = require("./config/db");
 connectDB();
 
 app.use("/api", apiRoutes);
+
+const path = require("path");
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/build")));
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "../frontend", "build", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.json({ message: "API running..." });
+  });
+}
 
 app.use((error, req, res, next) => {
   if (process.env.NODE_ENV === "development") {
