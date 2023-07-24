@@ -121,7 +121,7 @@ const UserProfileScreenComponent = ({
           <h1>Change your profile</h1>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="validationCustom01">
-              <Form.Label>Your name</Form.Label>
+              <Form.Label>Nama</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -133,7 +133,7 @@ const UserProfileScreenComponent = ({
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicLastName">
-              <Form.Label>Your last name</Form.Label>
+              <Form.Label>Nama Akhir</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -145,50 +145,50 @@ const UserProfileScreenComponent = ({
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label>Email</Form.Label>
               <Form.Control disabled value={user.email} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPhone">
-              <Form.Label>Phone number</Form.Label>
+              <Form.Label>Telepon</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter your phone number"
+                placeholder="Masukkan Nomer Telepon"
                 defaultValue={user.phoneNumber}
                 name="phoneNumber"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicAddress">
-              <Form.Label>Address</Form.Label>
+              <Form.Label>Alamat</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter your street name and house number"
+                placeholder="Masukkan Alamat"
                 defaultValue={user.address}
                 name="address"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCountry">
-              <Form.Label>Country</Form.Label>
+              <Form.Label>Kecamatan</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter your country"
+                placeholder="Masukkan Nama Kecamatan"
                 defaultValue={user.country}
                 name="country"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicZip">
-              <Form.Label>Zip Code</Form.Label>
+              <Form.Label>Kode Pos</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter your Zip code"
+                placeholder="Masukkan Kode Pos"
                 defaultValue={user.zipCode}
                 name="zipCode"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCity">
-              <Form.Label>City</Form.Label>
+              <Form.Label>Kabupaten</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter your city"
+                placeholder="Masukkan Nama Kabupaten"
                 defaultValue={user.city}
                 name="city"
               />
