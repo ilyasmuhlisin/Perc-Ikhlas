@@ -50,10 +50,10 @@ const UserProfileScreenComponent = ({
     const lastName = form.lastName.value;
     const phoneNumber = form.phoneNumber.value;
     const address = form.address.value;
-    const country = form.country.value;
+    const district = form.district.value;
     const zipCode = form.zipCode.value;
     const city = form.city.value;
-    // const password = form.password.value;
+    // const state = form.state.value;
 
     if (
       event.currentTarget.checkValidity() === true
@@ -64,10 +64,10 @@ const UserProfileScreenComponent = ({
         lastName,
         phoneNumber,
         address,
-        country,
+        district,
         zipCode,
         city
-        // password
+        // state
       )
         .then((data) => {
           setUpdateUserResponseState({ success: data.success, error: "" });
@@ -102,7 +102,7 @@ const UserProfileScreenComponent = ({
       //     lastName,
       //     phoneNumber,
       //     address,
-      //     country,
+      //     district,
       //     zipCode,
       //     city,
       //     state,
@@ -166,13 +166,13 @@ const UserProfileScreenComponent = ({
                 name="address"
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCountry">
+            <Form.Group className="mb-3" controlId="formBasicDistrict">
               <Form.Label>Kecamatan</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Masukkan Nama Kecamatan"
-                defaultValue={user.country}
-                name="country"
+                defaultValue={user.district}
+                name="district"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicZip">

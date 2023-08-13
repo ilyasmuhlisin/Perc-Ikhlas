@@ -33,7 +33,7 @@ const UserOrdersScreenComponent = ({ getOrders }) => {
                 <td>{order.createdAt.substring(0, 10)}</td>
                 <td>Rp.{order.orderTotal.cartSubtotal}</td>
                 <td>
-                  {order.isDelivered ? (
+                  {order.isProcess ? (
                     <i className="bi bi-check-lg text-success"></i>
                   ) : (
                     <i className="bi bi-x-lg text-danger"></i>

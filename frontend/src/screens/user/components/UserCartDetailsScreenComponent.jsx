@@ -45,14 +45,14 @@ function UserCartDetailsScreenComponent({
     getUser()
       .then((data) => {
         console.log(data.address);
-        if (!data.address || !data.city || !data.country || !data.phoneNumber) {
+        if (!data.address || !data.city || !data.district || !data.phoneNumber) {
           setButtonDisabled(true);
           setMissingAddress(" .Lengkapi data diri profile terlebih dahulu");
         } else {
           setUserAddress({
             address: data.address,
             city: data.city,
-            country: data.country,
+            district: data.district,
             zipCode: data.zipCode,
             state: data.state,
             phoneNumber: data.phoneNumber,

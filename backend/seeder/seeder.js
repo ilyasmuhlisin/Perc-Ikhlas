@@ -51,7 +51,7 @@ const importData = async () => {
       //   return { ...user };
       // });
       await User.insertMany(userData);
-      // await Order.insertMany(orderData);
+      await Order.insertMany(orderData);
       // await Offline.insertMany(offlineData);
 
       console.log("Seeder data imported successfully");

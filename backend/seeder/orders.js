@@ -29,8 +29,8 @@ const orders = Array.from({ length: 22 }).map((_, idx) => {
     ],
     paymentMethod: "Dikirim",
     isPaid: false,
-    isDelivered: false,
-    createdAt: `2023-01-${day}T${hour}:12:36.490+00:00`,
+    isProcess: false,
+    createdAt: `2023-06-${day}T${hour}:12:36.490+00:00`,
   };
 });
 

@@ -22,7 +22,7 @@ const userSchema = mongoose.Schema(
     address: {
       type: String,
     },
-    country: {
+    district: {
       type: String,
     },
     zipCode: {

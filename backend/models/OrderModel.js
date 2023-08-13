@@ -38,12 +38,12 @@ const orderSchema = mongoose.Schema(
     paidAt: {
       type: Date,
     },
-    isDelivered: {
+    isProcess: {
       type: Boolean,
       required: true,
       default: false,
     },
-    deliveredAt: {
+    processAt: {
       type: Date,
     },
   },

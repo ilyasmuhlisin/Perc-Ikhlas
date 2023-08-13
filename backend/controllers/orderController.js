@@ -69,11 +69,11 @@ const updateOrderToPaid = async (req, res, next) => {
   }
 };
 
-const updateOrderToDelivered = async (req, res, next) => {
+const updateOrderToProcess = async (req, res, next) => {
   try {
     const order = await Order.findById(req.params.id).orFail();
-    order.isDelivered = true;
-    order.deliveredAt = Date.now();
+    order.isProcess = true;
+    order.processAt = Date.now();
     const updatedOrder = await order.save();
     res.send(updatedOrder);
   } catch (err) {
@@ -118,7 +118,7 @@ module.exports = {
   getOrder,
   createOrder,
   updateOrderToPaid,
-  updateOrderToDelivered,
+  updateOrderToProcess,
   getOrders,
   getOrderForAnalysis,
 };

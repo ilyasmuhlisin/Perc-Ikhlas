@@ -87,7 +87,8 @@ function UserFamilyScreenComponent({
                 required
                 type="text"
                 defaultValue={user && "maleName" in user ? user.maleName : ""}
-                // defaultValue={user.maleName !== undefined ? user.maleName : ""}
+                pattern="[A-Za-z\s]+"
+                title="Hanya diperbolehkan huruf"
                 name="maleName"
               />
               <Form.Control.Feedback type="invalid">
@@ -102,6 +103,8 @@ function UserFamilyScreenComponent({
                 defaultValue={
                   user && "maleParent" in user ? user.maleParent : ""
                 }
+                pattern="[A-Za-z\s]+"
+                title="Hanya diperbolehkan huruf"
                 name="maleParent"
               />
               <Form.Control.Feedback type="invalid">
@@ -116,6 +119,8 @@ function UserFamilyScreenComponent({
                 defaultValue={
                   user && "maleAddress" in user ? user.maleAddress : ""
                 }
+                pattern="[A-Za-z\s]+"
+                title="Hanya diperbolehkan huruf"
                 name="maleAddress"
               />
               <Form.Control.Feedback type="invalid">
@@ -158,6 +163,8 @@ function UserFamilyScreenComponent({
                 defaultValue={
                   user && "femaleName" in user ? user.femaleName : ""
                 }
+                pattern="[A-Za-z\s]+"
+                title="Hanya diperbolehkan huruf"
                 name="femaleName"
               />
               <Form.Control.Feedback type="invalid">
@@ -172,6 +179,8 @@ function UserFamilyScreenComponent({
                 defaultValue={
                   user && "femaleParent" in user ? user.femaleParent : ""
                 }
+                pattern="[A-Za-z\s]+"
+                title="Hanya diperbolehkan huruf"
                 name="femaleParent"
               />
               <Form.Control.Feedback type="invalid">
@@ -186,6 +195,8 @@ function UserFamilyScreenComponent({
                 defaultValue={
                   user && "femaleAddress" in user ? user.femaleAddress : ""
                 }
+                pattern="[A-Za-z\s]+"
+                title="Hanya diperbolehkan huruf"
                 name="femaleAddress"
               />
               <Form.Control.Feedback type="invalid">

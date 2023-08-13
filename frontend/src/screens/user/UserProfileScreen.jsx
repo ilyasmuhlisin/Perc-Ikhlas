@@ -8,10 +8,9 @@ const updateUserApiRequest = async (
   lastName,
   phoneNumber,
   address,
-  country,
+  district,
   zipCode,
   city,
-  state,
   password
 ) => {
   const { data } = await axios.put("/api/users/profile", {
@@ -19,10 +18,10 @@ const updateUserApiRequest = async (
     lastName,
     phoneNumber,
     address,
-    country,
+    district,
     zipCode,
     city,
-    password,
+    // password,
   });
   return data;
 };

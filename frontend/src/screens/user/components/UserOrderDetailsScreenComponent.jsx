@@ -19,7 +19,7 @@ const UserOrderDetailsScreenComponent = ({ userInfo, getUser, getOrder }) => {
   const [orderButtonMessage, setOrderButtonMessage] = useState("");
   const [cartItems, setCartItems] = useState([]);
   const [cartSubtotal, setCartSubtotal] = useState(0);
-  const [isDelivered, setIsDelivered] = useState(false);
+  const [isProcess, setIsProcess] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const { id } = useParams();
@@ -30,7 +30,7 @@ const UserOrderDetailsScreenComponent = ({ userInfo, getUser, getOrder }) => {
         setUserAddress({
           address: data.address,
           city: data.city,
-          country: data.country,
+          district: data.district,
           zipCode: data.zipCode,
           state: data.state,
           phoneNumber: data.phoneNumber,
@@ -45,9 +45,9 @@ const UserOrderDetailsScreenComponent = ({ userInfo, getUser, getOrder }) => {
         setPaymentMethod(data.paymentMethod);
         setCartItems(data.cartItems);
         setCartSubtotal(data.orderTotal.cartSubtotal);
-        data.isDelivered
-          ? setIsDelivered(data.deliveredAt)
-          : setIsDelivered(false);
+        data.isProcess
+          ? setIsProcess(data.processAt)
+          : setIsProcess(false);
         data.isPaid ? setIsPaid(data.paidAt) : setIsPaid(false);
         if (data.isPaid) {
           setOrderButtonMessage("Pesanan sudah lunas");
@@ -90,10 +90,10 @@ const UserOrderDetailsScreenComponent = ({ userInfo, getUser, getOrder }) => {
               <Col>
                 <Alert
                   className="mt-3"
-                  variant={isDelivered ? "success" : "danger"}
+                  variant={isProcess ? "success" : "danger"}
                 >
-                  {isDelivered ? (
-                    <>Diproses {isDelivered}</>
+                  {isProcess ? (
+                    <>Diproses {isProcess}</>
                   ) : (
                     <>Belum diproses, tunggu konfirmasi</>
                   )}

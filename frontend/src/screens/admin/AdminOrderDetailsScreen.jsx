@@ -7,8 +7,8 @@ const getOrder = async (id) => {
   return data;
 };
 
-const markAsDelivered = async (id) => {
-  const { data } = await axios.put("/api/orders/delivered/" + id);
+const markAsProcess = async (id) => {
+  const { data } = await axios.put("/api/orders/process/" + id);
   if (data) {
     return data;
   }
@@ -25,7 +25,7 @@ function AdminOrderDetailsScreen() {
   return (
     <OrderDetailsScreenComponent
       getOrder={getOrder}
-      markAsDelivered={markAsDelivered}
+      markAsProcess={markAsProcess}
       markAsPaid={markAsPaid}
     />
   );

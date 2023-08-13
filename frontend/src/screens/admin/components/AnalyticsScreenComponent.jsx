@@ -35,9 +35,14 @@ function AnalyticsScreenComponent({
     let today = new Date().toDateString();
     const handler = (newOrder) => {
       var orderDate = new Date(newOrder.createdAt).toLocaleString("en-US", {
+        // hour: "numeric",
+        // hour12: true,
+        // timeZone: "UTC",
+        timeZone: "Asia/Jakarta",
         hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
         hour12: true,
-        timeZone: "UTC",
       });
       if (new Date(newOrder.createdAt).toDateString() === today) {
         if (today === new Date(firstDateToCompare).toDateString()) {
@@ -113,9 +118,11 @@ function AnalyticsScreenComponent({
         const orders = data.map((order) => {
           orderSum += order.orderTotal.cartSubtotal;
           var date = new Date(order.createdAt).toLocaleString("en-US", {
+            timeZone: "Asia/Jakarta",
             hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
             hour12: true,
-            timeZone: "UTC",
           });
           return { name: date, [firstDateToCompare]: orderSum };
         });
@@ -288,10 +295,7 @@ function AnalyticsScreenComponent({
         <AdminLinksComponent />
       </Col>
       <Col md={10}>
-        <h1>
-          Black Friday Cumulative Revenue {firstDateToCompare} VS{" "}
-          {secondDateToCompare}
-        </h1>
+        <h1>Cumulative Revenue</h1>
         <Form.Group controlId="firstDateToCompare">
           <Form.Label>Select First Date To Compare</Form.Label>
           <Form.Control
@@ -333,7 +337,7 @@ function AnalyticsScreenComponent({
               allowDuplicatedCategory={false}
             />
             <YAxis
-              label={{ value: "REVENUE $", angle: -90, position: "insideLeft" }}
+              label={{ value: "REVENUE ", angle: -90, position: "insideLeft" }}
             />
             <Tooltip />
             <Legend verticalAlign="top" height={36} />

@@ -9,7 +9,7 @@ const {
   getOrder,
   createOrder,
   updateOrderToPaid,
-  updateOrderToDelivered,
+  updateOrderToProcess,
   getOrders,
   getOrderForAnalysis,
 } = require("../controllers/orderController");
@@ -23,7 +23,7 @@ router.put("/paid/:id", updateOrderToPaid);
 
 // admin routes
 router.use(verifyIsAdmin);
-router.put("/delivered/:id", updateOrderToDelivered);
+router.put("/process/:id", updateOrderToProcess);
 router.get("/admin", getOrders);
 router.get("/analysis/:date", getOrderForAnalysis);
 

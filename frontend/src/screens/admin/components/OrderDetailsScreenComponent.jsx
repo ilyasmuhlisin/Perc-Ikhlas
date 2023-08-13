@@ -17,7 +17,7 @@ import { useDispatch } from "react-redux";
 
 function OrderDetailsScreenComponent({
   getOrder,
-  markAsDelivered,
+  markAsProcess,
   markAsPaid,
 }) {
   const { id } = useParams();
@@ -27,7 +27,7 @@ function OrderDetailsScreenComponent({
   const [paymentMethod, setPaymentMethod] = useState("");
   const [paidButton, setPaidButton] = useState("Tandai lunas");
   const [isPaid, setIsPaid] = useState(false);
-  const [isDelivered, setIsDelivered] = useState(false);
+  const [isProcess, setIsProcess] = useState(false);
   const [cartSubtotal, setCartSubtotal] = useState(0);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [orderButtonMessage, setOrderButtonMessage] =
@@ -41,11 +41,11 @@ function OrderDetailsScreenComponent({
         setPaymentMethod(order.paymentMethod);
         // order.isPaid ? setIsPaid(order.paidAt) : setIsPaid(false);
         order.isPaid ? setIsPaid(order.paidAt) : setIsPaid(false);
-        order.isDelivered
-          ? setIsDelivered(order.deliveredAt)
-          : setIsDelivered(false);
+        order.isProcess
+          ? setIsProcess(order.processAt)
+          : setIsProcess(false);
         setCartSubtotal(order.orderTotal.cartSubtotal);
-        if (order.isDelivered & order.isPaid) {
+        if (order.isProcess & order.isPaid) {
           setPaidButton("Sudah lunas");
           setOrderButtonMessage("Diproses");
           setButtonDisabled(true);
@@ -63,7 +63,7 @@ function OrderDetailsScreenComponent({
         // )
       );
     // halaman otomatis berubah ketika perubahan dilakukan
-  }, [isPaid, isDelivered, id]);
+  }, [isPaid, isProcess, id]);
   return (
     <Container fluid>
       <Row className="mt-4">
@@ -89,10 +89,10 @@ function OrderDetailsScreenComponent({
               <Col>
                 <Alert
                   className="mt-3"
-                  variant={isDelivered ? "success" : "danger"}
+                  variant={isProcess ? "success" : "danger"}
                 >
-                  {isDelivered ? (
-                    <>Diproses {isDelivered}</>
+                  {isProcess ? (
+                    <>Diproses {isProcess}</>
                   ) : (
                     <>Belum diproses</>
                   )}
@@ -166,10 +166,10 @@ function OrderDetailsScreenComponent({
                   size="lg"
                   variant="danger"
                   onClick={() =>
-                    markAsDelivered(id)
+                    markAsProcess(id)
                       .then((res) => {
                         if (res) {
-                          setIsDelivered(true);
+                          setIsProcess(true);
                         }
                       })
                       .catch((er) =>
